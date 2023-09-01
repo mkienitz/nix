@@ -8,5 +8,16 @@
       specialArgs = attrs;
       modules = [./machines/hygiea.nix];
     };
+
+    devShells = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"] (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+      in {
+        default = pkgs.mkShell {
+          name = "devShell";
+          packages = with pkgs; [alejandra deadnix nix-tree statix];
+        };
+      }
+    );
   };
 }
