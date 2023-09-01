@@ -37,4 +37,6 @@
       os = {editPreset = "nvim";};
     };
   };
+  
+  services.ssh-agent.enable = true;
 }
