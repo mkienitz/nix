@@ -30,6 +30,8 @@
     wheelNeedsPassword = false;
   };
 
+  time.timeZone = "Europe/Berlin";
+
   users = {
     mutableUsers = false;
     users.max = {
