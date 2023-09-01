@@ -6,10 +6,10 @@
   };
 
   home.shellAliases = {
-    ll = "ls -l";
-    la = "ls -la";
+    ll = "exa -l";
+    la = "exa -la";
+    tree = "exa -T";
     lg = "lazygit";
     update = "sudo nixos-rebuild --flake ~/nix-config switch";
-    alejandro = "alejandra .";
   };
 }
