@@ -36,6 +36,8 @@
 
   environment.systemPackages = with pkgs; [vim];
 
+  programs.zsh.enable = true;
+
   services.openssh = {
     enable = true;
     settings = {
@@ -53,6 +55,7 @@
   users = {
     mutableUsers = false;
     users.max = {
+      shell = pkgs.zsh;
       isNormalUser = true;
       hashedPassword = "$y$j9T$VCnJOOcqEduAbjfUu3lg.1$c6nV8lybLzpG1MMFicsvuL/AwUUni.4Zd9aCIbyJsMB";
       extraGroups = ["wheel"];
