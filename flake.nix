@@ -1,15 +1,30 @@
 {
-  inputs.nixpkgs.url = github:NixOS/nixpkgs;
-  inputs.home-manager.url = github:nix-community/home-manager;
+  inputs = {
+    nixpkgs.url = github:NixOS/nixpkgs;
+    home-manager.url = github:nix-community/home-manager;
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "github:lnl7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-  outputs = {nixpkgs, ...} @ attrs: {
+  outputs = {
+    self,
+    nixpkgs,
+    darwin,
+    home-manager,
+    ...
+  } @ attrs: {
     nixosConfigurations.hygiea = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = attrs;
-      modules = [./machines/hygiea.nix];
+      modules = [./hosts/hygiea];
+    };
+    darwinConfigurations.io = darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [./hosts/io];
     };
 
-    devShells = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"] (
+    devShells = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux" "aarch64-linux"] (
       system: let
         pkgs = import nixpkgs {inherit system;};
       in {
