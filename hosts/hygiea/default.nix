@@ -1,6 +1,7 @@
 {pkgs, ...}: {
-  imports = [../../kernels/linux ../../home];
+  imports = [../../modules/nixos ../../modules/home-manager];
 
+  # Hardware specific
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
     initrd.availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];

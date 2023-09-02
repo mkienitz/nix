@@ -1,3 +1,3 @@
 { ...}: {
-  imports = [../../kernels/darwin];
+  imports = [../../modules/darwin];
 }
