@@ -1,3 +1,3 @@
-{pkgs, ...}: {
+{ ...}: {
   imports = [../../kernels/darwin];
 }
