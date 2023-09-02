@@ -1,5 +1,10 @@
 {pkgs, ...}: {
-  imports = [../../modules/nixos ../../modules/home-manager];
+  imports = [
+    ../../modules/nixos
+    (import ../../modules/home-manager [
+      # List of extra home-manager modules
+    ])
+  ];
 
   # Hardware specific
   boot = {
