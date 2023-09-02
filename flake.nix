@@ -17,9 +17,8 @@
     ...
   } @ inputs:
     {
-      nixosConfigurations.hygiea = nixpkgs.lib.nixosSystem rec {
-        system = "aarch64-linux";
-        pkgs = self.pkgs.${system};
+      nixosConfigurations.hygiea = nixpkgs.lib.nixosSystem {
+        pkgs = self.pkgs.aarch64-linux;
         specialArgs = inputs;
         modules = [./hosts/hygiea];
       };
