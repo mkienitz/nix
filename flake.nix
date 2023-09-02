@@ -23,15 +23,13 @@
         modules = [./hosts/hygiea];
       };
 
-      darwinConfigurations.io = darwin.lib.darwinSystem rec {
-        system = "aarch64-darwin";
-        pkgs = self.pkgs.${system};
+      darwinConfigurations.io = darwin.lib.darwinSystem {
+        pkgs = self.pkgs.aarch64-darwin;
         modules = [./hosts/io];
       };
 
-      darwinConfigurations.charon = darwin.lib.darwinSystem rec {
-        system = "x86_64-darwin";
-        pkgs = self.pkgs.${system};
+      darwinConfigurations.charon = darwin.lib.darwinSystem {
+        pkgs = self.pkgs.x86_64-darwin;
         modules = [./hosts/charon];
       };
     }
