@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [../../common];
+  imports = [../../kernels/linux ../../home];
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;

@@ -9,25 +9,24 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     darwin,
-    home-manager,
     ...
-  } @ inputs: {
+  } @ attrs: {
     nixosConfigurations.hygiea = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
-      pkgs = import nixpgs {system = "aarch64-linux";};
+      pkgs = import nixpkgs {system = "aarch64-linux";};
+      specialArgs = attrs;
       modules = [./hosts/hygiea];
     };
     darwinConfigurations.io = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      pkgs = import nixpgs {system = "aarch64-darwin";};
+      pkgs = import nixpkgs {system = "aarch64-darwin";};
       modules = [./hosts/io];
     };
     darwinConfigurations.charon = darwin.lib.darwinSystem {
       system = "x86_64-darwin";
-      pkgs = import nixpgs {system = "x86_64-darwin";};
+      pkgs = import nixpkgs {system = "x86_64-darwin";};
       modules = [./hosts/charon];
     };
 

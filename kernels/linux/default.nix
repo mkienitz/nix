@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   nixpkgs,
   home-manager,
@@ -42,11 +41,6 @@
       openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcPOZFxCD1qSqCVXp5XYQ+yqJxI5kJ6PapuSOmnAIU MBP"];
     };
     users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcPOZFxCD1qSqCVXp5XYQ+yqJxI5kJ6PapuSOmnAIU MBP"];
-  };
-
-  home-manager.users.max = {
-    imports = [./home];
-    home.username = config.users.users.max.name;
   };
 
   system.stateVersion = "23.11";
