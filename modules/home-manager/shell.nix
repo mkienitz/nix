@@ -6,9 +6,9 @@
   };
 
   home.shellAliases = {
-    ll = "exa -l";
-    la = "exa -la";
-    tree = "exa -T";
+    ll = "eza -l";
+    la = "eza -la";
+    tree = "eza -T";
     lg = "lazygit";
     update = "sudo nixos-rebuild --flake ~/nix-config switch";
   };
