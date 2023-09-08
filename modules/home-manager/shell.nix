@@ -1,4 +1,10 @@
-{
+pkgs: {
+  home.packages = with pkgs; [eza fd file ripgrep];
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
     history.size = 100000;
