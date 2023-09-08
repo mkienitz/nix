@@ -23,6 +23,12 @@
         modules = [./hosts/hygiea];
       };
 
+      nixosConfigurations.gonggong = nixpkgs.lib.nixosSystem {
+        pkgs = self.pkgs.aarch64-linux;
+        specialArgs = inputs;
+        modules = [./hosts/gonggong];
+      };
+
       darwinConfigurations.io = darwin.lib.darwinSystem {
         pkgs = self.pkgs.aarch64-darwin;
         modules = [./hosts/io];
