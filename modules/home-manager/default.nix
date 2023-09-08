@@ -3,6 +3,6 @@ extra-imports: {pkgs, ...}: {
     imports = [./shell.nix ./git.nix ./ssh.nix] ++ extra-imports;
     home.username = "max";
     home.stateVersion = "23.11";
-    home.packages = with pkgs; [file exa fd ripgrep];
+    home.packages = with pkgs; [file exa fd ripgrep direnv];
   };
 }
