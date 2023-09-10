@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   modulesPath,
   lib,
   ...
@@ -19,6 +20,7 @@
       kernelModules = [];
     };
     kernelModules = [];
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     extraModulePackages = [];
     loader = {
       systemd-boot.enable = true;
