@@ -7,27 +7,34 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     nixpkgs,
     darwin,
     flake-utils,
+    colmena,
     self,
     ...
   } @ inputs:
     {
-      nixosConfigurations.hygiea = nixpkgs.lib.nixosSystem {
-        pkgs = self.pkgs.aarch64-linux;
-        specialArgs = inputs;
-        modules = [./hosts/hygiea];
+      colmena = {
+        meta = {
+          nixpkgs = self.pkgs.x86_64-linux;
+          nodeNixpkgs = {
+            gonggong = self.pkgs.aarch64-linux;
+            hygiea = self.pkgs.aarch64-linux;
+          };
+          machinesFile = ./machines.conf;
+          specialArgs = inputs;
+        };
+        gonggong.imports = [./hosts/gonggong];
+        hygiea.imports = [./hosts/hygiea];
       };
-
-      nixosConfigurations.gonggong = nixpkgs.lib.nixosSystem {
-        pkgs = self.pkgs.aarch64-linux;
-        specialArgs = inputs;
-        modules = [./hosts/gonggong];
-      };
+      nixosConfigurations = ((colmena.lib.makeHive self.colmena).introspect (x: x)).nodes;
 
       darwinConfigurations.io = darwin.lib.darwinSystem {
         pkgs = self.pkgs.aarch64-darwin;
@@ -44,7 +51,7 @@
         pkgs = import nixpkgs {inherit system;};
         devShells.default = pkgs.mkShell {
           name = "devShell";
-          packages = with pkgs; [alejandra nil deadnix nix-tree statix];
+          packages = with pkgs; [alejandra colmena.packages.${system}.colmena deadnix nil nix-tree statix];
         };
       }
     );

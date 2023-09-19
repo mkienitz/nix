@@ -6,6 +6,8 @@
     ])
   ];
 
+  deployment.buildOnTarget = true;
+
   # Hardware specific
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;

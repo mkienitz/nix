@@ -11,7 +11,10 @@
     (import ../../modules/home-manager [
       # List of extra home-manager modules
     ])
+    # ./caddy.nix
   ];
+
+  deployment.buildOnTarget = true;
 
   # Hardware specific
   boot = {
