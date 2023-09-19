@@ -44,7 +44,7 @@
         pkgs = import nixpkgs {inherit system;};
         devShells.default = pkgs.mkShell {
           name = "devShell";
-          packages = with pkgs; [alejandra deadnix nix-tree statix];
+          packages = with pkgs; [alejandra nil deadnix nix-tree statix];
         };
       }
     );
