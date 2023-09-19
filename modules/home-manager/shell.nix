@@ -1,4 +1,4 @@
-pkgs: {
+{pkgs, ...}: {
   home.packages = with pkgs; [eza fd file ripgrep];
   programs.direnv = {
     enable = true;
