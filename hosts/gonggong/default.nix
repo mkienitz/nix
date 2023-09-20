@@ -14,7 +14,7 @@
     # ./caddy.nix
   ];
 
-  deployment.buildOnTarget = true;
+  deployment.buildOnTarget = false;
 
   # Hardware specific
   boot = {
