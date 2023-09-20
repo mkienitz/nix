@@ -1,6 +1,10 @@
-extra-imports: {pkgs, ...}: {
+{pkgs, ...}: {
   home-manager.users.max = {
-    imports = [./shell.nix ./git.nix ./ssh.nix] ++ extra-imports;
+    imports = [
+      ./shell
+      ./git.nix
+      ./ssh.nix
+    ];
     home.username = "max";
     home.stateVersion = "23.11";
   };

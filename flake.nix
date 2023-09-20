@@ -7,7 +7,6 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -28,8 +27,7 @@
             gonggong = self.pkgs.aarch64-linux;
             hygiea = self.pkgs.aarch64-linux;
           };
-          machinesFile = ./machines.conf;
-          specialArgs = inputs;
+          specialArgs = {inherit inputs;};
         };
         gonggong.imports = [./hosts/gonggong];
         hygiea.imports = [./hosts/hygiea];
@@ -38,13 +36,11 @@
 
       darwinConfigurations.io = darwin.lib.darwinSystem {
         pkgs = self.pkgs.aarch64-darwin;
+        specialArgs = {inherit inputs;};
         modules = [./hosts/io];
       };
 
-      darwinConfigurations.charon = darwin.lib.darwinSystem {
-        pkgs = self.pkgs.x86_64-darwin;
-        modules = [./hosts/charon];
-      };
+      hosts = self.nixosConfigurations // self.darwinConfigurations;
     }
     // flake-utils.lib.eachDefaultSystem (
       system: rec {

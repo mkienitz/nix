@@ -1,14 +1,13 @@
 {
   pkgs,
-  nixpkgs,
-  home-manager,
+  inputs,
   ...
 }: {
-  imports = [home-manager.nixosModules.default];
+  imports = [inputs.home-manager.nixosModules.default];
 
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
-    registry.p.flake = nixpkgs;
+    registry.p.flake = inputs.nixpkgs;
   };
 
   environment.systemPackages = with pkgs; [vim];

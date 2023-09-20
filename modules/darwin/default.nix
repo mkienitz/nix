@@ -1,16 +1,26 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  nix.settings.experimental-features = "nix-command flakes";
+  imports = [inputs.home-manager.darwinModules.default];
+
   programs.zsh.enable = true;
+  users.users.max.name = "max";
+  users.users.max.home = "/Users/max";
   environment = {
     shells = with pkgs; [bash zsh];
     loginShell = pkgs.zsh;
-    systemPackages = with pkgs; [coreutils];
-    fonts = {
-      fontDir.enable = true;
-      fonts = with pkgs; [(nerdfonts.override {fonts = ["JetBrainsMono"];})];
-    };
+    systemPackages = with pkgs; [coreutils openssh];
   };
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [(nerdfonts.override {fonts = ["JetBrainsMono"];})];
+  };
+
   services.nix-daemon.enable = true;
-  services.nix-daemon.package = pkgs.nixFlakes;
   system.defaults = {
     finder = {
       AppleShowAllExtensions = true;

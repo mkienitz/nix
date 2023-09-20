@@ -1,17 +1,14 @@
 {
-  pkgs,
   config,
   modulesPath,
   lib,
   ...
 }: {
   imports = [
-    ../../modules/nixos
     (modulesPath + "/profiles/qemu-guest.nix")
-    (import ../../modules/home-manager [
-      # List of extra home-manager modules
-    ])
-    # ./caddy.nix
+    ../../modules/nixos
+    ../../users/max
+    ./caddy.nix
   ];
 
   deployment.buildOnTarget = false;

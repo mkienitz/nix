@@ -1,9 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../../modules/nixos
-    (import ../../modules/home-manager [
-      # List of extra home-manager modules
-    ])
+    ../../users/max
   ];
 
   deployment.buildOnTarget = false;
