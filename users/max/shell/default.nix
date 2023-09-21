@@ -4,6 +4,8 @@
   ...
 }: {
   imports = [./starship.nix];
+
+  # Various command line tools
   home.packages = with pkgs; [
     neovim
     tree-sitter
@@ -22,6 +24,7 @@
     wget
   ];
 
+  #
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -34,13 +37,32 @@
 
   programs.zsh = {
     enable = true;
-    envExtra = lib.readFile ./zshenv;
+    initExtraFirst = ''
+      if autoload history-search-end; then
+        zle -N history-beginning-search-backward-end history-search-end
+        zle -N history-beginning-search-forward-end  history-search-end
+      fi
+    '';
     history = {
       size = 100000;
       save = 100000;
     };
-    enableAutosuggestions = true;
     defaultKeymap = "emacs";
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+      }
+      {
+        name = "fast-syntax-highlighting";
+        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+      }
+      {
+        name = "zsh-autosuggestions";
+        file = "zsh-autosuggestions.zsh";
+        src = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
+      }
+    ];
   };
 
   home.sessionVariablesExtra = lib.optionalString pkgs.stdenv.isDarwin ''
