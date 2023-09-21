@@ -42,7 +42,7 @@
 
       gonggong = {
         hostname = "88.99.122.44";
-        user = "max";
+        user = "root";
         port = 22;
       };
 
