@@ -17,12 +17,8 @@
       ];
       StandardErrorPath = "/tmp/ssh-agent.err";
       StandardOutPath = "/tmp/ssh-agent.out";
-      EnvironmentVariables = let
-        askpass =
-          pkgs.writeShellScriptBin "askpass"
-          (lib.readFile ./askpass.sh);
-      in {
-        SSH_ASKPASS = "${askpass}/bin/askpass";
+      EnvironmentVariables = {
+        SSH_ASKPASS = toString ./askpass.sh;
         DISPLAY = ":0";
       };
     };
