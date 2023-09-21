@@ -4,7 +4,7 @@
 
     ../../modules/nixos
 
-    ../../modules/services/caddy.nix
+    ./services/nginx.nix
   ];
 
   deployment.buildOnTarget = false;
