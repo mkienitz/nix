@@ -9,8 +9,9 @@
     sensibleOnTop = true;
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
-    plugins = [
-      pkgs.tmuxPlugins.vim-tmux-navigator
+    plugins = with pkgs; [
+      tmuxPlugins.vim-tmux-navigator
+      tmuxPlugins.catppuccin
     ];
     extraConfig = ''
       set -ag terminal-overrides ",*:RGB"

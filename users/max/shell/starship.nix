@@ -1,128 +1,160 @@
 {
+  pkgs,
+  lib,
+  ...
+}: {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = {
-      "$schema" = "https://starship.rs/config-schema.json";
-      c = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = " ";
-      };
-      character = {
-        disabled = false;
-        error_symbol = "[❯](bold fg:color_red)";
-        success_symbol = "[❯](bold fg:color_green)";
-      };
-      directory = {
-        format = "[ $path ]($style)";
-        style = "fg:color_fg0 bg:color_yellow";
-        truncation_length = 3;
-        truncation_symbol = "…/";
-      };
-      docker_context = {
-        format = "[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)";
-        style = "bg:color_bg3";
-        symbol = "";
-      };
-      format = "[](color_orange)$os$username[](fg:color_orange bg:color_yellow)$directory[](fg:color_yellow bg:color_aqua)$git_branch$git_status[](fg:color_aqua bg:color_blue)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:color_blue bg:color_bg3)$nix_shell$docker_context[](fg:color_bg3 bg:color_bg1)$time[ ](fg:color_bg1)$line_break$character";
-      git_branch = {
-        format = "[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)";
-        style = "bg:color_aqua";
-        symbol = "";
-      };
-      git_status = {
-        format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)";
-        style = "bg:color_aqua";
-      };
-      golang = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      haskell = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      java = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = " ";
-      };
-      kotlin = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      line_break = {disabled = false;};
-      nix_shell = {
-        format = "[$symbol( \\($name\\))]($style)";
-        style = "bg:color_bg3";
-        symbol = "";
-      };
-      nodejs = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      os = {
-        disabled = false;
-        style = "bg:color_orange fg:color_fg0";
-        symbols = {
-          Arch = "󰣇";
-          Debian = "󰣚";
-          Fedora = "󰣛";
-          Linux = "󰌽";
-          Macos = "󰀵";
-          NixOS = "";
-          Raspbian = "󰐿";
-          Ubuntu = "󰕈";
-          Windows = "󰍲";
+    settings = let
+      flavour = "mocha";
+    in
+      {
+        "$schema" = "https://starship.rs/config-schema.json";
+        c = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:peach)]($style)";
+          style = "bg:peach";
+          symbol = " ";
         };
-      };
-      palette = "gruvbox_dark";
-      palettes = {
-        gruvbox_dark = {
-          color_aqua = "#689d6a";
-          color_bg1 = "#3c3836";
-          color_bg3 = "#665c54";
-          color_blue = "#458588";
-          color_fg0 = "#fbf1c7";
-          color_green = "#98971a";
-          color_orange = "#d65d0e";
-          color_purple = "#b16286";
-          color_red = "#cc241d";
-          color_yellow = "#d79921";
+        character = {
+          disabled = false;
+          error_symbol = "[❯](bold fg:red)";
+          success_symbol = "[❯](bold fg:green)";
         };
-      };
-      php = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      python = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      rust = {
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-        symbol = "";
-      };
-      time = {
-        disabled = false;
-        format = "[[  $time ](fg:color_fg0 bg:color_bg1)]($style)";
-        style = "bg:color_bg1";
-        time_format = "%R";
-      };
-      username = {
-        format = "[ $user ]($style)";
-        show_always = true;
-        style_root = "bg:color_orange fg:color_fg0";
-        style_user = "bg:color_orange fg:color_fg0";
-      };
-    };
+        directory = {
+          format = "[ $path ]($style)";
+          style = "fg:surface0 bg:yellow";
+          truncation_length = 3;
+          truncation_symbol = "…/";
+        };
+        docker_context = {
+          format = "[[ $symbol( $context) ](fg:surface0 bg:blue)]($style)";
+          style = "bg:blue";
+          symbol = "";
+        };
+        format = lib.concatStrings [
+          "[](peach)$os$username[](fg:peach bg:yellow)"
+          "$directory[](fg:yellow bg:green)"
+          "$git_branch$git_status[](fg:green bg:teal)"
+          "$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:teal bg:blue)"
+          "$nix_shell$docker_context[](fg:blue bg:maroon)"
+          "$time[ ](fg:maroon)"
+          "$line_break$character"
+        ];
+        git_branch = {
+          format = "[[ $symbol $branch ](fg:surface0 bg:green)]($style)";
+          style = "bg:green";
+          symbol = "";
+        };
+        git_status = {
+          format = "[[($all_status$ahead_behind )](fg:surface0 bg:green)]($style)";
+          style = "bg:green";
+        };
+        golang = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = "";
+        };
+        haskell = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = "";
+        };
+        java = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = " ";
+        };
+        kotlin = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = "";
+        };
+        line_break = {disabled = false;};
+        nix_shell = {
+          format = "[ $symbol( \\($name\\)) ](fg:surface0 bg:blue)($style)";
+          style = "bg:blue";
+          symbol = "";
+        };
+        nodejs = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = "";
+        };
+        os = {
+          disabled = false;
+          style = "bg:peach fg:surface0";
+          symbols = {
+            Arch = "󰣇";
+            Debian = "󰣚";
+            Fedora = "󰣛";
+            Linux = "󰌽";
+            Macos = "󰀵";
+            NixOS = "";
+            Raspbian = "󰐿";
+            Ubuntu = "󰕈";
+            Windows = "󰍲";
+          };
+        };
+        python = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = "";
+        };
+        rust = {
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
+          symbol = "";
+        };
+        time = {
+          disabled = false;
+          format = "[[  $time ](fg:surface0 bg:maroon)]($style)";
+          style = "bg:maroon";
+          time_format = "%R";
+        };
+        username = {
+          format = "[ $user ]($style)";
+          show_always = true;
+          style_root = "bg:peach fg:surface0";
+          style_user = "bg:peach fg:surface0";
+        };
+        palette = "catppuccin_${flavour}";
+      }
+      // builtins.fromTOML (builtins.readFile
+        (pkgs.fetchFromGitHub
+          {
+            owner = "catppuccin";
+            repo = "starship";
+            rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f"; # Replace with the latest commit hash
+            hash = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
+          }
+          + /palettes/${flavour}.toml));
+    # Catppuccin palette reference
+    # rosewater = "#f5e0dc"
+    # flamingo = "#f2cdcd"
+    # pink = "#f5c2e7"
+    # mauve = "#cba6f7"
+    # red = "#f38ba8"
+    # maroon = "#eba0ac"
+    # peach = "#fab387"
+    # yellow = "#f9e2af"
+    # green = "#a6e3a1"
+    # teal = "#94e2d5"
+    # sky = "#89dceb"
+    # sapphire = "#74c7ec"
+    # blue = "#89b4fa"
+    # lavender = "#b4befe"
+    # text     = "#cdd6f4"
+    # subtext1 = "#bac2de"
+    # subtext0 = "#a6adc8"
+    # overlay2 = "#9399b2"
+    # overlay1 = "#7f849c"
+    # overlay0 = "#6c7086"
+    # surface2 = "#585b70"
+    # surface1 = "#45475a"
+    # surface0 = "#313244"
+    # base = "#1e1e2e"
+    # mantle = "#181825"
+    # crust = "#11111b"
   };
 }
