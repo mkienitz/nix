@@ -1,5 +1,22 @@
 {
-  # services.ssh-agent.enable = true;
+  pkgs,
+  lib,
+  ...
+}: {
+  launchd.agents.ssh-agent = lib.mkIf (pkgs.stdenv.isDarwin) {
+    enable = true;
+    config = {
+      KeepAlive = true;
+      RunAtLoad = true;
+      ProgramArguments = [
+        (toString (pkgs.writeShellScript "setup-ssh-agent-sock" ''
+          ${pkgs.coreutils}/bin/rm -f "/tmp/ssh-agent.sock"
+          ${pkgs.openssh}/bin/ssh-agent -D -a "/tmp/ssh-agent.sock"
+        ''))
+      ];
+    };
+  };
+  services.ssh-agent.enable = !pkgs.stdenv.isDarwin;
   programs.ssh = {
     enable = true;
     matchBlocks = {

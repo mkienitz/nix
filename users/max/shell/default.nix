@@ -43,6 +43,10 @@
     defaultKeymap = "emacs";
   };
 
+  home.sessionVariablesExtra = lib.optionalString pkgs.stdenv.isDarwin ''
+    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+  '';
+
   home.shellAliases = {
     c = "clear";
     vim = "nvim";
