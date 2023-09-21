@@ -3,8 +3,41 @@
   inputs,
   ...
 }: {
-  nix.settings.experimental-features = "nix-command flakes";
   imports = [inputs.home-manager.darwinModules.default];
+  nix.settings.experimental-features = "nix-command flakes";
+  nixpkgs.hostPlatform = "aarch64-darwin";
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      protocol = "ssh-ng";
+      system = "aarch64-linux";
+      hostName = "gonggong";
+      supportedFeatures = ["big-parallel" "kvm"];
+    }
+  ];
+  homebrew = {
+    enable = true;
+    global = {
+      brewfile = true;
+    };
+    onActivation = {
+      autoUpdate = false;
+      cleanup = "zap";
+    };
+    casks = [
+      "adobe-creative-cloud"
+      "discord"
+      "google-chrome"
+      "jetbrains-toolbox"
+      "karabiner-elements"
+      "kitty"
+      "obsidian"
+      "postman"
+      "signal"
+      "spotify"
+      "zoom"
+    ];
+  };
 
   programs.zsh.enable = true;
   users.users.max.name = "max";
