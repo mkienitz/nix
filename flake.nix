@@ -20,6 +20,7 @@
     ...
   } @ inputs:
     {
+      # Colmena deployed nodes
       colmena = {
         meta = {
           nixpkgs = self.pkgs.x86_64-linux;
@@ -32,14 +33,16 @@
         gonggong.imports = [./hosts/gonggong];
         hygiea.imports = [./hosts/hygiea];
       };
-      nixosConfigurations = ((colmena.lib.makeHive self.colmena).introspect (x: x)).nodes;
 
+      # Tim Apple
       darwinConfigurations.io = darwin.lib.darwinSystem {
         pkgs = self.pkgs.aarch64-darwin;
         specialArgs = {inherit inputs;};
         modules = [./hosts/io];
       };
 
+      # Add a convenience alias 'hosts'
+      nixosConfigurations = ((colmena.lib.makeHive self.colmena).introspect (x: x)).nodes;
       hosts = self.nixosConfigurations // self.darwinConfigurations;
     }
     // flake-utils.lib.eachDefaultSystem (
