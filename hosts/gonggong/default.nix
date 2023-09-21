@@ -1,12 +1,12 @@
 {
-  config,
-  lib,
   ...
 }: {
   imports = [
     ./hw-specific.nix
+
     ../../modules/nixos
-    ./caddy.nix
+
+		../../modules/services/caddy.nix
   ];
 
   deployment.buildOnTarget = false;
