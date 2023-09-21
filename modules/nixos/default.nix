@@ -23,12 +23,14 @@
     };
   };
 
-  security.sudo = {
-    execWheelOnly = false;
-    wheelNeedsPassword = false;
-  };
-
+  security.sudo.enable = false;
   time.timeZone = "Europe/Berlin";
+
+  # To future potential docker user: WARY
+  networking.nftables.enable = true;
+  networking.firewall = {
+    enable = true;
+  };
 
   users = let
     authorizedKeys = [
@@ -38,14 +40,11 @@
     ];
   in {
     mutableUsers = false;
-    users.max = {
+    users.root = {
       shell = pkgs.zsh;
-      isNormalUser = true;
       hashedPassword = "$y$j9T$VCnJOOcqEduAbjfUu3lg.1$c6nV8lybLzpG1MMFicsvuL/AwUUni.4Zd9aCIbyJsMB";
-      extraGroups = ["wheel"];
       openssh.authorizedKeys.keys = authorizedKeys;
     };
-    users.root.openssh.authorizedKeys.keys = authorizedKeys;
   };
 
   system.stateVersion = "23.11";
