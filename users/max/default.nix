@@ -1,9 +1,14 @@
-{pkgs, ...}: {
+{...}: {
+	# If on darwin, setup graphical applications using homebrew
+	imports = [
+		./graphical/homebrew.nix
+	];
+	# Setup home manager modules for user
+  home-manager.useGlobalPkgs = true;
   home-manager.users.max = {
     imports = [
       ./shell
-      ./git.nix
-      ./ssh.nix
+      ./graphical
     ];
     home.username = "max";
     home.stateVersion = "23.11";

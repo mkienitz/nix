@@ -15,29 +15,6 @@
       supportedFeatures = ["big-parallel" "kvm"];
     }
   ];
-  homebrew = {
-    enable = true;
-    global = {
-      brewfile = true;
-    };
-    onActivation = {
-      autoUpdate = false;
-      cleanup = "zap";
-    };
-    casks = [
-      "adobe-creative-cloud"
-      "discord"
-      "google-chrome"
-      "jetbrains-toolbox"
-      "karabiner-elements"
-      "kitty"
-      "obsidian"
-      "postman"
-      "signal"
-      "spotify"
-      "zoom"
-    ];
-  };
 
   programs.zsh.enable = true;
   users.users.max.name = "max";
