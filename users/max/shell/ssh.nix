@@ -3,6 +3,7 @@
   lib,
   ...
 }: {
+  # Setup agent depending on arch
   launchd.agents.ssh-agent = lib.mkIf (pkgs.stdenv.isDarwin) {
     enable = true;
     config = {
@@ -14,9 +15,21 @@
           ${pkgs.openssh}/bin/ssh-agent -D -a "/tmp/ssh-agent.sock"
         ''))
       ];
+      StandardErrorPath = "/tmp/ssh-agent.err";
+      StandardOutPath = "/tmp/ssh-agent.out";
+      EnvironmentVariables = let
+        askpass =
+          pkgs.writeShellScriptBin "askpass"
+          (lib.readFile ./askpass.sh);
+      in {
+        SSH_ASKPASS = "${askpass}/bin/askpass";
+        DISPLAY = ":0";
+      };
     };
   };
   services.ssh-agent.enable = !pkgs.stdenv.isDarwin;
+
+  # General settings
   programs.ssh = {
     enable = true;
     matchBlocks = {

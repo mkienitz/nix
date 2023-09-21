@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   config = lib.mkIf (pkgs.stdenv.isDarwin) {
     homebrew = {
       enable = true;
@@ -9,6 +13,9 @@
         autoUpdate = false;
         cleanup = "zap";
       };
+      brews = [
+        "pinentry-mac"
+      ];
       casks = [
         "adobe-creative-cloud"
         "discord"
