@@ -7,8 +7,8 @@
     ./zsh.nix
     ./starship.nix
     ./git.nix
-		./ssh.nix
-		./tmux.nix
+    ./ssh.nix
+    ./tmux.nix
   ];
 
   # Various command line tools
