@@ -1,8 +1,8 @@
 {...}: {
   # If on darwin, setup graphical applications using homebrew
   imports = [
-    ./graphical/homebrew.nix
-    ./graphical/yabai.nix
+    # ./graphical/homebrew.nix
+    # ./graphical/yabai.nix
   ];
   # Setup home manager modules for user
   home-manager.useGlobalPkgs = true;
