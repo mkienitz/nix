@@ -12,6 +12,7 @@
       protocol = "ssh-ng";
       system = "aarch64-linux";
       hostName = "gonggong";
+      maxJobs = 8;
       supportedFeatures = ["big-parallel" "kvm"];
     }
   ];
