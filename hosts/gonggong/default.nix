@@ -4,7 +4,7 @@
 
     ../../modules/nixos
 
-    ./services/nginx.nix
+    ./services
   ];
 
   deployment.buildOnTarget = false;

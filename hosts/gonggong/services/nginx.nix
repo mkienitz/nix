@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.firewall.allowedTCPPorts = [80 443];
   security.acme = {
     acceptTerms = true;
@@ -28,6 +32,13 @@
           locations."/".extraConfig = ''
             return 302 https://www.paypal.com/paypalme/maximiliankienitz;
           '';
+        };
+      "bipper.kienitz.dev" =
+        defaults
+        // {
+          locations."/api/".proxyPass = let
+            bipper = config.services.bipper;
+          in "http://${bipper.address}:${toString bipper.port}/";
         };
     };
     appendHttpConfig = ''

@@ -9,6 +9,8 @@
     flake-utils.url = "github:numtide/flake-utils";
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+    bipper.url = "github:mkienitz/bipper-rs";
+    bipper.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -48,6 +50,7 @@
     // flake-utils.lib.eachDefaultSystem (
       system: rec {
         pkgs = import nixpkgs {inherit system;};
+        formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
           name = "devShell";
           packages = with pkgs; [alejandra colmena.packages.${system}.colmena deadnix nil nix-tree statix];
