@@ -17,6 +17,7 @@
         "pinentry-mac"
       ];
       casks = [
+        "docker"
         "adobe-creative-cloud"
         "discord"
         "google-chrome"
