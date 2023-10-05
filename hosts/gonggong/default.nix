@@ -6,6 +6,4 @@
 
     ./services
   ];
-
-  deployment.buildOnTarget = false;
 }

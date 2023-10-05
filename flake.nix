@@ -7,8 +7,6 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    colmena.url = "github:zhaofengli/colmena";
-    colmena.inputs.nixpkgs.follows = "nixpkgs";
     bipper.url = "github:mkienitz/bipper-rs";
     bipper.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -17,25 +15,10 @@
     nixpkgs,
     darwin,
     flake-utils,
-    colmena,
     self,
     ...
   } @ inputs:
     {
-      # Colmena deployed nodes
-      colmena = {
-        meta = {
-          nixpkgs = self.pkgs.x86_64-linux;
-          nodeNixpkgs = {
-            gonggong = self.pkgs.aarch64-linux;
-            hygiea = self.pkgs.aarch64-linux;
-          };
-          specialArgs = {inherit inputs;};
-        };
-        gonggong.imports = [./hosts/gonggong];
-        hygiea.imports = [./hosts/hygiea];
-      };
-
       # Tim Apple
       darwinConfigurations.io = darwin.lib.darwinSystem {
         pkgs = self.pkgs.aarch64-darwin;
@@ -43,17 +26,44 @@
         modules = [./hosts/io];
       };
 
-      # Add a convenience alias 'hosts'
-      nixosConfigurations = ((colmena.lib.makeHive self.colmena).introspect (x: x)).nodes;
-      hosts = self.nixosConfigurations // self.darwinConfigurations;
+      # Not Tim Apple
+      nixosConfigurations = let
+        mkNixosHost = hostname: arch:
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+              inherit (self.pkgs.${arch}) lib;
+            };
+            modules = [
+              ./hosts/${hostname}
+              {
+                nixpkgs.hostPlatform = arch;
+                nixpkgs.overlays = self.pkgs.${arch}.overlays;
+                nixpkgs.config = self.pkgs.${arch}.config;
+              }
+            ];
+          };
+      in {
+        # Hetzner vServer
+        gonggong = mkNixosHost "gonggong" "aarch64-linux";
+        # Raspberry Pi 4
+        hygiea = mkNixosHost "hygiea" "aarch64-linux";
+      };
     }
     // flake-utils.lib.eachDefaultSystem (
       system: rec {
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (_final: prev: {
+              deploy = prev.callPackage ./pkgs/deploy.nix {};
+            })
+          ];
+        };
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
           name = "devShell";
-          packages = with pkgs; [alejandra colmena.packages.${system}.colmena deadnix nil nix-tree statix];
+          packages = with pkgs; [alejandra deadnix deploy nil nix-tree statix];
         };
       }
     );

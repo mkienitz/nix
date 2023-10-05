@@ -1,10 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../../modules/nixos
-    ../../users/max
   ];
-
-  deployment.buildOnTarget = false;
 
   # Hardware specific
   boot = {
