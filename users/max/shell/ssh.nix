@@ -51,6 +51,12 @@
         user = "max";
         port = 22;
       };
+
+      sbox = {
+        hostname = "u368782.your-storagebox.de";
+        user = "u368782";
+        port = 23;
+      };
     };
     extraOptionOverrides = {
       AddKeysToAgent = "yes";
