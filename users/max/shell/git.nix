@@ -3,6 +3,10 @@
     enable = true;
     userName = "Maximilian Kienitz";
     userEmail = "max@kienitz.dev";
+    ignores = [
+      ".direnv"
+      ".DS_Store"
+    ];
   };
 
   programs.lazygit = {
