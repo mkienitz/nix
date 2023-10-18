@@ -63,7 +63,13 @@
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
           name = "devShell";
-          packages = with pkgs; [alejandra deadnix deploy nil nix-tree statix];
+          packages = with pkgs; [
+            deadnix
+            deploy
+            nil
+            nix-tree
+            statix
+          ];
         };
       }
     );
