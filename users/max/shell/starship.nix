@@ -12,8 +12,8 @@
       {
         "$schema" = "https://starship.rs/config-schema.json";
         c = {
-          format = "[[ $symbol( $version) ](fg:surface0 bg:peach)]($style)";
-          style = "bg:peach";
+          format = "[[ $symbol( $version) ](fg:surface0 bg:teal)]($style)";
+          style = "bg:teal";
           symbol = " ";
         };
         character = {
