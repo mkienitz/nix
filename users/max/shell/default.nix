@@ -13,6 +13,7 @@
 
   # Various command line tools
   home.packages = with pkgs; [
+    comma
     neovim
     tree-sitter
     timg
