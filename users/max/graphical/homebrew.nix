@@ -14,12 +14,13 @@
         cleanup = "zap";
       };
       brews = [
+        "m1ddc"
         "pinentry-mac"
       ];
       casks = [
-        "docker"
         "adobe-creative-cloud"
         "discord"
+        "docker"
         "google-chrome"
         "jetbrains-toolbox"
         "karabiner-elements"
