@@ -7,6 +7,12 @@
       ".direnv"
       ".DS_Store"
     ];
+    extraConfig = {
+      init.defaultBranch = "main";
+      merge.conflictstyle = "diff3";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
+    };
   };
 
   programs.lazygit = {
