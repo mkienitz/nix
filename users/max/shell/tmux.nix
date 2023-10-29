@@ -17,6 +17,7 @@
       set -ag terminal-overrides ",*:RGB"
       set -g @tmux-nvim-resize-step-x 5
       set -g @tmux-nvim-resize-step-y 5
+      set -g status-position top
       unbind '"'
       unbind %
       bind s split-window -v -c "#{pane_current_path}"
