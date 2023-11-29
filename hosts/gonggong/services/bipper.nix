@@ -6,6 +6,7 @@
   imports = [inputs.bipper.nixosModules.default];
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_14;
     ensureDatabases = ["bipper"];
     identMap = ''
       # ArbitraryMapName systemUser DBUser

@@ -7,7 +7,7 @@
   security.acme = {
     acceptTerms = true;
     defaults = {
-      email = "contact@kienitz.dev";
+      email = "contact@maxkienitz.com";
     };
   };
   services.nginx = {
@@ -18,7 +18,7 @@
         enableACME = true;
       };
     in {
-      "kienitz.dev" =
+      "maxkienitz.com" =
         defaults
         // {
           locations."/".extraConfig = ''
@@ -26,14 +26,14 @@
                  return 404 "<img src=\"https://http.cat/404.jpg\">";
           '';
         };
-      "paypal.kienitz.dev" =
+      "paypal.maxkienitz.com" =
         defaults
         // {
           locations."/".extraConfig = ''
             return 302 https://www.paypal.com/paypalme/maximiliankienitz;
           '';
         };
-      "bipper.kienitz.dev" =
+      "bipper.maxkienitz.com" =
         defaults
         // {
           locations."/api/".proxyPass = let
