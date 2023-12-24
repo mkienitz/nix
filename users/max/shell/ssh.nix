@@ -57,6 +57,13 @@
         user = "u368782";
         port = 23;
       };
+
+      "bitbucket.ase.in.tum.de" = {
+        hostname = "bitbucket.ase.in.tum.de";
+        user = "git";
+        port = 7999;
+        identityFile = "~/.ssh/tum_ed25519";
+      };
     };
     extraOptionOverrides = {
       AddKeysToAgent = "yes";
