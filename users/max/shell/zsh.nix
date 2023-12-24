@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -12,10 +9,6 @@
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-
-  home.sessionPath = [
-    "/opt/homebrew/bin"
-  ];
 
   programs.zsh = {
     enable = true;
