@@ -29,11 +29,6 @@
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      vserver = {
-        hostname = "45.157.178.176";
-        user = "max";
-        port = 22;
-      };
       lxhalle = {
         hostname = "lxhalle.in.tum.de";
         user = "kienitz";
