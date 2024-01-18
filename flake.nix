@@ -56,7 +56,15 @@
           inherit system;
           overlays = [
             (_final: prev: {
-              deploy = prev.callPackage ./pkgs/deploy.nix {};
+              deploy = prev.callPackage (pkgs.fetchFromGitHub
+              {
+                owner = "oddlama";
+                repo = "nix-config";
+                rev = "8446b8fa1376ee82b2d55f78bcc9bcb5534adf53";
+                hash = "sha256-Uh7N8a8nYSOE70hhcPRXJ56WYtK/O8fpwdrxL78UbTE=";
+              }
+              + 
+            "/pkgs/deploy.nix") {};
             })
           ];
         };
