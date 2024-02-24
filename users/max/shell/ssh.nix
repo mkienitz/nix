@@ -42,8 +42,8 @@
       };
 
       hygiea = {
-        hostname = "192.168.0.176";
-        user = "max";
+        hostname = "192.168.178.32";
+        user = "root";
         port = 22;
       };
 
