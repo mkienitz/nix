@@ -12,34 +12,35 @@
     kernelModules = ["kvm-intel"];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
-      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
     };
   };
 
-  fileSystems."/" = {
-    device = "rpool/root";
-    fsType = "zfs";
-    options = ["zfsutil"]; # TODO: Needed?
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/09FD-4017";
-    fsType = "vfat";
+  fileSystems = {
+    "/" = {
+      device = "rpool/root";
+      fsType = "zfs";
+      options = ["zfsutil"]; # TODO: Needed?
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/09FD-4017";
+      fsType = "vfat";
+    };
   };
 
   hardware = {
-    enableRedistributableFirmware = true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    enableRedistributableFirmware = true;
   };
 
   networking = {
-    useDHCP = lib.mkDefault true;
     hostId = "5ce254d7";
     hostName = "iapetus";
+    useDHCP = lib.mkDefault true;
   };
 
-  swapDevices = [];
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  swapDevices = [];
 }

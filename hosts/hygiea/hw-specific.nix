@@ -1,14 +1,16 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
     initrd.availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];
+    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
     loader = {
-      grub.enable = false;
       generic-extlinux-compatible.enable = true;
+      grub.enable = false;
     };
   };
-
-  hardware.enableRedistributableFirmware = true;
 
   fileSystems = {
     "/" = {
@@ -18,7 +20,11 @@
     };
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   networking = {
+    hostId = "15e1ade1";
     hostName = "hygiea";
+    useDHCP = lib.mkDefault true;
   };
 }

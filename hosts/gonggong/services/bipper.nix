@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [inputs.bipper.nixosModules.default];
+
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_14;
@@ -28,6 +29,7 @@
       }
     ];
   };
+
   services.bipper = {
     enable = true;
     address = "127.0.0.1";
