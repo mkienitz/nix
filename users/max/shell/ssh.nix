@@ -47,6 +47,12 @@
         port = 22;
       };
 
+      iapetus = {
+        hostname = "192.168.178.37";
+        user = "root";
+        port = 22;
+      };
+
       sbox = {
         hostname = "u368782.your-storagebox.de";
         user = "u368782";

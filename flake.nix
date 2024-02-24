@@ -2,13 +2,23 @@
   description = "Nix configurations for all machines";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    bipper.url = "github:mkienitz/bipper-rs";
-    bipper.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    bipper = {
+      url = "github:mkienitz/bipper-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    coffee-labeler = {
+      url = "github:mkienitz/coffee-labeler";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -48,6 +58,8 @@
         gonggong = mkNixosHost "gonggong" "aarch64-linux";
         # Raspberry Pi 4
         hygiea = mkNixosHost "hygiea" "aarch64-linux";
+        # Beelink Mini S12 Pro
+        iapetus = mkNixosHost "iapetus" "x86_64-linux";
       };
     }
     // flake-utils.lib.eachDefaultSystem (
@@ -57,14 +69,13 @@
           overlays = [
             (_final: prev: {
               deploy = prev.callPackage (pkgs.fetchFromGitHub
-              {
-                owner = "oddlama";
-                repo = "nix-config";
-                rev = "8446b8fa1376ee82b2d55f78bcc9bcb5534adf53";
-                hash = "sha256-Uh7N8a8nYSOE70hhcPRXJ56WYtK/O8fpwdrxL78UbTE=";
-              }
-              + 
-            "/pkgs/deploy.nix") {};
+                {
+                  owner = "oddlama";
+                  repo = "nix-config";
+                  rev = "8446b8fa1376ee82b2d55f78bcc9bcb5534adf53";
+                  hash = "sha256-Uh7N8a8nYSOE70hhcPRXJ56WYtK/O8fpwdrxL78UbTE=";
+                }
+                + "/pkgs/deploy.nix") {};
             })
           ];
         };
