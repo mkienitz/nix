@@ -19,6 +19,7 @@
       ];
       casks = [
         "adobe-creative-cloud"
+        "balenaetcher"
         "discord"
         "docker"
         "google-chrome"
@@ -29,6 +30,7 @@
         "postman"
         "signal"
         "spotify"
+        "zed"
         "zoom"
       ];
     };
