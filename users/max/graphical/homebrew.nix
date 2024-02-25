@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf (pkgs.stdenv.isDarwin) {
+  config = lib.mkIf pkgs.stdenv.isDarwin {
     homebrew = {
       enable = true;
       global = {

@@ -46,7 +46,7 @@
     {
       agenix-rekey = agenix-rekey.configure {
         userFlake = self;
-        nodes = { inherit (self.nixosConfigurations) hygiea; };
+        nodes = {inherit (self.nixosConfigurations) hygiea;};
       };
 
       # Tim Apple
@@ -67,9 +67,10 @@
             modules = [
               ./hosts/${hostname}
               {
-                nixpkgs.hostPlatform = arch;
-                nixpkgs.overlays = self.pkgs.${arch}.overlays;
-                nixpkgs.config = self.pkgs.${arch}.config;
+                nixpkgs = {
+                  hostPlatform = arch;
+                  inherit (self.pkgs.${arch}) overlays config;
+                };
               }
             ];
           };

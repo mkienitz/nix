@@ -37,8 +37,8 @@
         defaults
         // {
           locations."/api/".proxyPass = let
-            bipper = config.services.bipper;
-          in "http://${bipper.address}:${toString bipper.port}/";
+            inherit (config.services.bipper) address port;
+          in "http://${address}:${toString port}/";
         };
     };
     appendHttpConfig = ''

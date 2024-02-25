@@ -4,7 +4,7 @@
   ...
 }: {
   # Setup agent depending on arch
-  launchd.agents.ssh-agent = lib.mkIf (pkgs.stdenv.isDarwin) {
+  launchd.agents.ssh-agent = lib.mkIf pkgs.stdenv.isDarwin {
     enable = true;
     config = {
       KeepAlive = true;
@@ -23,11 +23,17 @@
       };
     };
   };
+
+  home.sessionVariablesExtra = lib.optionalString pkgs.stdenv.isDarwin ''
+    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+  '';
+
   services.ssh-agent.enable = !pkgs.stdenv.isDarwin;
 
   # General settings
   programs.ssh = {
     enable = true;
+
     matchBlocks = {
       lxhalle = {
         hostname = "lxhalle.in.tum.de";
@@ -66,6 +72,7 @@
         identityFile = "~/.ssh/tum_ed25519";
       };
     };
+
     extraOptionOverrides = {
       AddKeysToAgent = "yes";
       IdentitiesOnly = "yes";
