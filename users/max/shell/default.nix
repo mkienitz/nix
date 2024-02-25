@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./zsh.nix
     ./starship.nix
@@ -30,10 +26,6 @@
       tldr
       wget
     ];
-
-    sessionVariablesExtra = lib.optionalString pkgs.stdenv.isDarwin ''
-      export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
-    '';
 
     shellAliases = {
       c = "clear";

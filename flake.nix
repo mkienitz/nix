@@ -8,6 +8,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +20,7 @@
     agenix-rekey = {
       url = "github:oddlama/agenix-rekey";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -40,6 +46,7 @@
     devshell,
     flake-utils,
     nixpkgs,
+    pre-commit-hooks,
     self,
     ...
   } @ inputs:
@@ -102,36 +109,63 @@
             })
           ];
         };
+
+        # nix flake check
+        checks.pre-commit-hooks = pre-commit-hooks.lib.${system}.run {
+          src = pkgs.lib.cleanSource ./.;
+          hooks = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+          };
+        };
+
+        # nix fmt
         formatter = pkgs.alejandra;
+
+        # nix develop
         devShells.default = pkgs.devshell.mkShell {
           packages = with pkgs; [
-            pkgs.agenix-rekey
             age-plugin-yubikey
-            yubikey-manager
-            yubico-piv-tool
-            deadnix
             nil
-            nix-tree
-            statix
           ];
 
-          commands = [
+          devshell.startup.pre-commit.text = checks.pre-commit-hooks.shellHook;
+
+          commands = with pkgs; [
             {
               name = "rekey";
               help = "run agenix rekey and copy to remote builders";
-              category = "deployment";
               command = ''
                 agenix rekey && \
                 agenix rekey --show-out-paths | xargs nix copy --to ssh://gonggong
               '';
+              category = "deployment";
             }
             {
-              name = "deploy";
+              package = deploy;
               help = "deploy config to host";
               category = "deployment";
-              command = ''
-                ${pkgs.deploy}/bin/deploy "$@"
-              '';
+            }
+            {
+              package = deadnix;
+              help = "scan nix files for dead code";
+              category = "lint";
+            }
+            {
+              package = statix;
+              help = "lint nix files";
+              category = "lint";
+            }
+            {
+              package = pkgs.agenix-rekey;
+              help = "create and edit secrets";
+              category = "other";
+            }
+            {
+              package = nix-tree;
+              help = "browse dependecy graph of derivations";
+              category = "other";
             }
           ];
         };
