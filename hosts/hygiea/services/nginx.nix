@@ -1,14 +1,6 @@
 {config, ...}: {
-  age.secrets.acme-cloudflare-zone-token = {
-    rekeyFile = ../secrets/acme-cloudflare-zone-token.age;
-    mode = "440";
-    # group = "acme";
-  };
-  age.secrets.acme-cloudflare-dns-token = {
-    rekeyFile = ../secrets/acme-cloudflare-dns-token.age;
-    mode = "440";
-    # group = "acme";
-  };
+  age.secrets.acme-cloudflare-zone-token.rekeyFile = ../secrets/acme-cloudflare-zone-token.age;
+  age.secrets.acme-cloudflare-dns-token.rekeyFile = ../secrets/acme-cloudflare-dns-token.age;
 
   networking.firewall.allowedTCPPorts = [80 443];
   security.acme = {
@@ -29,6 +21,7 @@
       "label.maxkienitz.com".inheritDefaults = true;
     };
   };
+
   services.nginx = {
     enable = true;
     virtualHosts = let
