@@ -7,7 +7,6 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_14;
     ensureDatabases = ["bipper"];
     identMap = ''
       # ArbitraryMapName systemUser DBUser
@@ -23,9 +22,7 @@
     ensureUsers = [
       {
         name = "bipper";
-        ensurePermissions = {
-          "DATABASE bipper" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
   };
