@@ -164,7 +164,7 @@
             }
             {
               package = nix-tree;
-              help = "browse dependecy graph of derivations";
+              help = "browse dependency graph of derivations";
               category = "other";
             }
           ];
