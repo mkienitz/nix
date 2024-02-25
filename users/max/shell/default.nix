@@ -14,7 +14,6 @@
   # Various command line tools
   home.packages = with pkgs; [
     comma
-    neovim
     tree-sitter
     timg
     bat
@@ -30,6 +29,11 @@
     tldr
     wget
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   home.sessionVariablesExtra = lib.optionalString pkgs.stdenv.isDarwin ''
     export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
