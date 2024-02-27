@@ -3,8 +3,6 @@
   inputs,
   ...
 }: {
-  imports = [inputs.home-manager.nixosModules.default];
-
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
     registry.p.flake = inputs.nixpkgs;
