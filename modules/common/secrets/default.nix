@@ -7,5 +7,6 @@
     masterIdentities = [./YubiKey5CNFC_master_identity.pub];
     cacheDir = "/tmp/agenix-rekey";
     forceRekeyOnSystem = "aarch64-darwin";
+    storageMode = "derivation";
   };
 }
