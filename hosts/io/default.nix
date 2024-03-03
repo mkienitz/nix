@@ -1,5 +1,6 @@
-{...}: {
+{inputs, ...}: {
   imports = [
+    inputs.home-manager.darwinModules.default
     ../../modules/darwin
     ../../users/max
     ../../users/max/graphical/homebrew.nix
