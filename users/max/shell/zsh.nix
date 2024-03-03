@@ -25,10 +25,10 @@
       };
       defaultKeymap = "emacs";
       plugins = [
-        {
-          name = "fzf-tab";
-          src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
-        }
+        # {
+        #   name = "fzf-tab";
+        #   src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+        # }
         {
           name = "fast-syntax-highlighting";
           src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
