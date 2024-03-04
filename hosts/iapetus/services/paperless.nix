@@ -39,16 +39,23 @@ in {
   systemd = {
     # Create folder for scanner and share it with the paperless group
     tmpfiles.rules = [
-      # "d /var/lib/vsftpd/es580w 2770 vsftpd paperless - -"
       "d ${paperlessConsumePath} 2770 vsftpd paperless - -"
     ];
-    # paperless-ngx doesn't setup its own SCRATCH_DIR for whatever reason
+    # paperless-web service doesn't setup its own SCRATCH_DIR for whatever reason
     services.paperless-web.script = lib.mkBefore "mkdir -p /tmp/paperless";
   };
 
   services = {
-    # TODO: use upstreams
     nginx = {
+      upstreams.paperless = let
+        inherit (config.services.paperless) address port;
+      in {
+        servers."${address}:${builtins.toString port}" = {};
+        extraConfig = ''
+          zone paperless 64k;
+          keepalive 5;
+        '';
+      };
       enable = true;
       virtualHosts.${paperlessDomain} = {
         forceSSL = true;
@@ -56,10 +63,8 @@ in {
         extraConfig = ''
           client_max_body_size 512M;
         '';
-        locations."/" = let
-          inherit (config.services.paperless) address port;
-        in {
-          proxyPass = "http://${address}:${builtins.toString port}";
+        locations."/" = {
+          proxyPass = "http://paperless";
           proxyWebsockets = true;
         };
       };
@@ -123,7 +128,6 @@ in {
         PAPERLESS_CONSUMER_BARCODE_SCANNER = "ZXING";
         PAPERLESS_CONSUMER_RECURSIVE = true;
         PAPERLESS_FILENAME_FORMAT = "{created_year}-{created_month}-{created_day}_{asn}_{title}";
-        # PAPERLESS_FILENAME_FORMAT_REMOVE_NONE = true;
 
         # Let nginx handle compression
         PAPERLESS_ENABLE_COMPRESSION = false;
