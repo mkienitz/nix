@@ -1,7 +1,7 @@
 {
   programs.kitty = {
     enable = true;
-    theme = "Catppuccin-Mocha";
+    theme = "Gruvbox Dark";
     settings = {
       # Font
       font_family = "JetBrains Mono";
