@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  programs.zsh.enable = true;
+
   environment = {
     loginShell = pkgs.zsh;
     shells = with pkgs; [bash zsh];
