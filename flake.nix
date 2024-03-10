@@ -37,6 +37,7 @@
     coffee-labeler = {
       url = "github:mkienitz/coffee-labeler";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -98,7 +99,7 @@
             agenix-rekey.overlays.default
             devshell.overlays.default
             (_final: prev: {
-              deploy = prev.callPackage (pkgs.fetchFromGitHub
+              deploy = prev.callPackage (prev.fetchFromGitHub
                 {
                   owner = "oddlama";
                   repo = "nix-config";
