@@ -1,10 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [inputs.home-manager.darwinModules.default];
-
+{pkgs, ...}: {
   environment = {
     loginShell = pkgs.zsh;
     shells = with pkgs; [bash zsh];
@@ -38,8 +32,6 @@
   };
 
   nixpkgs.hostPlatform = "aarch64-darwin";
-
-  programs.zsh.enable = true;
 
   services.nix-daemon.enable = true;
 
