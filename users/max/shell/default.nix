@@ -56,9 +56,5 @@
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
   };
 }
