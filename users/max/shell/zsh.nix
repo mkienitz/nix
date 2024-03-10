@@ -1,23 +1,12 @@
 {pkgs, ...}: {
   programs = {
-    zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-
     zsh = {
       enable = true;
       initExtraFirst = ''
         if autoload history-search-end; then
           zle -N history-beginning-search-backward-end history-search-end
-            zle -N history-beginning-search-forward-end  history-search-end
-            fi
+          zle -N history-beginning-search-forward-end history-search-end
+        fi
       '';
       history = {
         size = 100000;

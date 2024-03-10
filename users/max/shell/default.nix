@@ -10,7 +10,6 @@
   home = {
     # Various command line tools
     packages = with pkgs; [
-      comma
       tree-sitter
       timg
       bat
@@ -42,8 +41,24 @@
     };
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
+  programs = {
+    nix-index-database.comma.enable = true;
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
   };
 }
