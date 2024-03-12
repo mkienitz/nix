@@ -14,7 +14,6 @@
             };
           };
         };
-        # TODO: ui-select
       };
     };
     keymaps = [
