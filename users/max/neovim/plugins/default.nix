@@ -20,7 +20,6 @@
       gitsigns.enable = true;
       comment-nvim.enable = true;
       nvim-autopairs.enable = true;
-      fidget.enable = true;
     };
   };
 }

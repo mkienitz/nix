@@ -10,6 +10,7 @@
         lightbulb.enable = false;
         rename.keys.quit = "<esc>";
       };
+      fidget.enable = true;
       lsp = {
         enable = true;
         servers = {
