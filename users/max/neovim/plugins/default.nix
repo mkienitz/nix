@@ -10,6 +10,7 @@ _: {
     ./telescope.nix
     ./treesitter.nix
     ./undotree.nix
+    ./lsp
   ];
   programs.nixvim = {
     plugins = {
