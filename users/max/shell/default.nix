@@ -24,6 +24,13 @@
       ripgrep
       tldr
       wget
+      (pkgs.writeShellScriptBin "view_nixvim_output" ''
+        set -e
+        cp ~/.config/nvim/init.lua /tmp/pretty.lua
+        chmod 600 /tmp/pretty.lua
+        ${stylua}/bin/stylua /tmp/pretty.lua
+        vim /tmp/pretty.lua
+      '')
     ];
 
     shellAliases = {
