@@ -75,5 +75,14 @@ _: {
         };
       }
     ];
+    extraConfigLuaPost =
+      /*
+      lua
+      */
+      ''
+        require("which-key").register({
+          ["<leader>f"] = { name = "Find" }
+        })
+      '';
   };
 }
