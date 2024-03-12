@@ -8,6 +8,7 @@ _: {
     ./nvim-window-picker.nix
     ./telescope.nix
     ./treesitter.nix
+    ./undotree.nix
   ];
   programs.nixvim = {
     plugins = {
