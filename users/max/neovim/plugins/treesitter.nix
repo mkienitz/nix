@@ -1,4 +1,4 @@
-_: {
+{
   programs.nixvim = {
     plugins = {
       treesitter = {
@@ -14,7 +14,6 @@ _: {
           };
         };
       };
-      treesitter-context.enable = true;
       treesitter-textobjects = {
         enable = true;
         select = {
