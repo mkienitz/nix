@@ -1,22 +1,12 @@
 _: {
   imports = [
     ./plugins
+    ./colorscheme.nix
   ];
   programs.nixvim = {
     enable = true;
+    vimAlias = true;
+    viAlias = true;
     globals.mapleader = " ";
-    colorschemes.gruvbox = {
-      enable = true;
-      settings = {
-        contrast = "soft";
-        overrides = {
-          SignColumn = {
-            bg = "#282828";
-          };
-        };
-      };
-    };
-    keymaps = [
-    ];
   };
 }

@@ -1,0 +1,27 @@
+alpha-nvim.lua
+autopairs.lua
+bufferline.lua
+catppuccin.lua
+comment.lua
+dressing.lua
+duck.lua
+fidget.lua
+fugitive.lua
+gitsigns.lua
+gruvbox.lua
+	FIX GUTTER
+harpoon.lua
+lazygit.lua
+leap.lua
+lsp
+lualine.lua
+neogit.lua
+nvim-colorizer.lua
+nvim-treesitter-textobjects.lua
+plenary.lua
+todo-comments.lua
+treesitter.lua
+undotree.lua
+vim-maximizer.lua
+
+LSP

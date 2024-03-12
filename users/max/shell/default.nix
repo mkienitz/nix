@@ -28,7 +28,6 @@
 
     shellAliases = {
       c = "clear";
-      vim = "nvim";
       weather = "curl wttr.in/Munich";
       zz = "z -";
       ls = "eza";
