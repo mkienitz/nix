@@ -3,7 +3,6 @@ _: {
     plugins = {
       treesitter = {
         enable = true;
-        ensureInstalled = ["c" "java" "haskell" "lua" "rust" "python" "cpp" "typescript" "scss" "svelte"];
         indent = true;
         incrementalSelection = {
           enable = true;
