@@ -1,4 +1,4 @@
-_: {
+{
   programs.nixvim = let
     mkIndentSettings = lang: width: expandTab: {
       name = "ftplugin/${lang}.lua";

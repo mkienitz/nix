@@ -1,6 +1,6 @@
-_: {
+{
   imports = [
-    ./lspconfig.nix
     ./cmp.nix
+    ./lspconfig.nix
   ];
 }

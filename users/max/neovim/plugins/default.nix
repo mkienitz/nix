@@ -1,4 +1,4 @@
-_: {
+{
   imports = [
     ./alpha.nix
     ./leap.nix
