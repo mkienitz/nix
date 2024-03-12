@@ -1,9 +1,10 @@
-{pkgs, ...}: {
+_: {
   imports = [
     ./alpha.nix
     ./leap.nix
     ./neo-tree.nix
     ./neogit.nix
+    ./nvim-surround.nix
     ./nvim-window-picker.nix
     ./telescope.nix
     ./treesitter.nix
@@ -16,11 +17,5 @@
       gitsigns.enable = true;
       comment-nvim.enable = true;
     };
-    extraPlugins = with pkgs.vimPlugins; [
-      nvim-surround
-    ];
-    extraConfigLuaPost = ''
-      require('nvim-surround').setup()
-    '';
   };
 }
