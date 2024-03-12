@@ -2,6 +2,7 @@ _: {
   imports = [
     ./alpha.nix
     ./leap.nix
+    ./lualine.nix
     ./neo-tree.nix
     ./neogit.nix
     ./nvim-surround.nix
