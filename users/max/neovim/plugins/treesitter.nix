@@ -9,11 +9,12 @@ _: {
           keymaps = {
             initSelection = "<C-space>";
             nodeIncremental = "<C-space>";
-            scopeIncremental = "false";
+            scopeIncremental = "<C-S-space>";
             nodeDecremental = "<bs>";
           };
         };
       };
+      treesitter-context.enable = true;
       treesitter-textobjects = {
         enable = true;
         select = {
