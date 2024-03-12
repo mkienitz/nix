@@ -33,11 +33,14 @@
         };
       };
     };
+    extraPlugins = with pkgs.vimPlugins; [
+      dressing-nvim
+    ];
     keymaps = [
       {
         key = "K";
         mode = "n";
-        action = "<cmd>Lspsaga hover_doc<cr>";
+        action = "<cmd>lua vim.lsp.buf.hover()<cr>";
         options = {
           desc = "Hover documentation";
         };
@@ -75,19 +78,19 @@
       {
         key = "<leader>c";
         mode = "n";
-        action = "<cmd>Lspsaga code_action<cr>";
+        action = "<cmd>lua vim.lsp.buf.code_action()<cr>";
         options = {desc = "Show code actions";};
       }
       {
         key = "<leader>rn";
         mode = "n";
-        action = "<cmd>Lspsaga rename<cr>";
+        action = "<cmd>lua vim.lsp.buf.rename()<cr>";
         options = {desc = "Rename symbol";};
       }
       {
         key = "<leader>e";
         mode = "n";
-        action = "<cmd>lua vim.diagnostic.open_float<cr>";
+        action = "<cmd>lua vim.diagnostic.open_float()<cr>";
         options = {desc = "Show diagnostics for line";};
       }
       {
