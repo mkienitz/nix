@@ -3,64 +3,125 @@
   pkgs,
   ...
 }: {
-  programs.nixvim.plugins = {
-    lsp = {
-      enable = true;
-      onAttach =
-        /*
-        lua
-        */
-        ''
-          if client.name == "tailwindcss" then
-            require("tailwindcss-colors").buf_attach(bufnr)
-          end
-          require("which-key").register({
-            K = { vim.lsp.buf.hover, "Hover documentation", buffer = bufnr },
-            g = {
-              name = "Go to",
-              d = { vim.lsp.buf.definition, "Definition", buffer = bufnr },
-              D = { vim.lsp.buf.declaration, "Declaration", buffer = bufnr },
-              i = { vim.lsp.buf.implementation, "Implementation", buffer = bufnr },
-              o = { vim.lsp.buf.type_definition, "Type definition", buffer = bufnr },
-              r = { vim.lsp.buf.references, "References", buffer = bufnr },
-            },
-            ["[d"] = { vim.diagnostic.goto_next, "Jump to next diagnostic", buffer = bufnr },
-            ["]d"] = { vim.diagnostic.goto_prev, "Jump to previous diagnostic", buffer = bufnr },
-            ["<leader>"] = {
-              c = { vim.lsp.buf.code_action, "Show code actions", buffer = bufnr },
-              rn = { vim.lsp.buf.rename, "Rename symbol", buffer = bufnr },
-              vws = { vim.lsp.buf.workspace_symbol, "Find symbol in workspace", buffer = bufnr },
-              e = { vim.diagnostic.open_float, "Show diagnostics for line", buffer = bufnr },
-              E = { require("telescope.builtin").diagnostics, "Show diagnostics for buffer", buffer = bufnr },
-              F = { vim.lsp.buf.format, "Format buffer", buffer = bufnr },
-            },
-          })
-        '';
-      servers = {
-        nil_ls = {
-          enable = true;
-          settings = {
-            formatting.command = [(lib.getExe pkgs.alejandra) "--quiet"];
+  programs.nixvim = {
+    plugins = {
+      lspsaga = {
+        enable = true;
+        lightbulb.enable = false;
+        rename.keys.quit = "<esc>";
+      };
+      lsp = {
+        enable = true;
+        servers = {
+          nil_ls = {
+            enable = true;
+            settings = {
+              formatting.command = [(lib.getExe pkgs.alejandra) "--quiet"];
+            };
           };
-        };
-        rust-analyzer = {
-          enable = true;
-          settings = {
-            checkOnSave = true;
-            check.command = "clippy";
-            files.excludeDirs = [".direnv"];
+          rust-analyzer = {
+            enable = true;
+            settings = {
+              checkOnSave = true;
+              check.command = "clippy";
+              files.excludeDirs = [".direnv"];
+            };
+            installCargo = false;
+            installRustc = false;
           };
-          onAttach.function =
-            /*
-            lua
-            */
-            ''
-              require("which-key").register({["<leader>y"] = require("rust_tools").hover_actions.hover_actions, buffer = bufnr })
-            '';
-          installCargo = false;
-          installRustc = false;
         };
       };
     };
+    keymaps = [
+      {
+        key = "K";
+        mode = "n";
+        action = "<cmd>Lspsaga hover_doc<cr>";
+        options = {
+          desc = "Hover documentation";
+        };
+      }
+      {
+        key = "gd";
+        mode = "n";
+        action = "<cmd>lua vim.lsp.buf.definition()<cr>";
+        options = {desc = "Definition";};
+      }
+      {
+        key = "gD";
+        mode = "n";
+        action = "<cmd>lua vim.lsp.buf.declaration()<cr>";
+        options = {desc = "Declaration";};
+      }
+      {
+        key = "gi";
+        mode = "n";
+        action = "<cmd>lua vim.lsp.buf.implementation()<cr>";
+        options = {desc = "Implementation";};
+      }
+      {
+        key = "go";
+        mode = "n";
+        action = "<cmd>lua vim.lsp.buf.type_definition()<cr>";
+        options = {desc = "Type definition";};
+      }
+      {
+        key = "gr";
+        mode = "n";
+        action = "<cmd>lua vim.lsp.buf.references()<cr>";
+        options = {desc = "References";};
+      }
+      {
+        key = "<leader>c";
+        mode = "n";
+        action = "<cmd>Lspsaga code_action<cr>";
+        options = {desc = "Show code actions";};
+      }
+      {
+        key = "<leader>rn";
+        mode = "n";
+        action = "<cmd>Lspsaga rename<cr>";
+        options = {desc = "Rename symbol";};
+      }
+      {
+        key = "<leader>e";
+        mode = "n";
+        action = "<cmd>lua vim.diagnostic.open_float<cr>";
+        options = {desc = "Show diagnostics for line";};
+      }
+      {
+        key = "<leader>E";
+        mode = "n";
+        action = "<cmd>lua require('telescope.builtin').diagnostics()<cr>";
+        options = {desc = "Show available diagnostics";};
+      }
+      {
+        key = "<leader>F";
+        mode = "n";
+        action = "<cmd>lua vim.lsp.buf.format()<cr>";
+        options = {desc = "Format buffer";};
+      }
+      {
+        key = "]d";
+        mode = "n";
+        action = "<cmd>lua vim.diagnostic.goto_next()<cr>";
+        options = {desc = "Jump to next diagnostic";};
+      }
+      {
+        key = "[d";
+        mode = "n";
+        action = "<cmd>lua vim.diagnostic.goto_prev()<cr>";
+        options = {desc = "Jump to previous diagnostic";};
+      }
+    ];
+    extraConfigLuaPost =
+      /*
+      lua
+      */
+      ''
+        require("which-key").register({
+          ["<leader>g"] = { name = "Goto" }
+        })
+      '';
   };
 }
