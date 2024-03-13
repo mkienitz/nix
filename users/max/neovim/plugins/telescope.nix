@@ -1,10 +1,10 @@
-{
-  programs.nixvim = {
-    plugins = {
-      telescope = {
-        enable = true;
-        enabledExtensions = ["fzf"];
-        extensions.fzf-native.enable = true;
+{pkgs, ...}: {
+  programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
+    {
+      pkg = telescope-nvim;
+      lazy = true;
+      dependencies = [telescope-fzf-native-nvim];
+      opts = {
         defaults = {
           mappings = {
             i = {
@@ -15,73 +15,30 @@
           };
         };
       };
-    };
-    keymaps = [
-      {
-        key = "<leader>ff";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').find_files()<cr>";
-        options = {
-          desc = "Find local files";
-        };
-      }
-      {
-        key = "<leader>fg";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').git_files()<cr>";
-        options = {
-          desc = "Find Git files";
-        };
-      }
-      {
-        key = "<leader>fr";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').oldfiles()<cr>";
-        options = {
-          desc = "Find old files";
-        };
-      }
-      {
-        key = "<leader>fb";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').buffers()<cr>";
-        options = {
-          desc = "Find buffers";
-        };
-      }
-      {
-        key = "<leader>fc";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').grep_string()<cr>";
-        options = {
-          desc = "Grep string under cursor";
-        };
-      }
-      {
-        key = "<leader>fs";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').live_grep()<cr>";
-        options = {
-          desc = "Grep in current working directory";
-        };
-      }
-      {
-        key = "<leader>ft";
-        mode = "n";
-        action = "<cmd>lua require('telescope.builtin').treesitter()<cr>";
-        options = {
-          desc = "Treesitter symbols";
-        };
-      }
-    ];
-    extraConfigLuaPost =
-      /*
-      lua
-      */
-      ''
-        require("which-key").register({
-          ["<leader>f"] = { name = "Find" }
-        })
-      '';
-  };
+      config =
+        /*
+        lua
+        */
+        ''
+          function(_, opts)
+            require("telescope").setup(opts)
+            require("telescope").load_extension("fzf")
+            local tsb = require("telescope.builtin")
+              local wk = require("which-key")
+              wk.register({
+                ["<leader>f"] = {
+                  name = "Find",
+                  f = { tsb.find_files, "Local files" },
+                  g = { tsb.git_files, "Git files" },
+                  r = { tsb.oldfiles, "Old files" },
+                  b = { tsb.buffers, "Buffers" },
+                  c = { tsb.grep_string, "String under cursor" },
+                  s = { tsb.live_grep, "String in current working directory" },
+                  t = { tsb.treesitter, "Treesitter symbols" },
+                },
+              })
+          end
+        '';
+    }
+  ];
 }

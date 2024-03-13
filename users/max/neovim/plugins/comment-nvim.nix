@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
-      pkg = nvim-surround;
+      pkg = comment-nvim;
       opts = {};
     }
   ];

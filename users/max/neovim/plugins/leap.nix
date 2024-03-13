@@ -1,35 +1,26 @@
 {
-  programs.nixvim = {
-    plugins = {
-      leap = {
-        enable = true;
-      };
-    };
-    keymaps = [
-      {
-        key = "s";
-        mode = "n";
-        action = "<Plug>(leap-forward-to)";
-        options = {
-          desc = "Leap forward";
-        };
-      }
-      {
-        key = "S";
-        mode = "n";
-        action = "<Plug>(leap-backward-to)";
-        options = {
-          desc = "Leap backward";
-        };
-      }
-      {
-        key = "gs";
-        mode = "n";
-        action = "<Plug>(leap-cross-windows)";
-        options = {
-          desc = "Cross-dimensional leap";
-        };
-      }
-    ];
-  };
+  pkgs,
+  config,
+  ...
+}: let
+  inherit (config.nixvim) helpers;
+in {
+  programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
+    {
+      pkg = leap-nvim;
+      lazy = false;
+      opts = {case_sensitive = true;};
+      keys.__raw = helpers.toLuaObject [
+        ((helpers.listToUnkeyedAttrs
+          ["s" "<Plug>(leap-forward-to)"])
+        // {desc = "Leap forward";})
+        ((helpers.listToUnkeyedAttrs
+          ["S" "<Plug>(leap-backward-to)"])
+        // {desc = "Leap backward";})
+        ((helpers.listToUnkeyedAttrs
+          ["gs" "<Plug>(leap-cross-windows)"])
+        // {desc = "Leap across windows";})
+      ];
+    }
+  ];
 }

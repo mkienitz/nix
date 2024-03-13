@@ -1,15 +1,22 @@
 {
-  programs.nixvim = {
-    plugins = {
-      neo-tree = {
-        enable = true;
-        closeIfLastWindow = true;
-        popupBorderStyle = "rounded";
-        defaultComponentConfigs = {
+  pkgs,
+  config,
+  ...
+}: let
+  inherit (config.nixvim) helpers;
+in {
+  programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
+    {
+      pkg = neo-tree-nvim;
+      dependencies = [plenary-nvim nui-nvim nvim-web-devicons nvim-window-picker];
+      opts = {
+        close_if_last_window = true;
+        popup_border_style = "rounded";
+        default_component_configs = {
           container = {
-            enableCharacterFade = false;
+            enable_character_fade = false;
           };
-          gitStatus = {
+          git_status = {
             symbols = {
               added = "A";
               deleted = "D";
@@ -27,31 +34,24 @@
           width = 36;
         };
         filesystem = {
-          filteredItems = {
-            forceVisibleInEmptyFolder = true;
-            hideDotfiles = false;
-            hideByName = [".git"];
-            neverShow = [".DS_Store"];
+          filtered_items = {
+            force_visible_in_empty_folder = true;
+            hide_dotfiles = false;
+            hide_by_name = [".git"];
+            never_show = [".DS_Store"];
           };
-          groupEmptyDirs = true;
-          followCurrentFile = {
+          group_empty_dirs = true;
+          follow_current_file = {
             enabled = true;
           };
-          useLibuvFileWatcher = true;
-        };
-        renderers = {
+          use_libuv_file_watcher = true;
         };
       };
-    };
-    keymaps = [
-      {
-        key = "<leader>t";
-        mode = "n";
-        action = "<cmd>Neotree action=show toggle<cr>";
-        options = {
-          desc = "Toggle Neo-tree";
-        };
-      }
-    ];
-  };
+      keys.__raw = helpers.toLuaObject [
+        ((helpers.listToUnkeyedAttrs
+          ["<leader>t" "<cmd>Neotree action=show toggle<cr>"])
+        // {desc = "Open Neotree";})
+      ];
+    }
+  ];
 }

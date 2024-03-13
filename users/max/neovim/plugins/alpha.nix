@@ -1,109 +1,33 @@
-{lib, ...}: {
-  programs.nixvim = {
-    plugins = {
-      alpha = {
-        enable = true;
-        iconsEnabled = true;
-        layout = let
-          mkPadding = val: {
-            type = "padding";
-            inherit val;
-          };
-          mkButton = {
-            val,
-            shortcut,
-          }: extra: (lib.recursiveUpdate {
-              type = "button";
-              opts = {
-                position = "center";
-                width = 30;
-                cursor = 3;
-                inherit shortcut;
-                align_shortcut = "right";
-                hl_shortcut = "keyword";
-              };
-              inherit val;
-              # Somehow, the n defined presses will be mapped to the buttons 1:1, starting from the beginning
-              # This prevents this "squashing"
-              on_press.__raw = "function() end";
-            }
-            extra);
-        in [
-          (mkPadding 4)
-          {
-            type = "text";
-            val = [
-              "                        _    ___           "
-              "   ____ ___  ____  ____| |  / (_)___ ___   "
-              "  / __ `__ \\/ __ \\/ __ \\ | / / / __ `__ \\ "
-              " / / / / / / /_/ / /_/ / |/ / / / / / / /  "
-              "/_/ /_/ /_/\\____/\\____/|___/_/_/ /_/ /_/ "
-            ];
-            opts = {
-              position = "center";
-            };
+{pkgs, ...}: {
+  programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
+    {
+      pkg = alpha-nvim;
+      dependencies = [nvim-web-devicons telescope-nvim];
+      config = ''
+        function()
+          local alpha = require("alpha")
+          local dashboard = require("alpha.themes.dashboard")
+          -- Set header
+          dashboard.section.header.val = {
+            [[                          _    ___            ]],
+            [[     ____ ___  ____  ____| |  / (_)___ ___    ]],
+            [[    / __ `__ \/ __ \/ __ \ | / / / __ `__ \   ]],
+            [[   / / / / / / /_/ / /_/ / |/ / / / / / / /   ]],
+            [[  /_/ /_/ /_/\____/\____/|___/_/_/ /_/ /_/    ]],
           }
-          (mkPadding 2)
-          {
-            type = "group";
-            opts.spacing = 1;
-            val = [
-              (mkButton {
-                  shortcut = "e";
-                  val = "  New File";
-                } {
-                  on_press.__raw = "function() vim.cmd[[ene]] end";
-                  opts.keymap = [
-                    "n"
-                    "e"
-                    ":enew<cr>"
-                    {
-                      noremap = true;
-                      silent = true;
-                      nowait = true;
-                    }
-                  ];
-                })
-              (mkButton {
-                shortcut = "SPC  t";
-                val = "  Toggle File Explorer";
-              } {})
-              (mkButton {
-                shortcut = "SPC ff";
-                val = "󰱼  Local Files";
-              } {})
-              (mkButton {
-                shortcut = "SPC fg";
-                val = "  Git Files";
-              } {})
-              (mkButton {
-                shortcut = "SPC fr";
-                val = "󱋢  Recent Files";
-              } {})
-              (mkButton {
-                shortcut = "SPC fs";
-                val = "  Find String";
-              } {})
-              (mkButton {
-                  shortcut = "q";
-                  val = "  Quit";
-                } {
-                  on_press.__raw = "function() vim.cmd[[qa]] end";
-                  opts.keymap = [
-                    "n"
-                    "q"
-                    ":qa<cr>"
-                    {
-                      noremap = true;
-                      silent = true;
-                      nowait = true;
-                    }
-                  ];
-                })
-            ];
+          -- Set menu
+          dashboard.section.buttons.val = {
+            dashboard.button("e", "  New File", "<cmd>ene<CR>"),
+            dashboard.button("SPC  t", "  Toggle File Explorer"),
+            dashboard.button("SPC ff", "󰱼  Local Files"),
+            dashboard.button("SPC fg", "  Git Files"),
+            dashboard.button("SPC fr", "󱋢  Recent Files"),
+            dashboard.button("SPC fs", "  Find String"),
+            dashboard.button("q", "  Quit", "<cmd>qa<CR>"),
           }
-        ];
-      };
-    };
-  };
+          alpha.setup(dashboard.opts)
+        end
+      '';
+    }
+  ];
 }
