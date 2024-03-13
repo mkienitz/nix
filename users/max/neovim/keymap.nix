@@ -15,12 +15,12 @@
       }
       # Paste clipboard below/above the current line
       {
-        key = "<leader>p>";
+        key = "<leader>p";
         mode = "n";
         action = "<cmd>pu<cr>";
       }
       {
-        key = "<leader>P>";
+        key = "<leader>P";
         mode = "n";
         action = "<cmd>pu!<cr>";
       }
