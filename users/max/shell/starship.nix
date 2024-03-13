@@ -4,7 +4,7 @@
     enableZshIntegration = true;
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
-      format = "[ ](bg:color_orange)$os$username[](bg:color_yellow fg:color_orange)$directory[](fg:color_yellow bg:color_aqua)$git_branch$git_status[](fg:color_aqua bg:color_blue)$c$rust$golang$nodejs$java$kotlin$haskell$python[](fg:color_blue bg:color_bg3)$docker_context[](fg:color_bg3 bg:color_bg1)$time[](fg:color_bg1)$line_break$character";
+      format = "[ ](bg:color_orange)$os$username[](bg:color_yellow fg:color_orange)$directory[](fg:color_yellow bg:color_aqua)$git_branch$git_status[](fg:color_aqua bg:color_blue)$c$rust$golang$nodejs$java$kotlin$haskell$python[](fg:color_blue bg:color_bg3)$docker_context[](fg:color_bg3)$line_break$character";
       c = {
         format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
         style = "bg:color_blue";
@@ -95,7 +95,7 @@
         symbol = "";
       };
       time = {
-        disabled = false;
+        disabled = true;
         format = "[[  $time ](fg:color_fg0 bg:color_bg1)]($style)";
         style = "bg:color_bg1";
         time_format = "%R";
