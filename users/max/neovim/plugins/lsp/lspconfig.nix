@@ -78,10 +78,10 @@
             })
 
             lspconfig.rust_analyzer.setup({
-              server = {
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
+              capabilities = capabilities,
+              on_attach = on_attach,
+              settings = {
+                ['rust-analyzer'] = {
                   checkOnSave = {
                     command = "clippy",
                   },
@@ -108,10 +108,10 @@
               settings = {
                 ["nil"] = {
                   formatting = {
-                    command = { "${(lib.getExe pkgs.alejandra)}", "--quiet" }
-                  }
-                }
-              }
+                    command = { "${(lib.getExe pkgs.alejandra)}", "--quiet" },
+                  },
+                },
+              },
             })
 
             require("lspconfig").tailwindcss.setup({
