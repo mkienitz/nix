@@ -2,6 +2,7 @@
   imports = [
     ./filetypes.nix
     ./keymap.nix
+    ./moovim.nix
     ./options.nix
     ./plugins
   ];

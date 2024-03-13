@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (config.nixvim) helpers;
+  inherit (config.lib) moovim;
 in {
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
@@ -47,10 +47,12 @@ in {
           use_libuv_file_watcher = true;
         };
       };
-      keys.__raw = helpers.toLuaObject [
-        ((helpers.listToUnkeyedAttrs
-          ["<leader>t" "<cmd>Neotree action=show toggle<cr>"])
-        // {desc = "Open Neotree";})
+      keys = moovim.mkLazyKeys [
+        {
+          lhs = "<leader>t";
+          rhs = "<cmd>Neotree action=show toggle<cr>";
+          desc = "Open Neotree";
+        }
       ];
     }
   ];
