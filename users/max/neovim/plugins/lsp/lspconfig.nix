@@ -7,7 +7,13 @@
     {
       pkg = nvim-lspconfig;
       event = ["BufReadPre" "BufNewFile"];
-      dependencies = [dressing-nvim which-key-nvim cmp-nvim-lsp nvim-cmp telescope-nvim];
+      dependencies = [
+        dressing-nvim
+        which-key-nvim
+        cmp-nvim-lsp
+        nvim-cmp
+        telescope-nvim
+      ];
       config =
         /*
         lua
