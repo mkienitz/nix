@@ -45,8 +45,24 @@ in {
     services.paperless-web.script = lib.mkBefore "mkdir -p /tmp/paperless";
   };
 
+  environment.persistence = {
+    "/state".directories = [
+      "/var/lib/acme/${paperlessDomain}"
+    ];
+    "/persist".directories = [
+      "/paperless/media"
+      {
+        directory = "/var/lib/paperless";
+        user = "paperless";
+        group = "paperless";
+        mode = "0750";
+      }
+    ];
+  };
+
   services = {
     nginx = {
+      enable = true;
       upstreams.paperless = let
         inherit (config.services.paperless) address port;
       in {
@@ -56,7 +72,6 @@ in {
           keepalive 5;
         '';
       };
-      enable = true;
       virtualHosts.${paperlessDomain} = {
         forceSSL = true;
         useACMEHost = paperlessDomain;

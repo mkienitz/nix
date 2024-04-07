@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   boot = {
@@ -8,6 +9,17 @@
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
       kernelModules = [];
+      systemd.enable = true;
+      systemd.services.impermanence-root = {
+        wantedBy = ["initrd.target"];
+        after = ["zfs-import-rpool.service"];
+        before = ["sysroot.mount"];
+        unitConfig.DefaultDependencies = "no";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.zfs}/bin/zfs rollback -r rpool/local/root@blank";
+        };
+      };
     };
     kernelModules = ["kvm-intel"];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
@@ -18,14 +30,32 @@
   };
 
   fileSystems = {
-    "/" = {
-      device = "rpool/root";
-      fsType = "zfs";
-      options = ["zfsutil"]; # TODO: Needed?
-    };
     "/boot" = {
-      device = "/dev/disk/by-uuid/09FD-4017";
+      device = "/dev/disk/by-uuid/896B-8534";
       fsType = "vfat";
+    };
+    "/" = {
+      device = "rpool/local/root";
+      fsType = "zfs";
+      options = ["zfsutil"];
+    };
+    "/nix" = {
+      device = "rpool/local/nix";
+      fsType = "zfs";
+      options = ["zfsutil"];
+      neededForBoot = true;
+    };
+    "/state" = {
+      device = "rpool/local/state";
+      fsType = "zfs";
+      options = ["zfsutil"];
+      neededForBoot = true;
+    };
+    "/persist" = {
+      device = "rpool/safe/persist";
+      fsType = "zfs";
+      options = ["zfsutil"];
+      neededForBoot = true;
     };
   };
 
