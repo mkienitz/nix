@@ -59,9 +59,15 @@
         port = 22;
       };
 
-      sbox = {
+      sbox1 = {
         hostname = "u368782.your-storagebox.de";
         user = "u368782";
+        port = 23;
+      };
+
+      sbox2 = {
+        hostname = "u400140.your-storagebox.de";
+        user = "u400140";
         port = 23;
       };
 
