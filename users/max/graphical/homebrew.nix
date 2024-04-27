@@ -20,6 +20,7 @@
       ];
       casks = [
         "adobe-creative-cloud"
+        "alacritty"
         "balenaetcher"
         "bruno"
         "discord"
@@ -27,9 +28,12 @@
         "google-chrome"
         "jetbrains-toolbox"
         "karabiner-elements"
+        "keyboardcleantool"
         "kitty"
         "monodraw"
+        "mullvadvpn"
         "obsidian"
+        "obs"
         "postman"
         "signal"
         "spotify"
