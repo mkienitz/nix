@@ -10,8 +10,9 @@
         brewfile = true;
       };
       onActivation = {
-        autoUpdate = false;
+        autoUpdate = true;
         cleanup = "zap";
+        upgrade = true;
       };
       brews = [
         "m1ddc"
