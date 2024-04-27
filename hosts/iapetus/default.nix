@@ -1,7 +1,7 @@
 {inputs, ...}: {
   imports = [
     ../../modules/nixos
-    ../../modules/common/secrets
+    ../../modules/nixos/secrets
     ./hw-specific.nix
     ./services
     inputs.impermanence.nixosModules.impermanence
