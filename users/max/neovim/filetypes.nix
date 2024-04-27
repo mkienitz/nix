@@ -3,7 +3,7 @@
     mkIndentSettings = lang: width: expandTab: {
       name = "ftplugin/${lang}.lua";
       value = {
-        options = {
+        opts = {
           expandtab = expandTab;
           shiftwidth = width;
           tabstop = width;

@@ -1,6 +1,6 @@
 {
   programs.nixvim = {
-    options = {
+    opts = {
       ignorecase = true;
       termguicolors = true;
       encoding = "utf-8";
