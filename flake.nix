@@ -160,28 +160,28 @@
 
           devshell.startup.pre-commit.text = checks.pre-commit-hooks.shellHook;
 
-          commands = with pkgs; [
+          commands = [
             {
               name = "rekey";
-              help = "run agenix rekey and copy to remote builders";
+              help = "run agenix rekey and copy to specified remote builder";
               command = ''
                 agenix rekey && \
-                agenix rekey --show-out-paths | xargs nix copy --to ssh://gonggong
+                agenix rekey --show-out-paths | xargs nix copy --to "ssh://$${1}"
               '';
               category = "deployment";
             }
             {
-              package = deploy;
+              package = pkgs.deploy;
               help = "deploy config to host";
               category = "deployment";
             }
             {
-              package = deadnix;
+              package = pkgs.deadnix;
               help = "scan nix files for dead code";
               category = "lint";
             }
             {
-              package = statix;
+              package = pkgs.statix;
               help = "lint nix files";
               category = "lint";
             }
@@ -191,7 +191,7 @@
               category = "other";
             }
             {
-              package = nix-tree;
+              package = pkgs.nix-tree;
               help = "browse dependency graph of derivations";
               category = "other";
             }
