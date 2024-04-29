@@ -45,6 +45,7 @@
     dock.autohide = true;
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
+      NSWindowShouldDragOnGesture = true;
       InitialKeyRepeat = 14;
       KeyRepeat = 1;
     };
