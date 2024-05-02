@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  ...
+}: {
   imports = [
     inputs.agenix.nixosModules.default
     inputs.agenix-rekey.nixosModules.default
@@ -8,5 +12,6 @@
     cacheDir = "/tmp/agenix-rekey";
     forceRekeyOnSystem = "aarch64-darwin";
     storageMode = "derivation";
+    generatedSecretsDir = config.node.secretsDir + "/generated";
   };
 }
