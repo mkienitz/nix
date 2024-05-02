@@ -5,6 +5,12 @@
 }: {
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
+      pkg = lspsaga-nvim;
+      opts = {
+        lightbulb.enable = false;
+      };
+    }
+    {
       pkg = nvim-lspconfig;
       event = ["BufReadPre" "BufNewFile"];
       dependencies = [
