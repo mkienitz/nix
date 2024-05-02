@@ -77,38 +77,7 @@
 
       # Not Tim Apple
       nixosConfigurations = let
-        mkNixosHost = hostname: arch:
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-              inherit (self.pkgs.${arch}) lib;
-            };
-            modules = [
-              ./hosts/${hostname}
-              {
-                nixpkgs = {
-                  hostPlatform = arch;
-                  inherit (self.pkgs.${arch}) overlays config;
-                };
-              }
-              ({
-                lib,
-                config,
-                ...
-              }: {
-                options = {
-                  node.baseDir = lib.mkOption {
-                    type = lib.types.path;
-                    default = ./hosts + "/${hostname}";
-                  };
-                  node.secretsDir = lib.mkOption {
-                    type = lib.types.path;
-                    default = config.node.baseDir + "/secrets";
-                  };
-                };
-              })
-            ];
-          };
+        mkNixosHost = import ./lib/mkNixosHost.nix inputs;
       in {
         # Hetzner vServer
         gonggong = mkNixosHost "gonggong" "aarch64-linux";
@@ -125,16 +94,7 @@
           overlays = [
             agenix-rekey.overlays.default
             devshell.overlays.default
-            (_final: prev: {
-              deploy = prev.callPackage (prev.fetchFromGitHub
-                {
-                  owner = "oddlama";
-                  repo = "nix-config";
-                  rev = "124e1c289f39e0f43b249d361a56286d3b6d87d6";
-                  hash = "sha256-7+EnNwttjsUGVrI+pT9OWcoJU7Nx0lpOcy0k9A1zZdY=";
-                }
-                + "/pkgs/deploy.nix") {};
-            })
+            (import ./pkgs/deploy.nix)
           ];
         };
 
