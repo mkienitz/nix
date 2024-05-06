@@ -59,6 +59,14 @@
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
 
+            -- Generic LSP handler
+            for _, v in ipairs({"hls", "svelte", "typst_lsp", "pyright", "tsserver", "tailwindcss"}) do
+              lspconfig[v].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+              })
+            end
+
             -- Dedicated handlers
             lspconfig.lua_ls.setup({
               capabilities = capabilities,
@@ -78,11 +86,6 @@
               },
             })
 
-            lspconfig.hls.setup({
-              capabilities = capabilities,
-              on_attach = on_attach,
-            })
-
             lspconfig.rust_analyzer.setup({
               capabilities = capabilities,
               on_attach = on_attach,
@@ -98,21 +101,6 @@
               },
             })
 
-            require("lspconfig").svelte.setup({
-              capabilities = capabilities,
-              on_attach = on_attach,
-            })
-
-            require("lspconfig").tsserver.setup({
-              capabilities = capabilities,
-              on_attach = on_attach,
-            })
-
-            require("lspconfig").pyright.setup({
-              capabilities = capabilities,
-              on_attach = on_attach,
-            })
-
             lspconfig.nil_ls.setup({
               capabilities = capabilities,
               on_attach = on_attach,
@@ -123,11 +111,6 @@
                   },
                 },
               },
-            })
-
-            require("lspconfig").tailwindcss.setup({
-              capabilities = capabilities,
-              on_attach = on_attach,
             })
           end
         '';
