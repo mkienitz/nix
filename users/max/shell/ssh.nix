@@ -34,7 +34,7 @@
   programs.ssh = {
     enable = true;
 
-    matchBlocks = {
+    matchBlocks = rec {
       lxhalle = {
         hostname = "lxhalle.in.tum.de";
         user = "kienitz";
@@ -65,10 +65,18 @@
         port = 23;
       };
 
+      sbox1-synology = lib.recursiveUpdate sbox1 {
+        user = "${sbox1.user}-sub1";
+      };
+
       sbox2 = {
         hostname = "u400140.your-storagebox.de";
         user = "u400140";
         port = 23;
+      };
+
+      sbox2-iapetus = lib.recursiveUpdate sbox2 {
+        user = "${sbox2.user}-sub1";
       };
 
       "bitbucket.ase.in.tum.de" = {
