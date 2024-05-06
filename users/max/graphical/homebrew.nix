@@ -30,6 +30,7 @@
         "karabiner-elements"
         "keyboardcleantool"
         "kitty"
+        "macfuse"
         "monodraw"
         "mullvadvpn"
         "obsidian"
