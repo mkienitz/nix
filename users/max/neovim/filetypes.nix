@@ -21,6 +21,19 @@
       (mkIndentSettings "svelte" 2 false)
       (mkIndentSettings "typescript" 2 false)
       (mkIndentSettings "typescriptreact" 2 false)
+      (mkIndentSettings "typst" 2 true)
     ];
+    extraConfigLua =
+      /*
+      lua
+      */
+      ''
+        vim.filetype.add({
+          extension = {
+            typ = "typst",
+            typst = "typst",
+          }
+        })
+      '';
   };
 }
