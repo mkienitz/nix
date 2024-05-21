@@ -1,14 +1,15 @@
 {pkgs, ...}: {
   imports = [
-    ./lsp
     ./alpha.nix
     ./fidget.nix
     ./gruvbox.nix
     ./leap.nix
+    ./lsp
     ./lualine.nix
     ./neo-tree.nix
     ./neogit.nix
     ./nvim-window-picker.nix
+    ./oil-nvim.nix
     ./telescope.nix
     ./treesitter.nix
     ./undotree.nix
