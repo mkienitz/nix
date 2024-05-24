@@ -1,4 +1,14 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: {
+  # Don't setup user on darwin
+  users.users.max = lib.mkIf (!pkgs.stdenv.isDarwin) {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+  };
   home-manager.useGlobalPkgs = true;
   home-manager.users.max = {
     imports = [
