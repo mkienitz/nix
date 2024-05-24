@@ -8,7 +8,7 @@
     registry.p.flake = inputs.nixpkgs;
   };
 
-  environment.systemPackages = with pkgs; [vim];
+  environment.systemPackages = with pkgs; [vim nvd];
 
   programs.zsh.enable = true;
 
