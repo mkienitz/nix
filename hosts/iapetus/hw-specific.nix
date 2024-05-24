@@ -2,7 +2,6 @@
   boot = {
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-      systemd.enable = true;
     };
     kernelModules = ["kvm-intel"];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
