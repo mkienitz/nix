@@ -1,13 +1,7 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   boot = {
-    extraModulePackages = [];
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-      kernelModules = [];
       systemd.enable = true;
     };
     kernelModules = ["kvm-intel"];
@@ -49,15 +43,13 @@
   };
 
   hardware = {
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
   };
 
   networking = {
     hostId = "5ce254d7";
     hostName = config.node.hostname;
-    useDHCP = lib.mkDefault true;
+    useDHCP = true;
   };
-
-  swapDevices = [];
 }

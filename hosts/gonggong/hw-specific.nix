@@ -1,7 +1,6 @@
 {
   config,
   modulesPath,
-  lib,
   ...
 }: {
   imports = [
@@ -9,12 +8,9 @@
   ];
 
   boot = {
-    extraModulePackages = [];
     initrd = {
       availableKernelModules = ["xhci_pci" "usbhid" "sr_mod"];
-      kernelModules = [];
     };
-    kernelModules = [];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
@@ -44,10 +40,6 @@
   networking = {
     hostId = "600a1d45";
     hostName = "gonggong";
-    useDHCP = lib.mkDefault true;
+    useDHCP = true;
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-
-  swapDevices = [];
 }
