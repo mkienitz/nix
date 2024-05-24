@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   boot = {
@@ -10,16 +9,6 @@
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
       kernelModules = [];
       systemd.enable = true;
-      systemd.services.impermanence-root = {
-        wantedBy = ["initrd.target"];
-        after = ["zfs-import-rpool.service"];
-        before = ["sysroot.mount"];
-        unitConfig.DefaultDependencies = "no";
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = "${pkgs.zfs}/bin/zfs rollback -r rpool/local/root@blank";
-        };
-      };
     };
     kernelModules = ["kvm-intel"];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
@@ -66,11 +55,9 @@
 
   networking = {
     hostId = "5ce254d7";
-    hostName = "iapetus";
+    hostName = config.node.hostname;
     useDHCP = lib.mkDefault true;
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   swapDevices = [];
 }
