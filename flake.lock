@@ -294,6 +294,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716431128,
+        "narHash": "sha256-t3T8HlX3udO6f4ilLcN+j5eC3m2gqsouzSGiriKK6vk=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "7ffc4354dfeb37c8c725ae1465f04a9b45ec8606",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -913,6 +933,7 @@
         "coffee-labeler": "coffee-labeler",
         "darwin": "darwin_2",
         "devshell": "devshell_4",
+        "disko": "disko",
         "flake-utils": "flake-utils_3",
         "home-manager": "home-manager_2",
         "impermanence": "impermanence",
