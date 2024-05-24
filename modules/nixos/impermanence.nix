@@ -24,6 +24,8 @@
       ];
     };
   };
+  fileSystems."/state".neededForBoot = true;
+  fileSystems."/persist".neededForBoot = true;
   systemd.services.impermanence-root = {
     wantedBy = ["initrd.target"];
     after = ["zfs-import-rpool.service"];
