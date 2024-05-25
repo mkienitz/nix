@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   # TODO is this the right dir?
-  tsParserInstallDir = "$HOME/.config/nvim/treesitter";
+  tsParserInstallDir = "$HOME/.cache/nvim/treesitter";
   triggerEvents = ["BufReadPost" "BufNewFile"];
 in {
   programs.nixvim = {
