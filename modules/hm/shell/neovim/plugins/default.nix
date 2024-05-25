@@ -19,10 +19,6 @@
     # Plugins with no special configuration go here
     plugins = with pkgs.vimPlugins; [
       {
-        pkg = comment-nvim;
-        config = true;
-      }
-      {
         pkg = gitsigns-nvim;
         config = true;
       }
