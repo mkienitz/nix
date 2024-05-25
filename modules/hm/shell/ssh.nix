@@ -59,6 +59,12 @@
         port = 22;
       };
 
+      phoebe = {
+        hostname = "192.168.178.29";
+        user = "root";
+        port = 22;
+      };
+
       sbox1 = {
         hostname = "u368782.your-storagebox.de";
         user = "u368782";

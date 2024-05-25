@@ -26,6 +26,14 @@
       {
         protocol = "ssh-ng";
         system = "x86_64-linux";
+        hostName = "phoebe";
+        maxJobs = 8;
+        speedFactor = 9001;
+        supportedFeatures = ["big-parallel" "kvm"];
+      }
+      {
+        protocol = "ssh-ng";
+        system = "x86_64-linux";
         hostName = "iapetus";
         maxJobs = 8;
         supportedFeatures = ["big-parallel" "kvm"];
