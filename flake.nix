@@ -68,7 +68,7 @@
     {
       agenix-rekey = agenix-rekey.configure {
         userFlake = self;
-        nodes = {inherit (self.nixosConfigurations) hygiea iapetus;};
+        nodes = builtins.removeAttrs self.nixosConfigurations ["gonggong"];
       };
 
       # Tim Apple
