@@ -4,7 +4,10 @@
   pkgs,
   ...
 }: {
-  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+  imports = [
+    inputs.lanzaboote.nixosModules.lanzaboote
+    ../../modules/nixos/nvidia.nix
+  ];
   boot = {
     initrd = {
       availableKernelModules = ["sdhci_pci" "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "r8169"];
