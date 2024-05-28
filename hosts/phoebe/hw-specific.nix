@@ -1,8 +1,10 @@
 {
+  inputs,
   config,
   pkgs,
   ...
 }: {
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
   boot = {
     initrd = {
       availableKernelModules = ["sdhci_pci" "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "r8169"];
@@ -20,11 +22,16 @@
       };
     };
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
-    };
+    loader.efi.canTouchEfiVariables = true;
   };
+
+  # Lanzaboote
+  boot.loader.systemd-boot.enable = false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+  environment.persistence."/state".directories = ["/etc/secureboot"];
 
   hardware = {
     cpu.amd.updateMicrocode = true;
