@@ -30,24 +30,22 @@
   security.sudo.enable = false;
   time.timeZone = "Europe/Berlin";
 
-  # To future potential docker user: WARY
-  networking.nftables.enable = true;
-  networking.firewall = {
-    enable = true;
+  networking = {
+    # To future potential docker user: WARY
+    nftables.enable = true;
+    firewall.enable = true;
   };
 
-  users = let
-    authorizedKeys = [
-      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIKbdbkaOUCITGKH/XfDVg00dPE+iRHPFhNIUZ/SK+rbmAAAAC3NzaDpHZW5lcmFs Yubikey_5C_NFC_General"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcPOZFxCD1qSqCVXp5XYQ+yqJxI5kJ6PapuSOmnAIU max@MBP"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIWPlordUa2k1CrHiFeROhIwv055d3ntijlu61s/cAuH root@MBP"
-    ];
-  in {
+  users = {
     mutableUsers = false;
     users.root = {
       shell = pkgs.zsh;
-      hashedPassword = "$y$j9T$VCnJOOcqEduAbjfUu3lg.1$c6nV8lybLzpG1MMFicsvuL/AwUUni.4Zd9aCIbyJsMB";
-      openssh.authorizedKeys.keys = authorizedKeys;
+      hashedPassword = "$y$j9T$kkv/hMvXX8zbPnlYpboNC.$/5RpeHyIbZGjKlbl1NFz9Iah01v.95xLLgGpOITX12B";
+      openssh.authorizedKeys.keys = [
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIKbdbkaOUCITGKH/XfDVg00dPE+iRHPFhNIUZ/SK+rbmAAAAC3NzaDpHZW5lcmFs Yubikey_5C_NFC_General"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcPOZFxCD1qSqCVXp5XYQ+yqJxI5kJ6PapuSOmnAIU max@MBP"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIWPlordUa2k1CrHiFeROhIwv055d3ntijlu61s/cAuH root@MBP"
+      ];
     };
   };
 
