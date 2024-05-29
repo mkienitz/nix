@@ -19,6 +19,9 @@
       ../../modules/hm/gui
       ../../modules/hm/shell
       ../../modules/hm/shell/neovim
+      # Always add impermanence options, even if they aren't used.
+      # This avoids the need for guards.
+      ../../modules/hm/impermanence.nix
     ];
     home.username = "max";
     home.stateVersion = "23.11";
