@@ -46,6 +46,10 @@
   services.nix-daemon.enable = true;
 
   system.defaults = {
+    CustomUserPreferences."org.gpgtools.common" = {
+      DisableKeychain = false;
+      UseKeychain = true;
+    };
     finder = {
       AppleShowAllExtensions = true;
       _FXShowPosixPathInTitle = true;
