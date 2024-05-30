@@ -16,6 +16,8 @@ then
     fi
 fi
 
+echo -e "[$(date)]\nARGS: $*\nSERVICE: ${BURK:-no}" >> /tmp/askpass.log
+
 # We want to ignore confirmations for user presence
 if [[ "$1" == "Confirm user presence"* ]]
 then
