@@ -1,5 +1,6 @@
-{
+{inputs, ...}: {
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./filetypes.nix
     ./keymap.nix
     ./moovim.nix

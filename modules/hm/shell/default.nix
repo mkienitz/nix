@@ -1,5 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
+    inputs.nix-index-database.hmModules.nix-index
     ./zsh.nix
     ./starship.nix
     ./git.nix
