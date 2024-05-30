@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.zsh.enable = true;
 
   environment = {
@@ -15,6 +19,7 @@
   nix = {
     settings.experimental-features = "nix-command flakes";
     distributedBuilds = true;
+    registry.p.flake = inputs.nixpkgs;
     buildMachines = [
       {
         protocol = "ssh-ng";
