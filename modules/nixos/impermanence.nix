@@ -47,7 +47,7 @@
     # If home-manager is used, consume home.persistence options
     (lib.mkIf (config ? home-manager) (
       let
-        inherit (lib) isAttrs mkMerge flip attrNames mapAttrs;
+        inherit (lib) isAttrs mkMerge attrNames mapAttrs;
         mkUserFiles = map (x:
           {parentDirectory.mode = "700";}
           // (
@@ -64,20 +64,21 @@
           ));
       in {
         environment.persistence = mkMerge (
-          flip map
-          (attrNames config.home-manager.users)
+          map
           (
             user: let
               hmUserCfg = config.home-manager.users.${user};
             in
-              flip mapAttrs hmUserCfg.home.persistence
+              mapAttrs
               (_: sourceCfg: {
                 users.${user} = {
                   files = mkUserFiles sourceCfg.files;
                   directories = mkUserDirs sourceCfg.directories;
                 };
               })
+              hmUserCfg.home.persistence
           )
+          (attrNames config.home-manager.users)
         );
       }
     ))
