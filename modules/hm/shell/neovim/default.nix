@@ -13,4 +13,5 @@
     viAlias = true;
     defaultEditor = true;
   };
+  home.persistence."/state".directories = [".cache/nvim"];
 }
