@@ -109,8 +109,8 @@ lib.mkMerge [
         ];
       };
       # services.ssh-agent.enable = true;
-      services.gnome-keyring.enable = true;
-      home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+      # services.gnome-keyring.enable = true;
+      # home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
       # systemd.user.services.gnome-keyring.Service.Environment = "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
       # home.sessionVariables = {
       #   SSH_ASKPASS = askpass;
