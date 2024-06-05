@@ -9,11 +9,18 @@
       "nvidia-x11"
       "nvidia-settings"
     ];
-
+  # TODO: needed?
+  boot.blacklistedKernelModules = ["nouveau"];
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    nvidiaPersistenced = true;
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+    nvidia = {
+      modesetting.enable = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      nvidiaPersistenced = true;
+    };
   };
 }
