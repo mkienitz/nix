@@ -4,7 +4,7 @@
     theme = "Gruvbox Dark";
     settings = {
       # Font
-      font_family = "JetBrains Mono";
+      font_family = "JetBrainsMono Nerd Font Mono";
       font_size = "17.0";
 
       # Misc
