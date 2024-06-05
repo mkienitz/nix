@@ -1,28 +1,27 @@
 {
   inputs,
-  pkgs,
   lib,
-  config,
   ...
 }:
 lib.mkMerge [
-  (
-    lib.mkIf pkgs.stdenv.isLinux
-    {
-      users.users.max = {
-        isNormalUser = true;
-        shell = pkgs.zsh;
-        inherit (config.users.users.root) hashedPassword;
-      };
-      security.doas.enable = true;
-      security.doas.extraRules = [
-        {
-          users = ["max"];
-          keepEnv = true;
-        }
-      ];
-    }
-  )
+  # FIXME: mkMerge does not protect against unknown keys (doas on darwin)
+  # (
+  #   lib.mkIf pkgs.stdenv.isLinux
+  #   {
+  #     users.users.max = {
+  #       isNormalUser = true;
+  #       shell = pkgs.zsh;
+  #       inherit (config.users.users.root) hashedPassword;
+  #     };
+  #     security.doas.enable = true;
+  #     security.doas.extraRules = [
+  #       {
+  #         users = ["max"];
+  #         keepEnv = true;
+  #       }
+  #     ];
+  #   }
+  # )
   {
     home-manager = {
       useGlobalPkgs = true;
