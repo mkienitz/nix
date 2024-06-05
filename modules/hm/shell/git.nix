@@ -8,6 +8,7 @@
       ".DS_Store"
     ];
     extraConfig = {
+      safe.directory = "*";
       core.editor = "vim";
       init.defaultBranch = "main";
       merge.conflictstyle = "diff3";
