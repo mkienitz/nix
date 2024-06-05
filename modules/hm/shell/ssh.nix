@@ -97,12 +97,21 @@ lib.mkMerge [
     #   });
     # in
     {
-      home.persistence."/state".files = [
-        "/.ssh/id_ed25519_sk"
-        "/.ssh/id_ed25519_sk.pub"
-        "/.ssh/known_hosts"
-      ];
-      services.ssh-agent.enable = true;
+      home.persistence = {
+        "/state".files = [
+          "/.ssh/id_ed25519_sk"
+          "/.ssh/id_ed25519_sk.pub"
+          "/.ssh/known_hosts"
+        ];
+        "/persist".directories = [
+          "/Git"
+          "/Downloads"
+        ];
+      };
+      # services.ssh-agent.enable = true;
+      services.gnome-keyring.enable = true;
+      home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+      # systemd.user.services.gnome-keyring.Service.Environment = "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
       # home.sessionVariables = {
       #   SSH_ASKPASS = askpass;
       #   SSH_ASKPASS_REQUIRE = "force";
