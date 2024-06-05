@@ -1,4 +1,6 @@
-{
+{pkgs, ...}: {
+  home.packages = [(pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})];
+  fonts.fontconfig.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
