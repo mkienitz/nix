@@ -12,7 +12,7 @@
     ../../modules/nixos/initrd-ssh.nix
     ../../modules/nixos/yubikey.nix
     # GUI
-    ../../modules/nixos/gui
+    ../../modules/nixos/gui/stylix.nix
     ../../modules/nixos/gui/hyprland.nix
     # HM Nixos
     ../../users/max
