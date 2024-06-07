@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   imports = [
     # Machine & HW
     ./fs.nix
@@ -11,17 +11,20 @@
     ../../modules/nixos/impermanence.nix
     ../../modules/nixos/initrd-ssh.nix
     ../../modules/nixos/yubikey.nix
+    # GUI
+    ../../modules/nixos/gui
     ../../modules/nixos/gui/hyprland.nix
     # HM Nixos
-    inputs.home-manager.nixosModules.default
     ../../users/max
     ../../users/max/nixos.nix
   ];
+
   # Home-Manager
   home-manager.users.max.imports = [
     ../../modules/hm/gui/hyprland.nix
   ];
 
+  # FIXME: why does this not work if put into modules/nixos/default.nix?
   nixpkgs.config.allowUnfree = true;
 
   age.identityPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];

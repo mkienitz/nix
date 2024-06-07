@@ -1,8 +1,12 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.home-manager.nixosModules.default
+  ];
   users.users.max = {
     isNormalUser = true;
     shell = pkgs.zsh;
