@@ -35,4 +35,7 @@
       ];
     };
   };
+  home.persistence."/state".files = [
+    ".zsh_history"
+  ];
 }

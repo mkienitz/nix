@@ -68,4 +68,9 @@
       nix-direnv.enable = true;
     };
   };
+
+  home.persistence."/state".directories = [
+    ".local/share/direnv/allow"
+    ".local/share/zoxide"
+  ];
 }
