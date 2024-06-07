@@ -29,27 +29,7 @@
       ripgrep
       tldr
       wget
-      (pkgs.writeShellScriptBin "view_nixvim_output" ''
-        set -e
-        cp ~/.config/nvim/init.lua /tmp/pretty.lua
-        chmod 600 /tmp/pretty.lua
-        ${stylua}/bin/stylua /tmp/pretty.lua
-        vim /tmp/pretty.lua
-      '')
     ];
-
-    shellAliases = {
-      c = "clear";
-      weather = "curl wttr.in/Munich";
-      zz = "z -";
-      ls = "eza";
-      l = "eza";
-      llt = "eza --long --tree";
-      ll = "eza -l";
-      la = "eza -la";
-      tree = "eza -T";
-      lg = "lazygit";
-    };
   };
 
   programs = {
