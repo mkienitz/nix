@@ -9,8 +9,6 @@
       "nvidia-x11"
       "nvidia-settings"
     ];
-  # TODO: needed?
-  boot.blacklistedKernelModules = ["nouveau"];
   services.xserver.videoDrivers = ["nvidia"];
   hardware = {
     opengl = {
