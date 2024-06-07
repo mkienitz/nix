@@ -11,11 +11,6 @@
     systemPackages = with pkgs; [coreutils openssh];
   };
 
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [(nerdfonts.override {fonts = ["JetBrainsMono"];})];
-  };
-
   nix = {
     settings.experimental-features = "nix-command flakes";
     distributedBuilds = true;
