@@ -1,5 +1,15 @@
 {lib, ...}: {
-  programs.tofi.enable = true;
+  programs.tofi = {
+    enable = true;
+    settings = {
+      font-size = lib.mkForce 24;
+      matching-algorithm = "fuzzy";
+      outline-width = 1;
+      border-width = 2;
+    };
+  };
+  stylix.targets.tofi.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -75,4 +85,5 @@
       };
     };
   };
+  stylix.targets.hyprland.enable = true;
 }
