@@ -6,7 +6,6 @@
 }: {
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
-    ../../modules/nixos/nvidia.nix
   ];
   boot = {
     initrd = {

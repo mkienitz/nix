@@ -1,15 +1,17 @@
 {inputs, ...}: {
   imports = [
-    # Machine
+    # Machine & HW
     ./fs.nix
     ./hw-specific.nix
+    ../../modules/nixos/hw/nvidia.nix
+    ../../modules/nixos/hw/pipewire.nix
     # NixOS
     ../../modules/nixos
     ../../modules/nixos/secrets
     ../../modules/nixos/impermanence.nix
     ../../modules/nixos/initrd-ssh.nix
     ../../modules/nixos/yubikey.nix
-    ../../modules/nixos/wayland.nix
+    ../../modules/nixos/gui/hyprland.nix
     # HM Nixos
     inputs.home-manager.nixosModules.default
     ../../users/max
@@ -20,8 +22,7 @@
     ../../modules/hm/gui/hyprland.nix
   ];
 
-  # programs.seahorse.enable = true;
-  # services.gnome.gnome-keyring.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   age.identityPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];
   age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBivT5T9lDMrIL+hhRNEPr03lsBsgBV5jsELi61FGcIo";
