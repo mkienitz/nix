@@ -9,7 +9,6 @@
     ../../modules/nixos
     ../../modules/nixos/secrets
     ../../modules/nixos/impermanence.nix
-    ../../modules/nixos/initrd-ssh.nix
     ../../modules/nixos/yubikey.nix
     # GUI
     ../../modules/nixos/gui/stylix.nix
