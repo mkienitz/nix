@@ -3,12 +3,15 @@
     enable = true;
     settings = {
       font-size = lib.mkForce 24;
-      matching-algorithm = "fuzzy";
       outline-width = 1;
       border-width = 2;
     };
   };
-  stylix.targets.tofi.enable = true;
+  stylix.targets = {
+    tofi.enable = true;
+    gtk.enable = true;
+    hyprland.enable = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -18,21 +21,21 @@
         gaps_out = 5;
       };
       monitor = [
-        "DP-1, 3840x1600@119.98, 0x0, 1, bitdepth, 10"
-        "DP-2, 2560x1440@120.00, -1440x-370, 1, transform, 1"
+        "DP-2, 3840x1600@119.98, 0x0, 1, bitdepth, 10"
+        "DP-1, 2560x1440@120.00, -1440x-370, 1, transform, 1"
         # Begone
         "Unknown-1, disable"
       ];
       workspace = [
-        "1, monitor:DP-1, default: true"
-        "2, monitor:DP-1"
-        "3, monitor:DP-1"
-        "4, monitor:DP-1"
-        "5, monitor:DP-1"
-        "6, monitor:DP-2, default: true"
-        "7, monitor:DP-2"
-        "8, monitor:DP-2"
-        "9, monitor:DP-2"
+        "1, monitor:DP-2, default: true"
+        "2, monitor:DP-2"
+        "3, monitor:DP-2"
+        "4, monitor:DP-2"
+        "5, monitor:DP-2"
+        "6, monitor:DP-1, default: true"
+        "7, monitor:DP-1"
+        "8, monitor:DP-1"
+        "9, monitor:DP-1"
       ];
       # Longer shared edges have priority
       binds.focus_preferred_method = 1;
@@ -85,5 +88,4 @@
       };
     };
   };
-  stylix.targets.hyprland.enable = true;
 }
