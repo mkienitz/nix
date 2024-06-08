@@ -21,6 +21,8 @@
 
   # Home-Manager
   home-manager.users.max.imports = [
+    ../../modules/hm/gui
+    ../../modules/hm/gui/programs
     ../../modules/hm/gui/hyprland.nix
   ];
 

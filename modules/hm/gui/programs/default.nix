@@ -1,7 +1,6 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    discord
+{
+  imports = [
+    ./firefox.nix
+    ./vesktop.nix
   ];
-  programs.firefox.enable = true;
-  stylix.targets.firefox.enable = true;
 }
