@@ -105,6 +105,7 @@
       system: rec {
         pkgs = import nixpkgs {
           inherit system;
+          config.allowUnfree = true;
           overlays = [
             agenix-rekey.overlays.default
             devshell.overlays.default

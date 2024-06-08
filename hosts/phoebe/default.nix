@@ -24,9 +24,6 @@
     ../../modules/hm/gui/hyprland.nix
   ];
 
-  # FIXME: why does this not work if put into modules/nixos/default.nix?
-  nixpkgs.config.allowUnfree = true;
-
   nix.settings.extra-sandbox-paths = ["/tmp/agenix-rekey"];
 
   age.identityPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];
