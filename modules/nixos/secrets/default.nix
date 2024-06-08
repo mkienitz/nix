@@ -9,9 +9,8 @@
   ];
   age.rekey = {
     masterIdentities = [./YubiKey5CNFC_master_identity.pub];
-    cacheDir = "/tmp/agenix-rekey";
-    forceRekeyOnSystem = "aarch64-darwin";
-    storageMode = "derivation";
+    storageMode = "local";
+    localStorageDir = inputs.self.outPath + "/secrets/rekeyed/${config.node.hostname}";
     generatedSecretsDir = config.node.secretsDir + "/generated";
   };
 }
