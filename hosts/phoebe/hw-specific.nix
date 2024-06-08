@@ -25,6 +25,7 @@
     };
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader.efi.canTouchEfiVariables = true;
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
   # Lanzaboote
