@@ -13,8 +13,12 @@
       "m1ddc"
       "pinentry-mac"
     ];
+    taps = [
+      "nikitabobko/tap"
+    ];
     casks = [
       "adobe-creative-cloud"
+      "aerospace"
       "alacritty"
       "balenaetcher"
       "bruno"
