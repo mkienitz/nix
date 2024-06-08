@@ -1,4 +1,6 @@
 {lib, ...}: {
+  imports = [./waybar.nix];
+
   programs.tofi = {
     enable = true;
     settings = {
@@ -7,6 +9,7 @@
       border-width = 2;
     };
   };
+
   stylix.targets = {
     tofi.enable = true;
     gtk.enable = true;
@@ -16,6 +19,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      "exec-once" = "waybar";
       general = {
         gaps_in = 5;
         gaps_out = 5;
