@@ -14,8 +14,7 @@
     ../../modules/nixos/gui/stylix.nix
     ../../modules/nixos/gui/hyprland.nix
     # HM Nixos
-    ../../users/max
-    ../../users/max/nixos.nix
+    ../../modules/nixos/hm.nix
   ];
 
   # Home-Manager
