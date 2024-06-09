@@ -1,8 +1,8 @@
 {
   imports = [
     # Machine & HW
-    ./fs.nix
     ./hw-specific.nix
+    ../../modules/nixos/hw/lanzaboote.nix
     ../../modules/nixos/hw/nvidia.nix
     ../../modules/nixos/hw/pipewire.nix
     # NixOS
