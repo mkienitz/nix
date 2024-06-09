@@ -2,26 +2,26 @@
   imports = [
     # Machine & HW
     ./hw-specific.nix
-    ../../modules/nixos/hw/lanzaboote.nix
-    ../../modules/nixos/hw/nvidia.nix
-    ../../modules/nixos/hw/pipewire.nix
+    ../../config/nixos/hw/lanzaboote.nix
+    ../../config/nixos/hw/nvidia.nix
+    ../../config/nixos/hw/pipewire.nix
     # NixOS
-    ../../modules/nixos
-    ../../modules/nixos/secrets
-    ../../modules/nixos/impermanence.nix
-    ../../modules/nixos/yubikey.nix
+    ../../config/nixos
+    ../../config/nixos/secrets
+    ../../config/nixos/impermanence.nix
+    ../../config/nixos/yubikey.nix
     # GUI
-    ../../modules/nixos/gui/stylix.nix
-    ../../modules/nixos/gui/hyprland.nix
+    ../../config/nixos/gui/stylix.nix
+    ../../config/nixos/gui/hyprland.nix
     # HM Nixos
-    ../../modules/nixos/hm.nix
+    ../../config/nixos/hm.nix
   ];
 
   # Home-Manager
   home-manager.users.max.imports = [
-    ../../modules/hm/gui
-    ../../modules/hm/gui/programs
-    ../../modules/hm/gui/hyprland.nix
+    ../../config/hm/gui
+    ../../config/hm/gui/programs
+    ../../config/hm/gui/hyprland.nix
   ];
 
   age.identityPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];

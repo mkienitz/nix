@@ -9,7 +9,7 @@
   ftps_psv_max_port = ftps_psv_min_port;
 in {
   # Setup ACME
-  imports = [../../../modules/nixos/acme/maxkienitz.com];
+  imports = [../../../config/nixos/acme/maxkienitz.com];
   security.acme.certs.${paperlessDomain}.inheritDefaults = true;
 
   age.secrets = {

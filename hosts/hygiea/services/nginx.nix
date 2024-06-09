@@ -1,7 +1,7 @@
 {config, ...}: let
   coffee-labeler-domain = "label.maxkienitz.com";
 in {
-  imports = [../../../modules/nixos/acme/maxkienitz.com];
+  imports = [../../../config/nixos/acme/maxkienitz.com];
 
   networking.firewall.allowedTCPPorts = [80 443];
   security.acme.certs.${coffee-labeler-domain}.inheritDefaults = true;

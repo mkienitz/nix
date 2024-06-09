@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./hw-specific.nix
-    ../../modules/nixos
+    ../../config/nixos
     ./services
   ];
 }

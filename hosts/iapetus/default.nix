@@ -1,8 +1,8 @@
 {...}: {
   imports = [
-    ../../modules/nixos
-    ../../modules/nixos/secrets
-    ../../modules/nixos/impermanence.nix
+    ../../config/nixos
+    ../../config/nixos/secrets
+    ../../config/nixos/impermanence.nix
     ./hw-specific.nix
     ./services
   ];
