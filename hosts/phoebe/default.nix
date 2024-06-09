@@ -10,6 +10,7 @@
     ../../config/nixos/secrets
     ../../config/nixos/impermanence.nix
     ../../config/nixos/yubikey.nix
+    ../../config/nixos/network.nix
     # GUI
     ../../config/nixos/gui/stylix.nix
     ../../config/nixos/gui/hyprland.nix
