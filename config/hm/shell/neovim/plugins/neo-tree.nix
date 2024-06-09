@@ -32,6 +32,7 @@ in {
         };
         window = {
           width = 36;
+          mappings."Z" = "expand_all_nodes";
         };
         filesystem = {
           filtered_items = {
