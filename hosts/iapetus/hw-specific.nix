@@ -48,7 +48,6 @@
 
   networking = {
     hostId = "5ce254d7";
-    hostName = config.node.hostname;
     useDHCP = true;
   };
 }

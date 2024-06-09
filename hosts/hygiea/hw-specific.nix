@@ -24,7 +24,6 @@
 
   networking = {
     hostId = "15e1ade1";
-    hostName = "hygiea";
     useDHCP = lib.mkDefault true;
   };
 }

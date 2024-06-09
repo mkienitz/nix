@@ -39,7 +39,6 @@
 
   networking = {
     hostId = "600a1d45";
-    hostName = "gonggong";
     useDHCP = true;
   };
 }
