@@ -1,22 +1,16 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  nix = {
-    settings.experimental-features = ["nix-command" "flakes"];
-    registry.p.flake = inputs.nixpkgs;
-  };
+{pkgs, ...}: {
+  imports = [
+    ../common
+  ];
 
   environment.systemPackages = with pkgs; [vim nvd];
+
   programs.git = {
     enable = true;
     config = {
       safe.directory = "*";
     };
   };
-
-  programs.zsh.enable = true;
 
   services.openssh = {
     enable = true;

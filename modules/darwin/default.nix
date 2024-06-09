@@ -1,20 +1,12 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  programs.zsh.enable = true;
+{pkgs, ...}: {
+  imports = [
+    ../common
+  ];
 
-  environment = {
-    loginShell = pkgs.zsh;
-    shells = with pkgs; [bash zsh];
-    systemPackages = with pkgs; [coreutils openssh];
-  };
+  environment.systemPackages = with pkgs; [coreutils openssh];
 
   nix = {
-    settings.experimental-features = "nix-command flakes";
     distributedBuilds = true;
-    registry.p.flake = inputs.nixpkgs;
     buildMachines = [
       {
         protocol = "ssh-ng";
