@@ -138,15 +138,6 @@
 
           commands = [
             {
-              name = "rekey";
-              help = "run agenix rekey and copy to specified remote builder";
-              command = ''
-                agenix rekey 2>/dev/null && \
-                agenix rekey --show-out-paths 2>/dev/null | tail -n +2 | xargs nix copy --to "ssh://''${1}"
-              '';
-              category = "deployment";
-            }
-            {
               package = pkgs.deploy;
               help = "deploy config to host";
               category = "deployment";
