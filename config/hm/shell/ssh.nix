@@ -7,74 +7,62 @@ lib.mkMerge [
   {
     programs.ssh = {
       enable = true;
-
+      addKeysToAgent = "yes";
+      extraConfig = ''
+        IdentityFile ~/.ssh/id_ed25519_sk2
+      '';
       matchBlocks = rec {
         lxhalle = {
           hostname = "lxhalle.in.tum.de";
           user = "kienitz";
           port = 22;
         };
-
         gonggong = {
           hostname = "88.99.122.44";
           user = "root";
           port = 22;
         };
-
         hygiea = {
           hostname = "192.168.178.32";
           user = "root";
           port = 22;
         };
-
         iapetus = {
           hostname = "192.168.178.37";
           user = "root";
           port = 22;
         };
-
         phoebe = {
           hostname = "192.168.178.29";
           user = "root";
           port = 22;
         };
-
         sbox1 = {
           hostname = "u368782.your-storagebox.de";
           user = "u368782";
           port = 23;
         };
-
         sbox1-synology =
           sbox1
           // {
             user = "${sbox1.user}-sub1";
           };
-
         sbox2 = {
           hostname = "u400140.your-storagebox.de";
           user = "u400140";
           port = 23;
         };
-
         sbox2-iapetus =
           sbox2
           // {
             user = "${sbox2.user}-sub1";
           };
-
         "bitbucket.ase.in.tum.de" = {
           hostname = "bitbucket.ase.in.tum.de";
           user = "git";
           port = 7999;
           identityFile = "~/.ssh/tum_ed25519";
         };
-      };
-
-      extraOptionOverrides = {
-        AddKeysToAgent = "yes";
-        IdentitiesOnly = "yes";
-        IdentityFile = "~/.ssh/id_ed25519_sk2";
       };
     };
   }
