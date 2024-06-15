@@ -90,8 +90,6 @@ in {
       # Virtual users
       enableVirtualUsers = true;
       localUsers = true;
-      # TODO: report bug:
-      # nix module asserts that virtualUsers implies localUsers != null but that has a default value of false (always != null)
       userDbPath = lib.removeSuffix ".db" config.age.secrets.vsftpd-user-db.path;
       # User needs write permissions inside their chroot() jail
       allowWriteableChroot = true;
