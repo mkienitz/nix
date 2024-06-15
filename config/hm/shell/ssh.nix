@@ -74,6 +74,7 @@ lib.mkMerge [
       extraOptionOverrides = {
         AddKeysToAgent = "yes";
         IdentitiesOnly = "yes";
+        IdentityFile = "~/.ssh/id_ed25519_sk2";
       };
     };
   }
