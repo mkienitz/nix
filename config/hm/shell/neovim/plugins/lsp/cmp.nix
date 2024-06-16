@@ -10,6 +10,7 @@
         cmp-nvim-lsp-signature-help
         cmp-nvim-lsp-document-symbol
         cmp-nvim-lsp
+        crates-nvim
         luasnip
         cmp_luasnip
         lspkind-nvim
@@ -47,6 +48,7 @@
                 { name = "nvim_lsp", group_index = 1 },
                 { name = "nvim_lsp_document_symbol", group_index = 1 },
                 { name = "nvim_lsp_signature_help", group_index = 1 },
+                { name = "crates", group_index = 1 },
                 { name = "emoji", group_index = 2 },
                 { name = "luasnip", group_index = 2 },
                 { name = "path", group_index = 2 },
