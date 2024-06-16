@@ -11,9 +11,7 @@
         };
       };
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function(_, opts)
             require("gruvbox").setup(opts)

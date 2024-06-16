@@ -4,9 +4,7 @@
       pkg = undotree;
       dependencies = [which-key-nvim];
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function(_, _)
             require("which-key").register({

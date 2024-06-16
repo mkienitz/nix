@@ -16,9 +16,7 @@
         nvim-autopairs
       ];
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function()
             local cmp = require("cmp")

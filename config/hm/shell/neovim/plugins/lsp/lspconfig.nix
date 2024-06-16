@@ -21,9 +21,7 @@
         telescope-nvim
       ];
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function()
             -- Prepare keybinds on attach

@@ -16,9 +16,7 @@
         };
       };
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function(_, opts)
             require("telescope").setup(opts)

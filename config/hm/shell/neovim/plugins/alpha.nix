@@ -4,9 +4,7 @@
       pkg = alpha-nvim;
       dependencies = [nvim-web-devicons telescope-nvim];
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function()
             local alpha = require("alpha")

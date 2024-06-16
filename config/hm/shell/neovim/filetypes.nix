@@ -24,9 +24,7 @@
       (mkIndentSettings "typst" 2 true)
     ];
     extraConfigLua =
-      /*
-      lua
-      */
+      # lua
       ''
         vim.filetype.add({
           extension = {
