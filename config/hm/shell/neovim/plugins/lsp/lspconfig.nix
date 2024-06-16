@@ -11,8 +11,8 @@
     #lua
     ''
       function(client, bufnr)
-        if client.name == "tailwindcss" then
-          require("tailwindcss-colors").buf_attach(bufnr)
+        if client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint(bufnr, true)
         end
         local wk = require("which-key")
         wk.register({
