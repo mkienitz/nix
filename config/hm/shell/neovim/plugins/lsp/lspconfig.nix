@@ -11,9 +11,10 @@
     #lua
     ''
       function(client, bufnr)
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint(bufnr, true)
-        end
+        -- TODO uncomment once enabled
+        -- if client.server_capabilities.inlayHintProvider then
+        --   vim.lsp.inlay_hint(bufnr, true)
+        -- end
         local wk = require("which-key")
         wk.register({
           K = { vim.lsp.buf.hover, "Hover documentation", buffer = bufnr },
