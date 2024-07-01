@@ -6,5 +6,6 @@
   nix = {
     settings.experimental-features = ["nix-command" "flakes"];
     registry.p.flake = inputs.nixpkgs;
+    registry.t.flake = inputs.nix-templates;
   };
 }
