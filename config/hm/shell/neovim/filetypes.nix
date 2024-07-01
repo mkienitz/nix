@@ -22,6 +22,7 @@
       (mkIndentSettings "typescript" 2 false)
       (mkIndentSettings "typescriptreact" 2 false)
       (mkIndentSettings "typst" 2 true)
+      (mkIndentSettings "gleam" 2 true)
     ];
     extraConfigLua =
       # lua

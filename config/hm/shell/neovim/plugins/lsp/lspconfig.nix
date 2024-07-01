@@ -78,6 +78,7 @@ in {
               name = server_name;
               value = emptyTable;
             }) [
+              "gleam"
               "hls"
               "svelte"
               "typst_lsp"
