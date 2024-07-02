@@ -41,12 +41,6 @@
 in {
   programs.nixvim.plugins.lazy.plugins = [
     {
-      pkg = vpkgs.lspsaga-nvim;
-      opts = {
-        lightbulb.enable = false;
-      };
-    }
-    {
       pkg = vpkgs.crates-nvim;
       dependencies = with vpkgs; [plenary-nvim nvim-cmp];
       opts = {
