@@ -2,11 +2,10 @@
   description = "Nix configurations for all machines";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
@@ -19,7 +18,6 @@
     agenix-rekey = {
       url = "github:oddlama/agenix-rekey";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
     disko = {
       url = "github:nix-community/disko";
@@ -43,7 +41,6 @@
     coffee-labeler = {
       url = "github:mkienitz/coffee-labeler";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -73,50 +70,84 @@
     agenix-rekey,
     darwin,
     devshell,
-    flake-utils,
+    flake-parts,
     nixpkgs,
     pre-commit-hooks,
     self,
     ...
   } @ inputs:
-    {
-      agenix-rekey = agenix-rekey.configure {
-        userFlake = self;
-        nodes = builtins.removeAttrs self.nixosConfigurations ["gonggong"];
+    flake-parts.lib.mkFlake {inherit inputs;}
+    ({withSystem, ...}: {
+      systems = [
+        "aarch64-linux"
+        "aarch64-darwin"
+        "x86_64-linux"
+        "x86_64-darwin"
+      ];
+
+      imports = [
+        inputs.devshell.flakeModule
+        inputs.agenix-rekey.flakeModule
+      ];
+
+      flake = {
+        # Tim Apple
+        darwinConfigurations.io = withSystem "aarch64-darwin" ({pkgs, ...}:
+          darwin.lib.darwinSystem {
+            inherit pkgs;
+            specialArgs = {inherit inputs;};
+            modules = [./hosts/io];
+          });
+
+        # Not Tim Apple
+        nixosConfigurations = let
+          mkNixosHost = hostName: arch: (withSystem arch ({pkgs, ...}:
+            nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs;
+                inherit (pkgs) lib;
+              };
+              modules = [
+                ./hosts/${hostName}
+                ./modules/nixos
+                {
+                  node.hostName = hostName;
+                  nixpkgs = {
+                    hostPlatform = arch;
+                    inherit (pkgs) overlays config;
+                  };
+                }
+              ];
+            }));
+        in {
+          # Hetzner vServer
+          gonggong = mkNixosHost "gonggong" "aarch64-linux";
+          # Raspberry Pi 4
+          hygiea = mkNixosHost "hygiea" "aarch64-linux";
+          # Beelink Mini S12 Pro
+          iapetus = mkNixosHost "iapetus" "x86_64-linux";
+          # Desktop
+          phoebe = mkNixosHost "phoebe" "x86_64-linux";
+        };
       };
 
-      # Tim Apple
-      darwinConfigurations.io = darwin.lib.darwinSystem {
-        pkgs = self.pkgs.aarch64-darwin;
-        specialArgs = {inherit inputs;};
-        modules = [./hosts/io];
-      };
-
-      # Not Tim Apple
-      nixosConfigurations = let
-        mkNixosHost = import ./lib/mkNixosHost.nix inputs;
-      in {
-        # Hetzner vServer
-        gonggong = mkNixosHost "gonggong" "aarch64-linux";
-        # Raspberry Pi 4
-        hygiea = mkNixosHost "hygiea" "aarch64-linux";
-        # Beelink Mini S12 Pro
-        iapetus = mkNixosHost "iapetus" "x86_64-linux";
-        # Desktop
-        phoebe = mkNixosHost "phoebe" "x86_64-linux";
-      };
-    }
-    // flake-utils.lib.eachDefaultSystem (
-      system: rec {
-        pkgs = import nixpkgs {
+      perSystem = {
+        config,
+        pkgs,
+        self',
+        system,
+        ...
+      }: {
+        _module.args.pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
           overlays = [
-            agenix-rekey.overlays.default
             devshell.overlays.default
             (import ./pkgs/deploy.nix)
           ];
         };
+
+        agenix-rekey.nodes = builtins.removeAttrs self.nixosConfigurations ["gonggong"];
 
         # nix flake check
         checks.pre-commit-hooks = pre-commit-hooks.lib.${system}.run {
@@ -132,13 +163,13 @@
         formatter = pkgs.alejandra;
 
         # nix develop
-        devShells.default = pkgs.devshell.mkShell {
+        devshells.default = {
           packages = with pkgs; [
             age-plugin-yubikey
             nil
           ];
 
-          devshell.startup.pre-commit.text = checks.pre-commit-hooks.shellHook;
+          devshell.startup.pre-commit.text = self'.checks.pre-commit-hooks.shellHook;
 
           commands = [
             {
@@ -157,7 +188,7 @@
               category = "lint";
             }
             {
-              package = pkgs.agenix-rekey;
+              inherit (config.agenix-rekey) package;
               help = "create and edit secrets";
               category = "other";
             }
@@ -168,6 +199,6 @@
             }
           ];
         };
-      }
-    );
+      };
+    });
 }
