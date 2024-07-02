@@ -90,6 +90,8 @@ lib.mkMerge [
         "/state".files = [
           "/.ssh/id_ed25519_sk"
           "/.ssh/id_ed25519_sk.pub"
+          "/.ssh/id_ed25519_sk2"
+          "/.ssh/id_ed25519_sk2.pub"
           "/.ssh/known_hosts"
         ];
         "/persist".directories = [
