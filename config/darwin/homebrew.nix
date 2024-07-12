@@ -38,6 +38,7 @@
       "postman"
       "signal"
       "spotify"
+      "teamspeak-client"
       "zed"
       "zoom"
     ];
