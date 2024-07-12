@@ -67,11 +67,9 @@
   };
 
   outputs = {
-    agenix-rekey,
     darwin,
     flake-parts,
     nixpkgs,
-    self,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;}
@@ -84,8 +82,8 @@
       ];
 
       imports = [
-        inputs.agenix-rekey.flakeModule
         ./modules/flake/devshell.nix
+        ./modules/flake/agenix-rekey.nix
       ];
 
       flake = {
@@ -139,7 +137,6 @@
           inherit system;
           config.allowUnfree = true;
         };
-        agenix-rekey.nodes = builtins.removeAttrs self.nixosConfigurations ["gonggong"];
       };
     });
 }

@@ -19,7 +19,6 @@
 
     devshells.default = {
       packages = with pkgs; [
-        age-plugin-yubikey
         nil
       ];
       devshell.startup.pre-commit.text = config.pre-commit.installationScript;
@@ -45,11 +44,6 @@
           package = pkgs.statix;
           help = "lint nix files";
           category = "lint";
-        }
-        {
-          inherit (config.agenix-rekey) package;
-          help = "create and edit secrets";
-          category = "other";
         }
         {
           package = pkgs.nix-tree;
