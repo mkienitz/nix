@@ -69,10 +69,8 @@
   outputs = {
     agenix-rekey,
     darwin,
-    devshell,
     flake-parts,
     nixpkgs,
-    pre-commit-hooks,
     self,
     ...
   } @ inputs:
@@ -86,8 +84,8 @@
       ];
 
       imports = [
-        inputs.devshell.flakeModule
         inputs.agenix-rekey.flakeModule
+        ./modules/flake/devshell.nix
       ];
 
       flake = {
@@ -134,71 +132,14 @@
       perSystem = {
         config,
         pkgs,
-        self',
         system,
         ...
       }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [
-            devshell.overlays.default
-            (import ./pkgs/deploy.nix)
-          ];
         };
-
         agenix-rekey.nodes = builtins.removeAttrs self.nixosConfigurations ["gonggong"];
-
-        # nix flake check
-        checks.pre-commit-hooks = pre-commit-hooks.lib.${system}.run {
-          src = pkgs.lib.cleanSource ./.;
-          hooks = {
-            alejandra.enable = true;
-            deadnix.enable = true;
-            statix.enable = true;
-          };
-        };
-
-        # nix fmt
-        formatter = pkgs.alejandra;
-
-        # nix develop
-        devshells.default = {
-          packages = with pkgs; [
-            age-plugin-yubikey
-            nil
-          ];
-
-          devshell.startup.pre-commit.text = self'.checks.pre-commit-hooks.shellHook;
-
-          commands = [
-            {
-              package = pkgs.deploy;
-              help = "deploy config to host";
-              category = "deployment";
-            }
-            {
-              package = pkgs.deadnix;
-              help = "scan nix files for dead code";
-              category = "lint";
-            }
-            {
-              package = pkgs.statix;
-              help = "lint nix files";
-              category = "lint";
-            }
-            {
-              inherit (config.agenix-rekey) package;
-              help = "create and edit secrets";
-              category = "other";
-            }
-            {
-              package = pkgs.nix-tree;
-              help = "browse dependency graph of derivations";
-              category = "other";
-            }
-          ];
-        };
       };
     });
 }
