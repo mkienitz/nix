@@ -66,77 +66,19 @@
     };
   };
 
-  outputs = {
-    darwin,
-    flake-parts,
-    nixpkgs,
-    ...
-  } @ inputs:
+  outputs = {flake-parts, ...} @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;}
-    ({withSystem, ...}: {
+    {
       systems = [
         "aarch64-linux"
         "aarch64-darwin"
         "x86_64-linux"
         "x86_64-darwin"
       ];
-
       imports = [
         ./modules/flake/devshell.nix
         ./modules/flake/agenix-rekey.nix
+        ./modules/flake/hosts.nix
       ];
-
-      flake = {
-        # Tim Apple
-        darwinConfigurations.io = withSystem "aarch64-darwin" ({pkgs, ...}:
-          darwin.lib.darwinSystem {
-            inherit pkgs;
-            specialArgs = {inherit inputs;};
-            modules = [./hosts/io];
-          });
-
-        # Not Tim Apple
-        nixosConfigurations = let
-          mkNixosHost = hostName: arch: (withSystem arch ({pkgs, ...}:
-            nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit inputs;
-                inherit (pkgs) lib;
-              };
-              modules = [
-                ./hosts/${hostName}
-                ./modules/nixos
-                {
-                  node.hostName = hostName;
-                  nixpkgs = {
-                    hostPlatform = arch;
-                    inherit (pkgs) overlays config;
-                  };
-                }
-              ];
-            }));
-        in {
-          # Hetzner vServer
-          gonggong = mkNixosHost "gonggong" "aarch64-linux";
-          # Raspberry Pi 4
-          hygiea = mkNixosHost "hygiea" "aarch64-linux";
-          # Beelink Mini S12 Pro
-          iapetus = mkNixosHost "iapetus" "x86_64-linux";
-          # Desktop
-          phoebe = mkNixosHost "phoebe" "x86_64-linux";
-        };
-      };
-
-      perSystem = {
-        config,
-        pkgs,
-        system,
-        ...
-      }: {
-        _module.args.pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      };
-    });
+    };
 }
