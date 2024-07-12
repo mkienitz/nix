@@ -27,7 +27,7 @@
           };
           modules = [
             ../../hosts/${hostName}
-            ../nixos
+            ../../modules/nixos
             {
               node.hostName = hostName;
               nixpkgs = {

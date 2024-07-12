@@ -76,9 +76,9 @@
         "x86_64-darwin"
       ];
       imports = [
-        ./modules/flake/devshell.nix
-        ./modules/flake/agenix-rekey.nix
-        ./modules/flake/hosts.nix
+        ./config/flake/devshell.nix
+        ./config/flake/agenix-rekey.nix
+        ./config/flake/hosts.nix
       ];
     };
 }
