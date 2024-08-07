@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (config.nixvim.helpers) emptyTable toRawKeys;
+  inherit (config.lib.nixvim) emptyTable toRawKeys;
   inherit (builtins) map listToAttrs;
   vpkgs = pkgs.vimPlugins;
   on_attach =
