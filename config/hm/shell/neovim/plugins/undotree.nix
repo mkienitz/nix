@@ -7,8 +7,8 @@
         # lua
         ''
           function(_, _)
-            require("which-key").register({
-              ["<leader>u"] = { "<cmd>UndotreeToggle<CR>", "Toggle UndoTree" }
+            require("which-key").add({
+              { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Toggle UndoTree" },
             })
           end
         '';

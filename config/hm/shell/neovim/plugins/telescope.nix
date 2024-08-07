@@ -22,19 +22,17 @@
             require("telescope").setup(opts)
             require("telescope").load_extension("fzf")
             local tsb = require("telescope.builtin")
-              local wk = require("which-key")
-              wk.register({
-                ["<leader>f"] = {
-                  name = "Find",
-                  f = { tsb.find_files, "Local files" },
-                  g = { tsb.git_files, "Git files" },
-                  r = { tsb.oldfiles, "Old files" },
-                  b = { tsb.buffers, "Buffers" },
-                  c = { tsb.grep_string, "String under cursor" },
-                  s = { tsb.live_grep, "String in current working directory" },
-                  t = { tsb.treesitter, "Treesitter symbols" },
-                },
-              })
+            local wk = require("which-key")
+            wk.add({
+              { "<leader>f", group = "Find", },
+              { "<leader>ff", tsb.find_files, desc = "Local files" },
+              { "<leader>fg", tsb.git_files, desc = "Git files" },
+              { "<leader>fr", tsb.oldfiles, desc = "Old files" },
+              { "<leader>fb", tsb.buffers, desc = "Buffers" },
+              { "<leader>fc", tsb.grep_string, desc = "String under cursor" },
+              { "<leader>fs", tsb.live_grep, desc = "String in current working directory" },
+              { "<leader>ft", tsb.treesitter, desc = "Treesitter symbols" },
+            })
           end
         '';
     }

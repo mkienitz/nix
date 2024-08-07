@@ -16,25 +16,21 @@
         --   vim.lsp.inlay_hint(bufnr, true)
         -- end
         local wk = require("which-key")
-        wk.register({
-          K = { vim.lsp.buf.hover, "Hover documentation", buffer = bufnr },
-          g = {
-            d = { vim.lsp.buf.definition, "Definition", buffer = bufnr },
-            D = { vim.lsp.buf.declaration, "Declaration", buffer = bufnr },
-            i = { vim.lsp.buf.implementation, "Implementation", buffer = bufnr },
-            o = { vim.lsp.buf.type_definition, "Type definition", buffer = bufnr },
-            r = { vim.lsp.buf.references, "References", buffer = bufnr },
-          },
-          ["[d"] = { vim.diagnostic.goto_next, "Jump to next diagnostic", buffer = bufnr },
-          ["]d"] = { vim.diagnostic.goto_prev, "Jump to previous diagnostic", buffer = bufnr },
-          ["<leader>"] = {
-            c = { vim.lsp.buf.code_action, "Show code actions", buffer = bufnr },
-            rn = { vim.lsp.buf.rename, "Rename symbol", buffer = bufnr },
-            vws = { vim.lsp.buf.workspace_symbol, "Find symbol in workspace", buffer = bufnr },
-            e = { vim.diagnostic.open_float, "Show diagnostics for line", buffer = bufnr },
-            E = { require("telescope.builtin").diagnostics, "Show diagnostics for buffer", buffer = bufnr },
-            F = { vim.lsp.buf.format, "Format buffer", buffer = bufnr },
-          },
+        wk.add({
+          { "<leader>K", vim.lsp.buf.hover, desc = "Hover documentation", buffer = bufnr },
+          { "<leader>gd", vim.lsp.buf.definition, desc = "Definition", buffer = bufnr },
+          { "<leader>gD", vim.lsp.buf.declaration, desc = "Declaration", buffer = bufnr },
+          { "<leader>gi", vim.lsp.buf.implementation, desc = "Implementation", buffer = bufnr },
+          { "<leader>go", vim.lsp.buf.type_definition, desc = "Type definition", buffer = bufnr },
+          { "<leader>gr", vim.lsp.buf.references, desc = "References", buffer = bufnr },
+          { "[d", vim.diagnostic.goto_next, desc ="Jump to next diagnostic", buffer = bufnr },
+          { "]d", vim.diagnostic.goto_prev, desc ="Jump to previous diagnostic", buffer = bufnr },
+          { "<leader>c", vim.lsp.buf.code_action, desc = "Show code actions", buffer = bufnr },
+          { "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol", buffer = bufnr },
+          { "<leader>vws", vim.lsp.buf.workspace_symbol, desc = "Find symbol in workspace", buffer = bufnr },
+          { "<leader>e", vim.diagnostic.open_float, desc = "Show diagnostics for line", buffer = bufnr },
+          { "<leader>E", require("telescope.builtin").diagnostics, "Show diagnostics for buffer", buffer = bufnr },
+          { "<leader>F", vim.lsp.buf.format, desc = "Format buffer", buffer = bufnr },
         })
       end
     '';
