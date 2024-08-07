@@ -35,9 +35,7 @@
       };
     };
     style =
-      /*
-      css
-      */
+      # css
       ''
         * {
           font-family: JetBrainsMono Nerd Font;

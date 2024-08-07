@@ -35,9 +35,7 @@ in {
         };
       };
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function(_, opts)
             vim.opt.runtimepath:prepend("${tsParserInstallDir}")
@@ -184,9 +182,7 @@ in {
         };
       };
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           function(_, opts)
             require("nvim-treesitter.configs").setup(opts)

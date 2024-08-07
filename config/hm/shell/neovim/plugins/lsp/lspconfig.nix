@@ -8,7 +8,7 @@
   inherit (builtins) map listToAttrs;
   vpkgs = pkgs.vimPlugins;
   on_attach =
-    #lua
+    # lua
     ''
       function(client, bufnr)
         -- TODO uncomment once enabled
