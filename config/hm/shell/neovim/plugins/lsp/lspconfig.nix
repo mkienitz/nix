@@ -29,7 +29,7 @@
           { "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol", buffer = bufnr },
           { "<leader>vws", vim.lsp.buf.workspace_symbol, desc = "Find symbol in workspace", buffer = bufnr },
           { "<leader>e", vim.diagnostic.open_float, desc = "Show diagnostics for line", buffer = bufnr },
-          { "<leader>E", require("telescope.builtin").diagnostics, "Show diagnostics for buffer", buffer = bufnr },
+          { "<leader>E", require("telescope.builtin").diagnostics, desc = "Show diagnostics for buffer", buffer = bufnr },
           { "<leader>F", vim.lsp.buf.format, desc = "Format buffer", buffer = bufnr },
         })
       end
