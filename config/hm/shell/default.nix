@@ -17,7 +17,6 @@
     packages = with pkgs; [
       tree-sitter
       timg
-      bat
       cloc
       curl
       eza
@@ -46,6 +45,10 @@
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
+    };
+    bat = {
+      enable = true;
+      config.theme = "gruvbox-dark";
     };
   };
 
