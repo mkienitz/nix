@@ -17,12 +17,12 @@
         -- end
         local wk = require("which-key")
         wk.add({
-          { "<leader>K", vim.lsp.buf.hover, desc = "Hover documentation", buffer = bufnr },
-          { "<leader>gd", vim.lsp.buf.definition, desc = "Definition", buffer = bufnr },
-          { "<leader>gD", vim.lsp.buf.declaration, desc = "Declaration", buffer = bufnr },
-          { "<leader>gi", vim.lsp.buf.implementation, desc = "Implementation", buffer = bufnr },
-          { "<leader>go", vim.lsp.buf.type_definition, desc = "Type definition", buffer = bufnr },
-          { "<leader>gr", vim.lsp.buf.references, desc = "References", buffer = bufnr },
+          { "K", vim.lsp.buf.hover, desc = "Hover documentation", buffer = bufnr },
+          { "gd", vim.lsp.buf.definition, desc = "Definition", buffer = bufnr },
+          { "gD", vim.lsp.buf.declaration, desc = "Declaration", buffer = bufnr },
+          { "gi", vim.lsp.buf.implementation, desc = "Implementation", buffer = bufnr },
+          { "go", vim.lsp.buf.type_definition, desc = "Type definition", buffer = bufnr },
+          { "gr", vim.lsp.buf.references, desc = "References", buffer = bufnr },
           { "[d", vim.diagnostic.goto_next, desc ="Jump to next diagnostic", buffer = bufnr },
           { "]d", vim.diagnostic.goto_prev, desc ="Jump to previous diagnostic", buffer = bufnr },
           { "<leader>c", vim.lsp.buf.code_action, desc = "Show code actions", buffer = bufnr },
