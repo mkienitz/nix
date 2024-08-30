@@ -4,7 +4,8 @@
   programs.tofi = {
     enable = true;
     settings = {
-      font-size = lib.mkForce 24;
+      font = "JetbrainsMono Nerd Font Mono";
+      font-size = 24;
       outline-width = 1;
       border-width = 2;
     };
