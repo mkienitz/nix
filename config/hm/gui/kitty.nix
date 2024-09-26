@@ -1,7 +1,7 @@
 {
   programs.kitty = {
     enable = true;
-    theme = "Gruvbox Dark";
+    themeFile = "gruvbox-dark";
     settings = {
       # Font
       font_family = "JetBrainsMono Nerd Font Mono";
