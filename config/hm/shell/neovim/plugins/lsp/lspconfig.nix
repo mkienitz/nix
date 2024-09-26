@@ -73,7 +73,7 @@ in {
               "svelte"
               "typst_lsp"
               "pyright"
-              "tsserver"
+              "ts_ls"
               "tailwindcss"
             ])
           // {
