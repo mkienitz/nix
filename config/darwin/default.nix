@@ -29,22 +29,25 @@
 
   services.nix-daemon.enable = true;
 
-  system.defaults = {
-    CustomUserPreferences."org.gpgtools.common" = {
-      DisableKeychain = false;
-      UseKeychain = true;
+  system = {
+    defaults = {
+      CustomUserPreferences."org.gpgtools.common" = {
+        DisableKeychain = false;
+        UseKeychain = true;
+      };
+      finder = {
+        AppleShowAllExtensions = true;
+        _FXShowPosixPathInTitle = true;
+      };
+      dock.autohide = true;
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+        NSWindowShouldDragOnGesture = true;
+        InitialKeyRepeat = 14;
+        KeyRepeat = 1;
+      };
     };
-    finder = {
-      AppleShowAllExtensions = true;
-      _FXShowPosixPathInTitle = true;
-    };
-    dock.autohide = true;
-    NSGlobalDomain = {
-      AppleShowAllExtensions = true;
-      NSWindowShouldDragOnGesture = true;
-      InitialKeyRepeat = 14;
-      KeyRepeat = 1;
-    };
+    stateVersion = 5;
   };
 
   users.users.max = {
