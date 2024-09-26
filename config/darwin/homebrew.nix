@@ -35,6 +35,7 @@
       "mullvadvpn"
       "obs"
       "obsidian"
+      "orcaslicer"
       "postman"
       "signal"
       "spotify"
