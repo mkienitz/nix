@@ -1,10 +1,9 @@
-{config, ...}: {
+_: {
   boot = {
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
     };
     kernelModules = ["kvm-intel"];
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;

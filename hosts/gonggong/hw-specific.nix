@@ -1,8 +1,4 @@
-{
-  config,
-  modulesPath,
-  ...
-}: {
+{modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
@@ -11,7 +7,6 @@
     initrd = {
       availableKernelModules = ["xhci_pci" "usbhid" "sr_mod"];
     };
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
