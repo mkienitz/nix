@@ -1,4 +1,6 @@
-{inputs, ...}: {
+# TODO: Move this?
+{ inputs, ... }:
+{
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {

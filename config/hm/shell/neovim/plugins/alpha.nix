@@ -1,8 +1,12 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = alpha-nvim;
-      dependencies = [nvim-web-devicons telescope-nvim];
+      dependencies = [
+        nvim-web-devicons
+        telescope-nvim
+      ];
       config =
         # lua
         ''

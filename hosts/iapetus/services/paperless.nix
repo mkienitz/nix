@@ -2,14 +2,16 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   paperlessDomain = "paperless.maxkienitz.com";
   paperlessConsumePath = "/paperless/consume";
   ftps_psv_min_port = 56260;
   ftps_psv_max_port = ftps_psv_min_port;
-in {
+in
+{
   # Setup ACME
-  imports = [../../../config/nixos/acme/maxkienitz.com];
+  imports = [ ../../../config/nixos/acme/maxkienitz.com ];
   security.acme.certs.${paperlessDomain}.inheritDefaults = true;
 
   age.secrets = {
@@ -26,7 +28,11 @@ in {
   };
 
   networking.firewall = {
-    allowedTCPPorts = [21 80 443];
+    allowedTCPPorts = [
+      21
+      80
+      443
+    ];
     # Open port range for FTPS passive mode
     allowedTCPPortRanges = [
       {
@@ -63,15 +69,17 @@ in {
   services = {
     nginx = {
       enable = true;
-      upstreams.paperless = let
-        inherit (config.services.paperless) address port;
-      in {
-        servers."${address}:${builtins.toString port}" = {};
-        extraConfig = ''
-          zone paperless 64k;
-          keepalive 5;
-        '';
-      };
+      upstreams.paperless =
+        let
+          inherit (config.services.paperless) address port;
+        in
+        {
+          servers."${address}:${builtins.toString port}" = { };
+          extraConfig = ''
+            zone paperless 64k;
+            keepalive 5;
+          '';
+        };
       virtualHosts.${paperlessDomain} = {
         forceSSL = true;
         useACMEHost = paperlessDomain;

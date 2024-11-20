@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.waybar = {
     enable = true;
     settings = {
@@ -10,9 +11,19 @@
           "DP-1"
           "DP-2"
         ];
-        modules-left = ["hyprland/workspaces" "wlr/taskbar"];
-        modules-center = ["hyprland/window"];
-        modules-right = ["temperature" "cpu" "memory" "pulseaudio" "tray" "clock"];
+        modules-left = [
+          "hyprland/workspaces"
+          "wlr/taskbar"
+        ];
+        modules-center = [ "hyprland/window" ];
+        modules-right = [
+          "temperature"
+          "cpu"
+          "memory"
+          "pulseaudio"
+          "tray"
+          "clock"
+        ];
         cpu = {
           interval = 5;
           format = "CPU: {usage}%";

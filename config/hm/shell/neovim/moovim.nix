@@ -1,12 +1,24 @@
-{config, ...}: let
+{ config, ... }:
+let
   inherit (config.nixvim) helpers;
-in {
+in
+{
   lib.moovim = rec {
-    mkLazyKey = {
-      lhs,
-      rhs,
-      desc,
-    }: ((helpers.listToUnkeyedAttrs [lhs rhs]) // {inherit desc;});
+    mkLazyKey =
+      {
+        lhs,
+        rhs,
+        desc,
+      }:
+      (
+        (helpers.listToUnkeyedAttrs [
+          lhs
+          rhs
+        ])
+        // {
+          inherit desc;
+        }
+      );
 
     mkLazyKeys = bindings: {
       __raw = helpers.toLuaObject (builtins.map mkLazyKey bindings);

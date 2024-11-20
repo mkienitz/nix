@@ -2,13 +2,15 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.lib) moovim;
-in {
+in
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = oil-nvim;
-      dependencies = [nvim-web-devicons];
+      dependencies = [ nvim-web-devicons ];
       opts = {
         keymaps = {
           "<C-h>" = false;

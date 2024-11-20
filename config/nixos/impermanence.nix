@@ -4,7 +4,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
@@ -36,9 +37,9 @@
       boot.initrd.systemd = {
         enable = true;
         services.impermanence-root = {
-          wantedBy = ["initrd.target"];
-          after = ["zfs-import-rpool.service"];
-          before = ["sysroot.mount"];
+          wantedBy = [ "initrd.target" ];
+          after = [ "zfs-import-rpool.service" ];
+          before = [ "sysroot.mount" ];
           unitConfig.DefaultDependencies = "no";
           serviceConfig = {
             Type = "oneshot";
@@ -50,38 +51,31 @@
     # If home-manager is used, consume home.persistence options
     (lib.mkIf (config ? home-manager) (
       let
-        inherit (lib) isAttrs mkMerge attrNames mapAttrs;
-        mkUserFiles = map (x:
-          {parentDirectory.mode = "700";}
-          // (
-            if isAttrs x
-            then x
-            else {file = x;}
-          ));
-        mkUserDirs = map (x:
-          {mode = "700";}
-          // (
-            if isAttrs x
-            then x
-            else {directory = x;}
-          ));
-      in {
+        inherit (lib)
+          isAttrs
+          mkMerge
+          attrNames
+          mapAttrs
+          ;
+        mkUserFiles = map (
+          x: { parentDirectory.mode = "700"; } // (if isAttrs x then x else { file = x; })
+        );
+        mkUserDirs = map (x: { mode = "700"; } // (if isAttrs x then x else { directory = x; }));
+      in
+      {
         environment.persistence = mkMerge (
-          map
-          (
-            user: let
+          map (
+            user:
+            let
               hmUserCfg = config.home-manager.users.${user};
             in
-              mapAttrs
-              (_: sourceCfg: {
-                users.${user} = {
-                  files = mkUserFiles sourceCfg.files;
-                  directories = mkUserDirs sourceCfg.directories;
-                };
-              })
-              hmUserCfg.home.persistence
-          )
-          (attrNames config.home-manager.users)
+            mapAttrs (_: sourceCfg: {
+              users.${user} = {
+                files = mkUserFiles sourceCfg.files;
+                directories = mkUserDirs sourceCfg.directories;
+              };
+            }) hmUserCfg.home.persistence
+          ) (attrNames config.home-manager.users)
         );
       }
     ))

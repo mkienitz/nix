@@ -55,7 +55,9 @@
         style = "bg:color_blue";
         symbol = "";
       };
-      line_break = {disabled = false;};
+      line_break = {
+        disabled = false;
+      };
       nodejs = {
         format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
         style = "bg:color_blue";

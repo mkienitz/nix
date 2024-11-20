@@ -1,23 +1,30 @@
-{config, ...}: let
+{ config, ... }:
+let
   coffee-labeler-domain = "label.maxkienitz.com";
-in {
-  imports = [../../../config/nixos/acme/maxkienitz.com];
+in
+{
+  imports = [ ../../../config/nixos/acme/maxkienitz.com ];
 
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
   security.acme.certs.${coffee-labeler-domain}.inheritDefaults = true;
 
   services.nginx = {
     enable = true;
     upstreams = {
-      coffee-labeler = let
-        inherit (config.services.coffee-labeler) address port;
-      in {
-        servers."${address}:${toString port}" = {};
-        extraConfig = ''
-          zone coffee-labeler 64k;
-          keepalive 5;
-        '';
-      };
+      coffee-labeler =
+        let
+          inherit (config.services.coffee-labeler) address port;
+        in
+        {
+          servers."${address}:${toString port}" = { };
+          extraConfig = ''
+            zone coffee-labeler 64k;
+            keepalive 5;
+          '';
+        };
     };
     virtualHosts.${coffee-labeler-domain} = {
       forceSSL = true;

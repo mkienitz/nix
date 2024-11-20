@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./filetypes.nix
@@ -26,5 +27,5 @@
       vim /tmp/pretty.lua
     '')
   ];
-  home.persistence."/state".directories = [".cache/nvim"];
+  home.persistence."/state".directories = [ ".cache/nvim" ];
 }

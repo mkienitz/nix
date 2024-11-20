@@ -2,13 +2,14 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   boot = {
     initrd = {
       systemd = {
         enable = true;
         users.root.shell = "${pkgs.bashInteractive}/bin/bash";
-        storePaths = ["${pkgs.bashInteractive}/bin/bash"];
+        storePaths = [ "${pkgs.bashInteractive}/bin/bash" ];
         network = {
           enable = true;
           # TODO extract option
@@ -23,7 +24,7 @@
         ssh = {
           enable = true;
           port = 4;
-          hostKeys = [config.age.secrets.initrd-host-ssh-key.path];
+          hostKeys = [ config.age.secrets.initrd-host-ssh-key.path ];
         };
       };
     };
@@ -41,8 +42,11 @@
         [[ -e ${config.age.secrets.initrd-host-ssh-key.path} ]] \
           || ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -N "" -f ${config.age.secrets.initrd-host-ssh-key.path}
       '';
-      deps = ["agenixInstall" "users"];
+      deps = [
+        "agenixInstall"
+        "users"
+      ];
     };
-    agenixChown.deps = ["agenixEnsureInitrdHostkey"];
+    agenixChown.deps = [ "agenixEnsureInitrdHostkey" ];
   };
 }

@@ -27,18 +27,23 @@
         showListFooter = false;
         showRandomTip = false;
         theme = {
-          activeBorderColor = ["blue" "bold"];
-          cherryPickedCommitBgColor = ["cyan"];
-          cherryPickedCommitFgColor = ["blue"];
-          inactiveBorderColor = ["white"];
-          optionsTextColor = ["blue"];
-          selectedLineBgColor = ["default"];
-          selectedRangeBgColor = ["default"];
-          unstagedChangesColor = ["red"];
+          activeBorderColor = [
+            "blue"
+            "bold"
+          ];
+          cherryPickedCommitBgColor = [ "cyan" ];
+          cherryPickedCommitFgColor = [ "blue" ];
+          inactiveBorderColor = [ "white" ];
+          optionsTextColor = [ "blue" ];
+          selectedLineBgColor = [ "default" ];
+          selectedRangeBgColor = [ "default" ];
+          unstagedChangesColor = [ "red" ];
         };
       };
       notARepository = "skip";
-      os = {editPreset = "nvim";};
+      os = {
+        editPreset = "nvim";
+      };
     };
   };
 }

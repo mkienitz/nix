@@ -3,7 +3,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
@@ -15,6 +16,6 @@
     };
   };
   environment = lib.mkIf (config.environment ? persistence) {
-    persistence."/state".directories = ["/etc/secureboot"];
+    persistence."/state".directories = [ "/etc/secureboot" ];
   };
 }

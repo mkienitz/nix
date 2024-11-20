@@ -1,8 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = undotree;
-      dependencies = [which-key-nvim];
+      dependencies = [ which-key-nvim ];
       config =
         # lua
         ''

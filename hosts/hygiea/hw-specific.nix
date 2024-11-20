@@ -2,10 +2,15 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];
+      availableKernelModules = [
+        "xhci_pci"
+        "usbhid"
+        "usb_storage"
+      ];
       systemd.tpm2.enable = false;
     };
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
@@ -19,7 +24,7 @@
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-      options = ["noatime"];
+      options = [ "noatime" ];
     };
   };
 

@@ -2,8 +2,12 @@
   pkgs,
   config,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [80 443];
+}:
+{
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
   security.acme = {
     acceptTerms = true;
     defaults = {
@@ -12,40 +16,40 @@
   };
   services.nginx = {
     enable = true;
-    virtualHosts = let
-      defaults = {
-        forceSSL = true;
-        enableACME = true;
-      };
-    in {
-      "maxkienitz.com" =
-        defaults
-        // {
+    virtualHosts =
+      let
+        defaults = {
+          forceSSL = true;
+          enableACME = true;
+        };
+      in
+      {
+        "maxkienitz.com" = defaults // {
           locations."/".extraConfig = ''
             default_type text/html;
                  return 404 "<img src=\"https://http.cat/404.jpg\">";
           '';
         };
-      "paypal.maxkienitz.com" =
-        defaults
-        // {
+        "paypal.maxkienitz.com" = defaults // {
           locations."/".extraConfig = ''
             return 302 https://www.paypal.com/paypalme/maximiliankienitz;
           '';
         };
-      "bipper.maxkienitz.com" =
-        defaults
-        // {
-          locations."/api/".proxyPass = let
-            inherit (config.services.bipper) address port;
-          in "http://${address}:${toString port}/";
+        "bipper.maxkienitz.com" = defaults // {
+          locations."/api/".proxyPass =
+            let
+              inherit (config.services.bipper) address port;
+            in
+            "http://${address}:${toString port}/";
         };
-    };
+      };
     appendHttpConfig = ''
-      ssl_client_certificate ${pkgs.fetchurl {
-        url = "https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem";
-        hash = "sha256-wU/tDOUhDbBxn+oR0fELM3UNwX1gmur0fHXp7/DXuEM=";
-      }};
+      ssl_client_certificate ${
+        pkgs.fetchurl {
+          url = "https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem";
+          hash = "sha256-wU/tDOUhDbBxn+oR0fELM3UNwX1gmur0fHXp7/DXuEM=";
+        }
+      };
       ssl_verify_client on;
     '';
   };

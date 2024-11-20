@@ -1,9 +1,11 @@
-{inputs, ...}: let
+{ inputs, ... }:
+let
   bqlPrintPort = 10001;
-in {
-  imports = [inputs.bql-print.nixosModules.default];
+in
+{
+  imports = [ inputs.bql-print.nixosModules.default ];
 
-  networking.firewall.allowedTCPPorts = [bqlPrintPort];
+  networking.firewall.allowedTCPPorts = [ bqlPrintPort ];
 
   services.bql-print = {
     enable = true;

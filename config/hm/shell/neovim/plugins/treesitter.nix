@@ -1,8 +1,13 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   # TODO is this the right dir?
   tsParserInstallDir = "$HOME/.cache/nvim/treesitter";
-  triggerEvents = ["BufReadPost" "BufNewFile"];
-in {
+  triggerEvents = [
+    "BufReadPost"
+    "BufNewFile"
+  ];
+in
+{
   programs.nixvim = {
     extraPackages = with pkgs; [
       tree-sitter
@@ -45,7 +50,7 @@ in {
     }
     {
       pkg = nvim-treesitter-textobjects;
-      dependencies = [nvim-treesitter.withAllGrammars];
+      dependencies = [ nvim-treesitter.withAllGrammars ];
       event = triggerEvents;
       opts = {
         textobjects = {

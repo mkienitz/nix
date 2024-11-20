@@ -3,7 +3,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.default
     ../common/hm.nix
@@ -17,7 +18,7 @@
     enable = true;
     extraRules = [
       {
-        users = ["max"];
+        users = [ "max" ];
         keepEnv = true;
       }
     ];

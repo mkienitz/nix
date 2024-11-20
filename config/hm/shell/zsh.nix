@@ -1,8 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs = {
     fzf = {
       enable = true;
-      defaultOptions = ["--height 40%" "--reverse" "--ansi"];
+      defaultOptions = [
+        "--height 40%"
+        "--reverse"
+        "--ansi"
+      ];
     };
     zsh = {
       enable = true;
