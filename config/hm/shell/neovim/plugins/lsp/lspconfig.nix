@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (config.lib.nixvim) emptyTable toRawKeys;
   inherit (builtins) map listToAttrs;
   vpkgs = pkgs.vimPlugins;
@@ -34,11 +35,15 @@
         })
       end
     '';
-in {
+in
+{
   programs.nixvim.plugins.lazy.plugins = [
     {
       pkg = vpkgs.crates-nvim;
-      dependencies = with vpkgs; [plenary-nvim nvim-cmp];
+      dependencies = with vpkgs; [
+        plenary-nvim
+        nvim-cmp
+      ];
       opts = {
         lsp = {
           enabled = true;
@@ -52,7 +57,10 @@ in {
     }
     {
       pkg = vpkgs.nvim-lspconfig;
-      event = ["BufReadPre" "BufNewFile"];
+      event = [
+        "BufReadPre"
+        "BufNewFile"
+      ];
       dependencies = with vpkgs; [
         dressing-nvim
         which-key-nvim
@@ -64,23 +72,27 @@ in {
       opts = {
         servers =
           # Generic servers
-          listToAttrs (map (server_name: {
-              name = server_name;
-              value = emptyTable;
-            }) [
-              "gleam"
-              "hls"
-              "svelte"
-              "typst_lsp"
-              "pyright"
-              "ts_ls"
-              "tailwindcss"
-            ])
+          listToAttrs (
+            map
+              (server_name: {
+                name = server_name;
+                value = emptyTable;
+              })
+              [
+                "gleam"
+                "hls"
+                "svelte"
+                "typst_lsp"
+                "pyright"
+                "ts_ls"
+                "tailwindcss"
+              ]
+          )
           // {
             lua_ls = {
               settings = {
                 Lua = {
-                  diagnostics.globals = ["vim"];
+                  diagnostics.globals = [ "vim" ];
                   workspace.library = toRawKeys {
                     "vim.fn.expand(\"$VIMRUNTIME/lua\")" = true;
                     "vim.fn.stdpath(\"config\") .. \"/lua\"" = true;
@@ -89,11 +101,14 @@ in {
               };
             };
             nil_ls = {
-              settings.nil.formatting.command = ["${(lib.getExe pkgs.alejandra)}" "--quiet"];
+              settings.nil.formatting.command = [
+                "${(lib.getExe pkgs.nixfmt-rfc-style)}"
+                "--quiet"
+              ];
             };
             rust_analyzer.settings.rust-analyzer = {
               checkOnSave.command = "clippy";
-              files.excludeDirs = [".direnv"];
+              files.excludeDirs = [ ".direnv" ];
             };
           };
       };

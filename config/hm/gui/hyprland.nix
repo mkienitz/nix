@@ -1,5 +1,6 @@
-{lib, ...}: {
-  imports = [./waybar.nix];
+{ lib, ... }:
+{
+  imports = [ ./waybar.nix ];
 
   programs.tofi = {
     enable = true;

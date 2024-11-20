@@ -1,9 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = telescope-nvim;
       lazy = true;
-      dependencies = [telescope-fzf-native-nvim];
+      dependencies = [ telescope-fzf-native-nvim ];
       opts = {
         defaults = {
           mappings = {

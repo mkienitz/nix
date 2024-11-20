@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../common
   ];
 
-  environment.systemPackages = with pkgs; [vim nvd];
+  environment.systemPackages = with pkgs; [
+    vim
+    nvd
+  ];
 
   programs.git = {
     enable = true;

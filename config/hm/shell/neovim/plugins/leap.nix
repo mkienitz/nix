@@ -2,9 +2,11 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.lib) moovim;
-in {
+in
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = leap-nvim;

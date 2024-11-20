@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   stylix = {
     autoEnable = false;
     image = config.lib.stylix.pixel "base00";

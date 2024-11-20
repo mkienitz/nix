@@ -1,5 +1,6 @@
-{inputs, ...}: {
-  imports = [inputs.coffee-labeler.nixosModules.default];
+{ inputs, ... }:
+{
+  imports = [ inputs.coffee-labeler.nixosModules.default ];
 
   services.coffee-labeler = {
     enable = true;

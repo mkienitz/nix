@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [vesktop];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ vesktop ];
   home.persistence."/state".directories = [
     ".config/vesktop"
   ];

@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../common
   ];
 
-  environment.systemPackages = with pkgs; [coreutils openssh];
+  environment.systemPackages = with pkgs; [
+    coreutils
+    openssh
+  ];
 
   nix = {
     distributedBuilds = true;
@@ -13,14 +17,20 @@
         system = "aarch64-linux";
         hostName = "gonggong";
         maxJobs = 8;
-        supportedFeatures = ["big-parallel" "kvm"];
+        supportedFeatures = [
+          "big-parallel"
+          "kvm"
+        ];
       }
       {
         protocol = "ssh-ng";
         system = "x86_64-linux";
         hostName = "iapetus";
         maxJobs = 8;
-        supportedFeatures = ["big-parallel" "kvm"];
+        supportedFeatures = [
+          "big-parallel"
+          "kvm"
+        ];
       }
     ];
   };

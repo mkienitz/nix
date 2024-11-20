@@ -1,6 +1,7 @@
-{inputs, ...}: {
-  imports = [inputs.disko.nixosModules.default];
-  boot.initrd.systemd.services."zfs-import-rpool".after = ["cryptsetup.target"];
+{ inputs, ... }:
+{
+  imports = [ inputs.disko.nixosModules.default ];
+  boot.initrd.systemd.services."zfs-import-rpool".after = [ "cryptsetup.target" ];
   disko.devices = {
     disk = {
       nixnvme = {
@@ -50,30 +51,30 @@
         };
         options.ashift = "12";
 
-        datasets = let
-          mkDataset = mountpoint: {
-            type = "zfs_fs";
-            options = {
-              canmount = "noauto";
+        datasets =
+          let
+            mkDataset = mountpoint: {
+              type = "zfs_fs";
+              options = {
+                canmount = "noauto";
+                inherit mountpoint;
+              };
               inherit mountpoint;
             };
-            inherit mountpoint;
-          };
-          mkUnmountable = {
-            type = "zfs_fs";
-          };
-        in {
-          "local" = mkUnmountable;
-          "local/root" =
-            mkDataset "/"
-            // {
+            mkUnmountable = {
+              type = "zfs_fs";
+            };
+          in
+          {
+            "local" = mkUnmountable;
+            "local/root" = mkDataset "/" // {
               postCreateHook = "zfs snapshot rpool/local/root@blank";
             };
-          "local/nix" = mkDataset "/nix";
-          "local/state" = mkDataset "/state";
-          "safe" = mkUnmountable;
-          "safe/persist" = mkDataset "/persist";
-        };
+            "local/nix" = mkDataset "/nix";
+            "local/state" = mkDataset "/state";
+            "safe" = mkUnmountable;
+            "safe/persist" = mkDataset "/persist";
+          };
       };
     };
   };

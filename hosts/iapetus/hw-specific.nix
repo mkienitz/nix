@@ -1,9 +1,15 @@
 _: {
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+      ];
     };
-    kernelModules = ["kvm-intel"];
+    kernelModules = [ "kvm-intel" ];
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
@@ -18,24 +24,24 @@ _: {
     "/" = {
       device = "rpool/local/root";
       fsType = "zfs";
-      options = ["zfsutil"];
+      options = [ "zfsutil" ];
     };
     "/nix" = {
       device = "rpool/local/nix";
       fsType = "zfs";
-      options = ["zfsutil"];
+      options = [ "zfsutil" ];
       neededForBoot = true;
     };
     "/state" = {
       device = "rpool/local/state";
       fsType = "zfs";
-      options = ["zfsutil"];
+      options = [ "zfsutil" ];
       neededForBoot = true;
     };
     "/persist" = {
       device = "rpool/safe/persist";
       fsType = "zfs";
-      options = ["zfsutil"];
+      options = [ "zfsutil" ];
       neededForBoot = true;
     };
   };

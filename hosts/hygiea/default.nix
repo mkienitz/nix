@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ../../config/nixos
     ../../config/nixos/secrets

@@ -1,11 +1,16 @@
-{modulesPath, ...}: {
+{ modulesPath, ... }:
+{
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "usbhid" "sr_mod"];
+      availableKernelModules = [
+        "xhci_pci"
+        "usbhid"
+        "sr_mod"
+      ];
     };
     loader = {
       efi.canTouchEfiVariables = true;
@@ -17,13 +22,13 @@
     "/" = {
       device = "rpool/root";
       fsType = "zfs";
-      options = ["zfsutil"];
+      options = [ "zfsutil" ];
     };
 
     "/home/max" = {
       device = "rpool/home";
       fsType = "zfs";
-      options = ["zfsutil"];
+      options = [ "zfsutil" ];
     };
 
     "/boot" = {

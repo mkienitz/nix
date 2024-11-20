@@ -2,14 +2,16 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.lib) moovim;
-in {
+in
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = neogit;
       config = true;
-      dependencies = [plenary-nvim];
+      dependencies = [ plenary-nvim ];
       keys = moovim.mkLazyKeys [
         {
           lhs = "<leader>gg";

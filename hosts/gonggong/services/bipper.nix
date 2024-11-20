@@ -2,12 +2,13 @@
   inputs,
   pkgs,
   ...
-}: {
-  imports = [inputs.bipper.nixosModules.default];
+}:
+{
+  imports = [ inputs.bipper.nixosModules.default ];
 
   services.postgresql = {
     enable = true;
-    ensureDatabases = ["bipper"];
+    ensureDatabases = [ "bipper" ];
     identMap = ''
       # ArbitraryMapName systemUser DBUser
       superuser_map      root      postgres

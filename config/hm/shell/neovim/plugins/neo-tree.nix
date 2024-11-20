@@ -2,13 +2,20 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.lib) moovim;
-in {
+in
+{
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
       pkg = neo-tree-nvim;
-      dependencies = [plenary-nvim nui-nvim nvim-web-devicons nvim-window-picker];
+      dependencies = [
+        plenary-nvim
+        nui-nvim
+        nvim-web-devicons
+        nvim-window-picker
+      ];
       opts = {
         close_if_last_window = true;
         popup_border_style = "rounded";
@@ -38,8 +45,8 @@ in {
           filtered_items = {
             force_visible_in_empty_folder = true;
             hide_dotfiles = false;
-            hide_by_name = [".git"];
-            never_show = [".DS_Store"];
+            hide_by_name = [ ".git" ];
+            never_show = [ ".DS_Store" ];
           };
           group_empty_dirs = true;
           follow_current_file = {

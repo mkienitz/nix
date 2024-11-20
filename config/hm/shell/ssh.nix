@@ -42,21 +42,17 @@ lib.mkMerge [
           user = "u368782";
           port = 23;
         };
-        sbox1-synology =
-          sbox1
-          // {
-            user = "${sbox1.user}-sub1";
-          };
+        sbox1-synology = sbox1 // {
+          user = "${sbox1.user}-sub1";
+        };
         sbox2 = {
           hostname = "u400140.your-storagebox.de";
           user = "u400140";
           port = 23;
         };
-        sbox2-iapetus =
-          sbox2
-          // {
-            user = "${sbox2.user}-sub1";
-          };
+        sbox2-iapetus = sbox2 // {
+          user = "${sbox2.user}-sub1";
+        };
         "bitbucket.ase.in.tum.de" = {
           hostname = "bitbucket.ase.in.tum.de";
           user = "git";
@@ -111,7 +107,8 @@ lib.mkMerge [
       #   ExecStart = lib.mkForce "${pkgs.openssh}/bin/ssh-agent -d -a %t/ssh-agent";
       #   Environment = "SSH_ASKPASS=${askpass} DISPLAY=:0 BURK=yes";
       # };
-    })
+    }
+  )
   (lib.mkIf pkgs.stdenv.isDarwin {
     launchd.agents.ssh-agent = {
       enable = true;
@@ -119,10 +116,12 @@ lib.mkMerge [
         KeepAlive = true;
         RunAtLoad = true;
         ProgramArguments = [
-          (toString (pkgs.writeShellScript "setup-ssh-agent-sock" ''
-            ${pkgs.coreutils}/bin/rm -f "/tmp/ssh-agent.sock"
-            ${pkgs.openssh}/bin/ssh-agent -D -a "/tmp/ssh-agent.sock"
-          ''))
+          (toString (
+            pkgs.writeShellScript "setup-ssh-agent-sock" ''
+              ${pkgs.coreutils}/bin/rm -f "/tmp/ssh-agent.sock"
+              ${pkgs.openssh}/bin/ssh-agent -D -a "/tmp/ssh-agent.sock"
+            ''
+          ))
         ];
         StandardErrorPath = "/tmp/ssh-agent.err";
         StandardOutPath = "/tmp/ssh-agent.out";

@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options = {
     global.flakeRoot = lib.mkOption {
       type = lib.types.path;
