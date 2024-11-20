@@ -83,6 +83,7 @@
         ./config/flake/devshell.nix
         ./config/flake/agenix-rekey.nix
         ./config/flake/hosts.nix
+        ./config/flake/pre-commit.nix
       ];
     };
 }

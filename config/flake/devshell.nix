@@ -1,27 +1,21 @@
 {inputs, ...}: {
   imports = [
     inputs.devshell.flakeModule
-    inputs.pre-commit-hooks.flakeModule
   ];
 
   perSystem = {
     config,
     pkgs,
+    lib,
     ...
   }: {
     formatter = pkgs.alejandra;
-
-    pre-commit.settings.hooks = {
-      alejandra.enable = true;
-      deadnix.enable = true;
-      statix.enable = true;
-    };
 
     devshells.default = {
       packages = with pkgs; [
         nil
       ];
-      devshell.startup.pre-commit.text = config.pre-commit.installationScript;
+      devshell.startup.pre-commit.text = lib.mkIf (config ? pre-commit) config.pre-commit.installationScript;
       commands = [
         {
           package = pkgs.callPackage (pkgs.fetchFromGitHub
