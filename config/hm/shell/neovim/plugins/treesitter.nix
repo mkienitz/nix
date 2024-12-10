@@ -1,10 +1,4 @@
 { pkgs, ... }:
-let
-  triggerEvents = [
-    "BufReadPost"
-    "BufNewFile"
-  ];
-in
 {
   programs.nixvim = {
     extraPackages = with pkgs; [
@@ -15,8 +9,12 @@ in
   };
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
-      pkg = nvim-treesitter;
-      event = triggerEvents;
+      pkg = nvim-treesitter-textobjects;
+      dependencies = [ nvim-treesitter ];
+      event = [
+        "BufReadPost"
+        "BufNewFile"
+      ];
       opts = {
         highlight = {
           enable = true;
@@ -34,28 +32,6 @@ in
             node_decremental = "<bs>";
           };
         };
-      };
-      config =
-        # NOTE: use pkgs.linkFarm instead?
-        let
-          parsersDir = "${pkgs.symlinkJoin {
-            name = "treesitter-parsers";
-            paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-          }}";
-        in
-        # lua
-        ''
-          function(_, opts)
-            vim.opt.runtimepath:prepend("${parsersDir}")
-            require("nvim-treesitter.configs").setup(opts)
-          end
-        '';
-    }
-    {
-      pkg = nvim-treesitter-textobjects;
-      dependencies = [ nvim-treesitter ];
-      event = triggerEvents;
-      opts = {
         textobjects = {
           select = {
             enable = true;
@@ -190,9 +166,17 @@ in
         };
       };
       config =
+        # NOTE: use pkgs.linkFarm instead?
+        let
+          parsersDir = "${pkgs.symlinkJoin {
+            name = "treesitter-parsers";
+            paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+          }}";
+        in
         # lua
         ''
           function(_, opts)
+            vim.opt.runtimepath:prepend("${parsersDir}")
             require("nvim-treesitter.configs").setup(opts)
           end
         '';
