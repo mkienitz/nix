@@ -1,7 +1,5 @@
 { pkgs, ... }:
 let
-  # TODO is this the right dir?
-  tsParserInstallDir = "$HOME/.cache/nvim/treesitter";
   triggerEvents = [
     "BufReadPost"
     "BufNewFile"
@@ -17,11 +15,9 @@ in
   };
   programs.nixvim.plugins.lazy.plugins = with pkgs.vimPlugins; [
     {
-      pkg = nvim-treesitter.withAllGrammars;
+      pkg = nvim-treesitter;
       event = triggerEvents;
       opts = {
-        ensure_installed = "all";
-        parser_install_dir = tsParserInstallDir;
         highlight = {
           enable = true;
           additional_vim_regex_highlighting = false;
@@ -40,17 +36,24 @@ in
         };
       };
       config =
+        # NOTE: use pkgs.linkFarm instead?
+        let
+          parsersDir = "${pkgs.symlinkJoin {
+            name = "treesitter-parsers";
+            paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+          }}";
+        in
         # lua
         ''
           function(_, opts)
-            vim.opt.runtimepath:prepend("${tsParserInstallDir}")
+            vim.opt.runtimepath:prepend("${parsersDir}")
             require("nvim-treesitter.configs").setup(opts)
           end
         '';
     }
     {
       pkg = nvim-treesitter-textobjects;
-      dependencies = [ nvim-treesitter.withAllGrammars ];
+      dependencies = [ nvim-treesitter ];
       event = triggerEvents;
       opts = {
         textobjects = {
