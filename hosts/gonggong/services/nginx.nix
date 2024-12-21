@@ -27,7 +27,7 @@
         "maxkienitz.com" = defaults // {
           locations."/".extraConfig = ''
             default_type text/html;
-                 return 404 "<img src=\"https://http.cat/404.jpg\">";
+            return 404 "<img src=\"https://http.cat/404.jpg\">";
           '';
         };
         "paypal.maxkienitz.com" = defaults // {
@@ -36,11 +36,16 @@
           '';
         };
         "bipper.maxkienitz.com" = defaults // {
-          locations."/api/".proxyPass =
-            let
-              inherit (config.services.bipper) address port;
-            in
-            "http://${address}:${toString port}/";
+          locations."/api/" = {
+            proxyPass =
+              let
+                inherit (config.services.bipper) address port;
+              in
+              "http://${address}:${toString port}/";
+            extraConfig = ''
+              client_max_body_size 200M;
+            '';
+          };
         };
       };
     appendHttpConfig = ''
