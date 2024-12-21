@@ -4,11 +4,9 @@
     inputs.pre-commit-hooks.flakeModule
   ];
 
-  perSystem = _: {
-    pre-commit.settings.hooks = {
-      deadnix.enable = true;
-      statix.enable = true;
-      treefmt.enable = true;
+  perSystem =
+    { config, ... }:
+    {
+      pre-commit.settings.hooks.treefmt.enable = config ? treefmt;
     };
-  };
 }

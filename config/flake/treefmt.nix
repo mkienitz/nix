@@ -9,7 +9,9 @@
       projectRootFile = "flake.nix";
       programs = {
         beautysh.enable = true;
+        deadnix.enable = true;
         nixfmt.enable = true;
+        statix.enable = true;
       };
     };
   };
