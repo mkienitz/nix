@@ -53,10 +53,10 @@ lib.mkMerge [
         sbox2-iapetus = sbox2 // {
           user = "${sbox2.user}-sub1";
         };
-        "bitbucket.ase.in.tum.de" = {
-          hostname = "bitbucket.ase.in.tum.de";
+        "artemis.tum.de" = {
+          hostname = "artemis.tum.de";
           user = "git";
-          port = 7999;
+          port = 7921;
           identityFile = "~/.ssh/tum_ed25519";
         };
       };
