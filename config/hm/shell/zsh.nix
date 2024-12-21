@@ -40,15 +40,16 @@
       ];
       shellAliases = {
         c = "clear";
+        l = "eza";
+        la = "eza -la";
+        lg = "lazygit";
+        ll = "eza -l";
+        llt = "eza --long --tree";
+        ls = "eza";
+        tree = "eza -T";
         weather = "curl wttr.in/Munich";
         zz = "z -";
-        ls = "eza";
-        l = "eza";
-        llt = "eza --long --tree";
-        ll = "eza -l";
-        la = "eza -la";
-        tree = "eza -T";
-        lg = "lazygit";
+        py = "python3";
       };
     };
   };
