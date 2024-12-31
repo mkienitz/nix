@@ -42,6 +42,7 @@
         c = "clear";
         l = "eza";
         la = "eza -la";
+        lat = "eza -lat modified";
         lg = "lazygit";
         ll = "eza -l";
         llt = "eza --long --tree";
