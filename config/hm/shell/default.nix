@@ -51,6 +51,7 @@
       enable = true;
       config.theme = "gruvbox-dark";
     };
+    yazi.enable = true;
   };
 
   home.persistence."/state".directories = [
