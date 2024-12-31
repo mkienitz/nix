@@ -12,8 +12,8 @@
       };
       character = {
         disabled = false;
-        error_symbol = "[λ](bold fg:color_red)";
-        success_symbol = "[λ](bold fg:color_green)";
+        error_symbol = "[>_](bold fg:color_red)";
+        success_symbol = "[>_](bold fg:color_green)";
       };
       directory = {
         format = "[ $path ]($style)";
