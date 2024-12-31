@@ -66,6 +66,7 @@ in
         which-key-nvim
         cmp-nvim-lsp
         nvim-cmp
+        lean-nvim
         telescope-nvim
         crates-nvim
       ];
@@ -81,31 +82,29 @@ in
               [
                 "gleam"
                 "hls"
-                "svelte"
-                "typst_lsp"
+                "leanls"
                 "pyright"
-                "ts_ls"
+                "svelte"
                 "tailwindcss"
+                "tinymist"
+                "ts_ls"
               ]
           )
           // {
-            lua_ls = {
-              settings = {
-                Lua = {
-                  diagnostics.globals = [ "vim" ];
-                  workspace.library = toRawKeys {
-                    "vim.fn.expand(\"$VIMRUNTIME/lua\")" = true;
-                    "vim.fn.stdpath(\"config\") .. \"/lua\"" = true;
-                  };
-                };
+
+            lua_ls.settings.Lua = {
+              diagnostics.globals = [ "vim" ];
+              workspace.library = toRawKeys {
+                "vim.fn.expand(\"$VIMRUNTIME/lua\")" = true;
+                "vim.fn.stdpath(\"config\") .. \"/lua\"" = true;
               };
             };
-            nil_ls = {
-              settings.nil.formatting.command = [
-                "${(lib.getExe pkgs.nixfmt-rfc-style)}"
-                "--quiet"
-              ];
-            };
+
+            nil_ls.settings.nil.formatting.command = [
+              "${(lib.getExe pkgs.nixfmt-rfc-style)}"
+              "--quiet"
+            ];
+
             rust_analyzer.settings.rust-analyzer = {
               checkOnSave.command = "clippy";
               files.excludeDirs = [ ".direnv" ];
@@ -123,6 +122,9 @@ in
               server_opts.on_attach = ${on_attach}
               lspconfig[server_name].setup(server_opts)
             end
+            require("lean").setup({
+              lsp = { on_attach = ${on_attach}}
+            })
           end
         '';
     }
