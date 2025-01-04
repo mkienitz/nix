@@ -50,6 +50,10 @@
       url = "github:mkienitz/bql-print";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mvim = {
+      url = "github:mkienitz/mvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

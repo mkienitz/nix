@@ -6,11 +6,12 @@
 {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
-    ./zsh.nix
-    ./starship.nix
+    ./mvim.nix
     ./git.nix
     ./ssh.nix
+    ./starship.nix
     ./tmux.nix
+    ./zsh.nix
   ];
 
   home = {

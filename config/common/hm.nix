@@ -1,4 +1,3 @@
-# TODO: Move this?
 { inputs, ... }:
 {
   home-manager = {
@@ -11,9 +10,7 @@
         # Modules
         ../../modules/hm
         # Default config
-        ../hm/gui
-        ../hm/shell
-        ../hm/shell/neovim
+        ../hm
       ];
       home.username = "max";
       home.stateVersion = "23.11";
