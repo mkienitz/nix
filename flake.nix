@@ -39,7 +39,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     bipper = {
-      url = "github:mkienitz/bipper-rs";
+      url = "github:mkienitz/bipper";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     coffee-labeler = {

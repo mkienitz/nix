@@ -36,14 +36,14 @@
           '';
         };
         "bipper.maxkienitz.com" = defaults // {
-          locations."/api/" = {
+          locations."/" = {
             proxyPass =
               let
                 inherit (config.services.bipper) address port;
               in
               "http://${address}:${toString port}/";
             extraConfig = ''
-              client_max_body_size 200M;
+              client_max_body_size 500M;
             '';
           };
         };
