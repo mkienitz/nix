@@ -19,7 +19,6 @@
     casks = [
       "adobe-creative-cloud"
       "aerospace"
-      "alacritty"
       "balenaetcher"
       "bruno"
       "chatgpt"
@@ -37,6 +36,7 @@
       "obsidian"
       "orcaslicer"
       "postman"
+      "raycast"
       "signal"
       "spotify"
       "teamspeak-client"
