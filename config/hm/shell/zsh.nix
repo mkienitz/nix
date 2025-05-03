@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs = {
     fzf = {
@@ -12,7 +12,7 @@
     zsh = {
       enable = true;
       dotDir = ".config/zsh";
-      initExtraFirst = ''
+      initContent = lib.mkBefore ''
         if autoload history-search-end; then
           zle -N history-beginning-search-backward-end history-search-end
           zle -N history-beginning-search-forward-end history-search-end
