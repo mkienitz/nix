@@ -40,6 +40,7 @@
   ids.gids.nixbld = 30000;
 
   system = {
+    primaryUser = "max";
     defaults = {
       CustomUserPreferences."org.gpgtools.common" = {
         DisableKeychain = false;
