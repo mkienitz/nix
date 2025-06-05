@@ -58,10 +58,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-templates = {
       url = "github:mkienitz/nix-templates";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,6 +71,10 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+    };
+    coffee-vault = {
+      url = "github:mkienitz/coffee-vault";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
