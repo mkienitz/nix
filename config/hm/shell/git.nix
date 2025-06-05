@@ -3,6 +3,7 @@
     enable = true;
     userName = "Maximilian Kienitz";
     userEmail = "max@kienitz.dev";
+    signing.format = "ssh";
     ignores = [
       ".direnv"
       ".DS_Store"
