@@ -40,6 +40,7 @@
       ];
       shellAliases = {
         c = "clear";
+        dus = "du -sh ./* | sort -h -r";
         l = "eza";
         la = "eza -la";
         lat = "eza -lat modified";
