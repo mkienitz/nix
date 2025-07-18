@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
     ./mvim.nix
     ./git.nix
     ./ssh.nix
