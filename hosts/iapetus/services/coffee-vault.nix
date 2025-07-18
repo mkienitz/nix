@@ -15,7 +15,6 @@ in
   security.acme.certs.${coffeeVaultDomain}.inheritDefaults = true;
 
   networking.firewall.allowedTCPPorts = [
-    21
     80
     443
   ];
