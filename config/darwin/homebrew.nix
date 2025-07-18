@@ -18,7 +18,7 @@
       "bruno"
       "chatgpt"
       "discord"
-      "docker"
+      "docker-desktop"
       "google-chrome"
       "karabiner-elements"
       "keyboardcleantool"
