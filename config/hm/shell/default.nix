@@ -30,6 +30,14 @@
       ripgrep
       tldr
       wget
+      (claude-code.overrideAttrs (_oldAttrs: rec {
+        version = "1.0.65";
+        nodejs = nodejs_22;
+        src = fetchzip {
+          url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
+          hash = "sha256-xx7Nksfa0IN18i6MoU60olnY/BioS+W+OQmyETQYDHI=";
+        };
+      }))
     ];
   };
 
