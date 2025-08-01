@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   programs = {
     fzf = {
@@ -11,7 +16,7 @@
     };
     zsh = {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       initContent = lib.mkBefore ''
         if autoload history-search-end; then
           zle -N history-beginning-search-backward-end history-search-end
