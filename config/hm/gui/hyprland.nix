@@ -27,50 +27,46 @@
         gaps_out = 5;
       };
       monitor = [
-        "DP-2, 3840x1600@119.98, 0x0, 1, bitdepth, 10"
-        "DP-1, 2560x1440@120.00, -1440x-370, 1, transform, 1"
-        # Begone
-        "Unknown-1, disable"
+        "DP-2, 3840x2160@240.00, 0x0, 2, bitdepth, 10"
       ];
       workspace = [
-        "1, monitor:DP-2, default: true"
+        "1, monitor:DP-2, default:true"
         "2, monitor:DP-2"
         "3, monitor:DP-2"
         "4, monitor:DP-2"
         "5, monitor:DP-2"
-        "6, monitor:DP-1, default: true"
-        "7, monitor:DP-1"
-        "8, monitor:DP-1"
-        "9, monitor:DP-1"
+        "6, monitor:DP-2"
+        "7, monitor:DP-2"
+        "8, monitor:DP-2"
+        "9, monitor:DP-2"
       ];
       # Longer shared edges have priority
       binds.focus_preferred_method = 1;
-      bind =
-        [
-          # General
-          "SUPER SHIFT, E, exit,"
-          # Windows
-          "SUPER, Q, killactive,"
-          "SUPER, H, movefocus, l"
-          "SUPER, J, movefocus, d"
-          "SUPER, K, movefocus, u"
-          "SUPER, L, movefocus, r"
-          "SUPER SHIFT, H, movewindow, l"
-          "SUPER SHIFT, J, movewindow, d"
-          "SUPER SHIFT, K, movewindow, u"
-          "SUPER SHIFT, L, movewindow, r"
-          "SUPER, TAB, cyclenext,"
-          "SUPER SHIFT, TAB, cyclenext, prev"
-          "SUPER, F, fullscreen, 1"
-          # Programs
-          "SUPER, RETURN, exec, kitty"
-          "SUPER, B, exec, firefox"
-          "SUPER, D, exec, tofi-drun | xargs hyprctl dispatch exec --"
-        ]
-        ++ (builtins.concatMap (n: [
-          "SUPER, ${n}, workspace, ${n}"
-          "SUPER SHIFT, ${n}, movetoworkspacesilent, ${n}"
-        ]) (map builtins.toString (lib.range 1 9)));
+      bind = [
+        # General
+        "SUPER SHIFT, E, exit,"
+        # Windows
+        "SUPER, Q, killactive,"
+        "SUPER, H, movefocus, l"
+        "SUPER, J, movefocus, d"
+        "SUPER, K, movefocus, u"
+        "SUPER, L, movefocus, r"
+        "SUPER SHIFT, H, movewindow, l"
+        "SUPER SHIFT, J, movewindow, d"
+        "SUPER SHIFT, K, movewindow, u"
+        "SUPER SHIFT, L, movewindow, r"
+        "SUPER, TAB, cyclenext,"
+        "SUPER SHIFT, TAB, cyclenext, prev"
+        "SUPER, F, fullscreen, 1"
+        # Programs
+        "SUPER, RETURN, exec, kitty"
+        "SUPER, B, exec, firefox"
+        "SUPER, D, exec, tofi-drun | xargs hyprctl dispatch exec --"
+      ]
+      ++ (builtins.concatMap (n: [
+        "SUPER, ${n}, workspace, ${n}"
+        "SUPER SHIFT, ${n}, movetoworkspacesilent, ${n}"
+      ]) (map builtins.toString (lib.range 1 9)));
       bindm = [
         # left click
         "SUPER, mouse:272, movewindow"
