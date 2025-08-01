@@ -9,7 +9,6 @@
         height = 32;
         output = [
           "DP-1"
-          "DP-2"
         ];
         modules-left = [
           "hyprland/workspaces"
