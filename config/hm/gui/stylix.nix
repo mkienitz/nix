@@ -1,9 +1,13 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }:
 {
+  imports = [
+    inputs.stylix.homeModules.stylix
+  ];
   stylix = {
     autoEnable = false;
     image = config.lib.stylix.pixel "base00";

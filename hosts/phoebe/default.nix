@@ -12,7 +12,6 @@
     ../../config/nixos/yubikey.nix
     ../../config/nixos/network.nix
     # GUI
-    ../../config/nixos/gui/stylix.nix
     ../../config/nixos/gui/hyprland.nix
     # HM Nixos
     ../../config/nixos/hm.nix
@@ -23,6 +22,7 @@
     ../../config/hm/gui
     ../../config/hm/gui/programs
     ../../config/hm/gui/hyprland.nix
+    ../../config/hm/gui/stylix.nix
   ];
 
   age.identityPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
