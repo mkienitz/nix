@@ -14,6 +14,7 @@
         disabled = false;
         error_symbol = "[>_](bold fg:color_red)";
         success_symbol = "[>_](bold fg:color_green)";
+        vimcmd_symbol = "[<_](bold fg:color_green)";
       };
       directory = {
         format = "[ $path ]($style)";
