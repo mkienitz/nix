@@ -6,12 +6,13 @@
 lib.mkMerge [
   {
     programs.ssh = {
+      enableDefaultConfig = false;
       enable = true;
-      addKeysToAgent = "yes";
       extraConfig = ''
         IdentityFile ~/.ssh/id_ed25519_sk2
       '';
       matchBlocks = rec {
+        "*".addKeysToAgent = "yes";
         lxhalle = {
           hostname = "lxhalle.in.tum.de";
           user = "kienitz";
