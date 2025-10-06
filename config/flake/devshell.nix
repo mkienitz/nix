@@ -35,6 +35,12 @@
             category = "deployment";
           }
           {
+            name = "drs";
+            command = "sudo darwin-rebuild switch --flake . --show-trace";
+            help = "rebuild darwin system";
+            category = "deployment";
+          }
+          {
             package = pkgs.deadnix;
             help = "scan nix files for dead code";
             category = "lint";
