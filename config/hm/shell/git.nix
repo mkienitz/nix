@@ -1,14 +1,16 @@
 {
   programs.git = {
     enable = true;
-    userName = "Maximilian Kienitz";
-    userEmail = "max@kienitz.dev";
     signing.format = "ssh";
     ignores = [
       ".direnv"
       ".DS_Store"
     ];
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Maximilian Kienitz";
+        email = "max@kienitz.dev";
+      };
       core.editor = "vim";
       init.defaultBranch = "main";
       merge.conflictstyle = "diff3";
