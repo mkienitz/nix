@@ -62,6 +62,7 @@
   };
 
   users.users.max = {
+    uid = 501;
     name = "max";
     home = "/Users/max";
   };
