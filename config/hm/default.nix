@@ -2,5 +2,6 @@
   imports = [
     ./gui
     ./shell
+    ./karabiner
   ];
 }
