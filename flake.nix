@@ -75,6 +75,15 @@
       url = "github:mkienitz/coffee-vault";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    import-tree.url = "github:vic/import-tree";
+    packages = {
+      url = "path:./packages";
+      flake = false;
+    };
+    secrets = {
+      url = "path:./secrets";
+      flake = false;
+    };
   };
 
   outputs =
@@ -87,12 +96,7 @@
         "x86_64-darwin"
       ];
       imports = [
-        ./config/flake/devshell.nix
-        ./config/flake/agenix-rekey.nix
-        ./config/flake/pkgs.nix
-        ./config/flake/hosts.nix
-        ./config/flake/pre-commit.nix
-        ./config/flake/treefmt.nix
+        (inputs.import-tree ./den)
       ];
     };
 }

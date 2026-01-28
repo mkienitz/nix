@@ -4,11 +4,6 @@
   ...
 }:
 {
-  imports = [
-    inputs.devshell.flakeModule
-    inputs.pre-commit-hooks.flakeModule
-  ];
-
   flake = {
     # Tim Apple
     darwinConfigurations.io = withSystem "aarch64-darwin" (
@@ -18,7 +13,7 @@
         specialArgs = {
           inherit inputs;
         };
-        modules = [ ../../hosts/io ];
+        modules = [ ../../../hosts/io ];
       }
     );
 
@@ -32,11 +27,12 @@
             inputs.nixpkgs.lib.nixosSystem {
               specialArgs = {
                 inherit inputs;
+                # NOTE: Neccessary?
                 inherit (pkgs) lib;
               };
               modules = [
-                ../../hosts/${hostName}
-                ../../modules/nixos
+                ../../../hosts/${hostName}
+                ../../../modules/nixos
                 {
                   node.hostName = hostName;
                   nixpkgs = {
@@ -52,7 +48,7 @@
         # Hetzner vServer
         gonggong = mkNixosHost "gonggong" "aarch64-linux";
         # Raspberry Pi 4
-        hygiea = mkNixosHost "hygiea" "aarch64-linux";
+        # hygiea = inputs.self.lib.mkNixosHost "hygiea" "aarch64-linux";
         # Beelink Mini S12 Pro
         iapetus = mkNixosHost "iapetus" "x86_64-linux";
         # Desktop

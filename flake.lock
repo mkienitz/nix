@@ -1151,6 +1151,21 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1763762820,
+        "narHash": "sha256-ZvYKbFib3AEwiNMLsejb/CWs/OL/srFQ8AogkebEPF0=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "3c23749d8013ec6daa1d7255057590e9ca726646",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane_3",
@@ -1539,6 +1554,18 @@
         "type": "github"
       }
     },
+    "packages": {
+      "flake": false,
+      "locked": {
+        "path": "./packages",
+        "type": "path"
+      },
+      "original": {
+        "path": "./packages",
+        "type": "path"
+      },
+      "parent": []
+    },
     "parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -1876,12 +1903,15 @@
         "flake-parts": "flake-parts_6",
         "home-manager": "home-manager_2",
         "impermanence": "impermanence",
+        "import-tree": "import-tree",
         "lanzaboote": "lanzaboote",
         "mvim": "mvim",
         "nix-index-database": "nix-index-database",
         "nix-templates": "nix-templates",
         "nixpkgs": "nixpkgs_4",
+        "packages": "packages",
         "pre-commit-hooks": "pre-commit-hooks_7",
+        "secrets": "secrets",
         "stylix": "stylix",
         "treefmt-nix": "treefmt-nix_7"
       }
@@ -1950,6 +1980,18 @@
         "repo": "rust-overlay",
         "type": "github"
       }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "path": "./secrets",
+        "type": "path"
+      },
+      "original": {
+        "path": "./secrets",
+        "type": "path"
+      },
+      "parent": []
     },
     "slimlock": {
       "inputs": {
