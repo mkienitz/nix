@@ -1,5 +1,5 @@
-_: {
-  flake.modules.nixos.nginx = {
+{
+  flake.modules.nixos.nginx-base = {
     networking.firewall.allowedTCPPorts = [
       80
       443

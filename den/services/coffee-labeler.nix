@@ -9,7 +9,6 @@
       imports = [
         inputs.coffee-labeler.nixosModules.default
         ../../config/nixos/acme/maxkienitz.com
-        inputs.self.modules.nixos.nginx
       ];
 
       services.coffee-labeler = {
