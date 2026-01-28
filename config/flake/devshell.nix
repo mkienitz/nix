@@ -47,6 +47,11 @@
             help = "browse dependency graph of derivations";
             category = "other";
           }
+          {
+            package = pkgs.cleanup;
+            help = "cleanup direnv mess";
+            category = "other";
+          }
         ];
       };
     };

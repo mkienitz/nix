@@ -9,5 +9,6 @@
       }
       + "/pkgs/deploy.nix"
     ) { };
+    cleanup = final.callPackage (import ../pkgs/cleanup) { };
   })
 ]
