@@ -47,10 +47,6 @@
       {
         # Hetzner vServer
         gonggong = mkNixosHost "gonggong" "aarch64-linux";
-        # Raspberry Pi 4
-        # hygiea = inputs.self.lib.mkNixosHost "hygiea" "aarch64-linux";
-        # Beelink Mini S12 Pro
-        iapetus = mkNixosHost "iapetus" "x86_64-linux";
         # Desktop
         phoebe = mkNixosHost "phoebe" "x86_64-linux";
       };
