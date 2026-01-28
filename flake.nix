@@ -89,6 +89,7 @@
       imports = [
         ./config/flake/devshell.nix
         ./config/flake/agenix-rekey.nix
+        ./config/flake/pkgs.nix
         ./config/flake/hosts.nix
         ./config/flake/pre-commit.nix
         ./config/flake/treefmt.nix

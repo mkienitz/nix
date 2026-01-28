@@ -59,18 +59,4 @@
         phoebe = mkNixosHost "phoebe" "x86_64-linux";
       };
   };
-
-  perSystem =
-    {
-      config,
-      pkgs,
-      system,
-      ...
-    }:
-    {
-      _module.args.pkgs = import inputs.nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    };
 }
