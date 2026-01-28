@@ -16,6 +16,7 @@
       shellAliases = {
         vim = "nvim";
         vi = "nvim";
+        mvim = "/Users/max/git/personal/mvim/result/bin/nvim";
       };
     };
   };
