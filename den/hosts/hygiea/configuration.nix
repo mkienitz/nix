@@ -1,10 +1,10 @@
 {
-  config,
+  inputs,
   ...
 }:
 {
   flake.modules.nixos.hygiea = {
-    imports = with config.flake.modules.nixos; [
+    imports = with inputs.self.modules.nixos; [
       system-base
       secrets
       nginx
