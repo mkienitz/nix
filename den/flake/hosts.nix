@@ -45,8 +45,6 @@
           ));
       in
       {
-        # Hetzner vServer
-        gonggong = mkNixosHost "gonggong" "aarch64-linux";
         # Desktop
         phoebe = mkNixosHost "phoebe" "x86_64-linux";
       };

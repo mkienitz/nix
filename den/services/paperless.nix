@@ -14,7 +14,9 @@
     in
     {
       # Setup ACME
-      imports = [ ../../config/nixos/acme/maxkienitz.com ];
+      imports = [
+        ../../config/nixos/acme/maxkienitz.com
+      ];
       security.acme.certs.${paperlessDomain}.inheritDefaults = true;
 
       age.secrets = {
@@ -33,8 +35,6 @@
       networking.firewall = {
         allowedTCPPorts = [
           21
-          80
-          443
         ];
         # Open port range for FTPS passive mode
         allowedTCPPortRanges = [
@@ -71,7 +71,6 @@
 
       services = {
         nginx = {
-          enable = true;
           upstreams.paperless =
             let
               inherit (config.services.paperless) address port;

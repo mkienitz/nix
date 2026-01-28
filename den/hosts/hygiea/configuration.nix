@@ -5,9 +5,11 @@
 {
   flake.modules.nixos.hygiea = {
     imports = with inputs.self.modules.nixos; [
+      # base
       system-base
       secrets
-      nginx
+      # services
+      nginx-base
       bql-print
       coffee-labeler
     ];

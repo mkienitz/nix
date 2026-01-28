@@ -10,6 +10,7 @@
       secrets
       impermanence
       # Services
+      nginx-base
       restic
       paperless
       coffee-vault
