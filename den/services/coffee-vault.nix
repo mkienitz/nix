@@ -11,7 +11,7 @@
     {
       imports = [
         inputs.coffee-vault.nixosModules.default
-        ../../config/nixos/acme/maxkienitz.com
+        inputs.self.modules.nixos.acme-maxkienitz-com
       ];
       security.acme.certs.${coffeeVaultDomain}.inheritDefaults = true;
 

@@ -1,0 +1,55 @@
+{
+  flake.modules.homeManager.git = {
+    programs.git = {
+      enable = true;
+      signing.format = "ssh";
+      ignores = [
+        ".direnv"
+        ".DS_Store"
+      ];
+      settings = {
+        user = {
+          name = "Maximilian Kienitz";
+          email = "max@kienitz.dev";
+        };
+        core.editor = "vim";
+        init.defaultBranch = "main";
+        merge.conflictstyle = "diff3";
+        pull.rebase = true;
+        push.autoSetupRemote = true;
+      };
+    };
+
+    # TODO split lazygit into feature
+    programs.lazygit = {
+      enable = true;
+      settings = {
+        disableStartupPopups = true;
+        gui = {
+          showCommandLog = true;
+          showFileTree = true;
+          showIcons = true;
+          showListFooter = false;
+          showRandomTip = false;
+          theme = {
+            activeBorderColor = [
+              "blue"
+              "bold"
+            ];
+            cherryPickedCommitBgColor = [ "cyan" ];
+            cherryPickedCommitFgColor = [ "blue" ];
+            inactiveBorderColor = [ "white" ];
+            optionsTextColor = [ "blue" ];
+            selectedLineBgColor = [ "default" ];
+            selectedRangeBgColor = [ "default" ];
+            unstagedChangesColor = [ "red" ];
+          };
+        };
+        notARepository = "skip";
+        os = {
+          editPreset = "nvim";
+        };
+      };
+    };
+  };
+}

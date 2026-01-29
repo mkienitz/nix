@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./gui
-    ./shell
-    ./karabiner
-  ];
-}

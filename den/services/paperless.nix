@@ -15,7 +15,7 @@
     {
       # Setup ACME
       imports = [
-        ../../config/nixos/acme/maxkienitz.com
+        inputs.self.modules.nixos.acme-maxkienitz-com
       ];
       security.acme.certs.${paperlessDomain}.inheritDefaults = true;
 
