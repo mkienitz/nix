@@ -32,15 +32,18 @@
       ));
 
     mkDarwinHost =
-      arch: name:
+      hostName: arch:
       (withSystem arch (
         { pkgs, ... }:
         {
-          ${name} = inputs.nix-darwin.lib.darwinSystem {
+          ${hostName} = inputs.nix-darwin.lib.darwinSystem {
             modules = [
-              inputs.self.modules.darwin.${name}
-              { nixpkgs.hostPlatform = arch; }
+              inputs.self.modules.darwin.${hostName}
               {
+                networking = {
+                  inherit hostName;
+                  computerName = hostName;
+                };
                 nixpkgs = {
                   hostPlatform = arch;
                   inherit (pkgs) overlays config;

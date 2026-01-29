@@ -8,12 +8,6 @@
     {
       imports = [
         inputs.nix-index-database.homeModules.nix-index
-        ./mvim.nix
-        ./git.nix
-        ./ssh.nix
-        ./starship.nix
-        ./tmux.nix
-        ./zsh.nix
       ];
 
       home = {

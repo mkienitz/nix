@@ -45,7 +45,9 @@
         inputs.self.modules.darwin.home-manager
       ];
       users.users.max = {
+        name = "max";
         home = "/Users/max";
+        uid = 501;
         shell = pkgs.zsh;
       };
 
@@ -61,5 +63,6 @@
 
   flake.modules.homeManager.max = {
     home.username = "max";
+    home.stateVersion = "23.11";
   };
 }
