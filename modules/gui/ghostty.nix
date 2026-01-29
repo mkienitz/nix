@@ -1,10 +1,10 @@
 {
-  flake.modules.homeManager =
+  flake.modules.homeManager.ghostty =
     { pkgs, ... }:
     {
       programs.ghostty = {
         enable = true;
-        package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostyy;
+        package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
         settings = {
           font-family = "JetBrains Mono";
           font-size = 16;
@@ -17,6 +17,7 @@
           macos-titlebar-style = "tabs";
           macos-titlebar-proxy-icon = "hidden";
           macos-option-as-alt = true;
+          shell-integration-features = "ssh-env";
         };
       };
     };

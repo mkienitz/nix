@@ -33,12 +33,9 @@
         ];
       };
 
-      nixpkgs.hostPlatform = "aarch64-darwin";
-
       ids.gids.nixbld = 30000;
 
       system = {
-        primaryUser = "max";
         defaults = {
           CustomUserPreferences."org.gpgtools.common" = {
             DisableKeychain = false;
@@ -57,12 +54,6 @@
           };
         };
         stateVersion = 5;
-      };
-
-      users.users.max = {
-        uid = 501;
-        name = "max";
-        home = "/Users/max";
       };
     };
 }
