@@ -11,10 +11,9 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # pre-commit-hooks = {
-    #   url = "github:cachix/pre-commit-hooks.nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
