@@ -8,6 +8,7 @@
     {
       config,
       pkgs,
+      lib,
       ...
     }:
     {
@@ -16,9 +17,9 @@
           config.treefmt.build.wrapper
           nil
         ];
-        # devshell.startup.pre-commit.text = lib.mkIf (
-        #   config ? pre-commit
-        # ) config.pre-commit.installationScript;
+        devshell.startup.pre-commit.text = lib.mkIf (
+          config ? pre-commit
+        ) config.pre-commit.installationScript;
         commands = [
           {
             package = pkgs.deploy;
