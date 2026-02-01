@@ -14,7 +14,12 @@
             IdentityFile ~/.ssh/id_ed25519_sk2
           '';
           matchBlocks = rec {
-            "*".addKeysToAgent = "yes";
+            "*" = {
+              addKeysToAgent = "yes";
+              controlMaster = "auto";
+              controlPersist = "5m";
+              controlPath = "~/.ssh/sockets/%r@%h-%p";
+            };
             lxhalle = {
               hostname = "lxhalle.in.tum.de";
               user = "kienitz";
