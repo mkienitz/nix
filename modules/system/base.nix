@@ -77,6 +77,7 @@
         "flakes"
         "pipe-operators"
       ];
+      optimise.automatic = true;
       registry.p.flake = inputs.nixpkgs;
       registry.t.flake = inputs.nix-templates;
     };
