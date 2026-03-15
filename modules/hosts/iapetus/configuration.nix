@@ -14,6 +14,7 @@
       restic
       paperless
       coffee-vault
+      home-assistant
     ];
     age = {
       # TODO maybe pass to secret factory instead?
