@@ -37,14 +37,19 @@
         ];
       };
 
-      environment.persistence."/persist".directories = [
-        {
-          directory = config.services.home-assistant.configDir;
-          user = "hass";
-          group = "hass";
-          mode = "0700";
-        }
-      ];
+      environment.persistence = {
+        "/state".directories = [
+          "/var/lib/acme/${homeAssistantDomain}"
+        ];
+        "/persist".directories = [
+          {
+            directory = config.services.home-assistant.configDir;
+            user = "hass";
+            group = "hass";
+            mode = "0700";
+          }
+        ];
+      };
 
       services.home-assistant = {
         enable = true;
@@ -63,6 +68,8 @@
           http = {
             server_host = "127.0.0.1";
             server_port = 8123;
+            use_x_forwarded_for = true;
+            trusted_proxies = [ "127.0.0.1" ];
           };
           logger = {
             default = "warning";
