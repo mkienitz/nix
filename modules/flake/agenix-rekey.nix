@@ -15,7 +15,10 @@
       ...
     }:
     {
-      agenix-rekey.nodes = builtins.removeAttrs self.nixosConfigurations [ "gonggong" ];
+      agenix-rekey = {
+        inherit (self) nixosConfigurations;
+        inherit (self) darwinConfigurations;
+      };
 
       devshells.default = {
         packages = with pkgs; [
