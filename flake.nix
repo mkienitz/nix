@@ -67,6 +67,16 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lrsync = {
+      url = "git+ssh://git@github.com/mkienitz/lrsync";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devshell.follows = "devshell";
+    };
+    portfolio = {
+      url = "path:/Users/max/git/personal/portfolio";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devshell.follows = "devshell";
+    };
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
