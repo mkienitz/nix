@@ -1,0 +1,27 @@
+_: {
+  flake.modules.nixos.nvidia =
+    {
+      config,
+      lib,
+      ...
+    }:
+    {
+      nixpkgs.config.allowUnfreePredicate =
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          "nvidia-persistenced"
+          "nvidia-x11"
+          "nvidia-settings"
+        ];
+      services.xserver.videoDrivers = [ "nvidia" ];
+      hardware = {
+        graphics.enable = true;
+        nvidia = {
+          open = true;
+          modesetting.enable = true;
+          package = config.boot.kernelPackages.nvidiaPackages.stable;
+          nvidiaPersistenced = true;
+        };
+      };
+    };
+}
