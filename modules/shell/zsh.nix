@@ -19,6 +19,8 @@
         zsh = {
           enable = true;
           dotDir = "${config.xdg.configHome}/zsh";
+          # NOTE: why do I need this? :C
+          completionInit = "autoload -U compinit && compinit -i";
           initContent = lib.mkBefore ''
             if autoload history-search-end; then
               zle -N history-beginning-search-backward-end history-search-end
