@@ -41,9 +41,27 @@
               port = 22;
             };
             phoebe = {
-              hostname = "192.168.178.29";
+              hostname = "192.168.178.64";
               user = "root";
               port = 22;
+            };
+            phoebe-max = {
+              hostname = "192.168.178.64";
+              user = "root";
+              port = 22;
+              extraOptions = {
+                RemoteCommand = "su -l max";
+                RequestTTY = "yes";
+              };
+            };
+            phoebe-unlock = {
+              hostname = "192.168.178.64";
+              user = "root";
+              port = 4;
+              extraOptions = {
+                RemoteCommand = "systemd-tty-ask-password-agent";
+                RequestTTY = "yes";
+              };
             };
             sbox1 = {
               hostname = "u368782.your-storagebox.de";
