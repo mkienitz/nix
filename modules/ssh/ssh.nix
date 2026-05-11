@@ -12,6 +12,7 @@
           enable = true;
           extraConfig = ''
             IdentityFile ~/.ssh/id_ed25519_sk2
+            IdentityFile ~/.ssh/id_ed25519_sk
           '';
           matchBlocks = rec {
             "*" = {
@@ -110,6 +111,8 @@
         {
           home.persistence = {
             "/state".files = [
+              "/.ssh/id_ed25519"
+              "/.ssh/id_ed25519.pub"
               "/.ssh/id_ed25519_sk"
               "/.ssh/id_ed25519_sk.pub"
               "/.ssh/id_ed25519_sk2"
