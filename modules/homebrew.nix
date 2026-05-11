@@ -19,7 +19,6 @@
         "adobe-creative-cloud"
         "bruno"
         "calibre"
-        "chatgpt"
         "discord"
         "docker-desktop"
         "google-chrome"
@@ -36,11 +35,7 @@
         "orcaslicer"
         "rectangle"
         "signal"
-        "spotify"
-        "teamspeak-client"
-        "zap"
         "zoom"
-        "zotero"
       ];
     };
   };
