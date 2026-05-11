@@ -49,7 +49,10 @@
           enable = true;
           config.theme = "gruvbox-dark";
         };
-        yazi.enable = true;
+        yazi = {
+          enable = true;
+          shellWrapperName = "y";
+        };
       };
 
       home.persistence."/state".directories = [
