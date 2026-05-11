@@ -68,7 +68,8 @@
         };
       };
       home.persistence."/state".files = [
-        ".zsh_history"
+        "${config.programs.zsh.dotDir}/.zsh_history"
+        "${config.programs.zsh.dotDir}/.zcompdump"
       ];
     };
 }
