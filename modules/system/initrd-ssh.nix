@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.initrd-ssh.nix =
+  flake.modules.nixos.initrd-ssh =
     {
       config,
       pkgs,
@@ -27,6 +27,10 @@ _: {
               enable = true;
               port = 4;
               hostKeys = [ config.age.secrets.initrd-host-ssh-key.path ];
+              authorizedKeys = [
+                "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIKbdbkaOUCITGKH/XfDVg00dPE+iRHPFhNIUZ/SK+rbmAAAAC3NzaDpHZW5lcmFs YubiKey_5C_NFC_General"
+                "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIPZeqY74R3BJej5SHvHTjQ/LqRcl3KMFCdQ01msy5mjRAAAACnNzaDpCYWNrdXA= YubiKey_5C_Backup"
+              ];
             };
           };
         };
