@@ -6,9 +6,9 @@
       imports = [
         inputs.self.modules.generic.system-base
       ];
-      environment.systemPackages = with pkgs; [
-        vim
-        nvd
+      environment.systemPackages = [
+        pkgs.vim
+        pkgs.nvd
       ];
 
       programs.git = {

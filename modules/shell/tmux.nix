@@ -16,9 +16,9 @@
           sensibleOnTop = true;
           inherit shell;
           terminal = "screen-256color";
-          plugins = with pkgs; [
-            tmuxPlugins.vim-tmux-navigator
-            tmuxPlugins.gruvbox
+          plugins = [
+            pkgs.tmuxPlugins.vim-tmux-navigator
+            pkgs.tmuxPlugins.gruvbox
           ];
           extraConfig = ''
             set -gu default-command

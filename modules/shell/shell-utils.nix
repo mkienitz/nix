@@ -12,21 +12,21 @@
 
       home = {
         # Various command line tools
-        packages = with pkgs; [
-          tree-sitter
-          timg
-          cloc
-          curl
-          eza
-          fd
-          fzf
-          git-filter-repo
-          hexyl
-          hyperfine
-          ripgrep
-          tldr
-          wget
-          claude-code
+        packages = [
+          pkgs.tree-sitter
+          pkgs.timg
+          pkgs.cloc
+          pkgs.curl
+          pkgs.eza
+          pkgs.fd
+          pkgs.fzf
+          pkgs.git-filter-repo
+          pkgs.hexyl
+          pkgs.hyperfine
+          pkgs.ripgrep
+          pkgs.tldr
+          pkgs.wget
+          pkgs.claude-code
         ];
       };
 

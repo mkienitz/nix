@@ -2,9 +2,9 @@
   flake.modules.darwin.io =
     { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs; [
-        coreutils
-        openssh
+      environment.systemPackages = [
+        pkgs.coreutils
+        pkgs.openssh
       ];
 
       nix = {

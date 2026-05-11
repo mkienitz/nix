@@ -21,8 +21,8 @@
       };
 
       devshells.default = {
-        packages = with pkgs; [
-          age-plugin-yubikey
+        packages = [
+          pkgs.age-plugin-yubikey
         ];
         commands = [
           {

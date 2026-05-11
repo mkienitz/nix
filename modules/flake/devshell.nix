@@ -13,9 +13,9 @@
     }:
     {
       devshells.default = {
-        packages = with pkgs; [
+        packages = [
           config.treefmt.build.wrapper
-          nil
+          pkgs.nil
         ];
         devshell.startup.pre-commit.text = lib.mkIf (
           config ? pre-commit
