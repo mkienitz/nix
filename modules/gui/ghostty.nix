@@ -17,6 +17,9 @@
           macos-titlebar-style = "tabs";
           macos-titlebar-proxy-icon = "hidden";
           macos-option-as-alt = true;
+          clipboard-paste-protection = false;
+          clipboard-read = "allow";
+          clipboard-write = "allow";
           shell-integration-features = "ssh-env";
         };
       };
