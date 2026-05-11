@@ -4,7 +4,6 @@
     {
       pkgs,
       lib,
-      config,
       ...
     }:
     {
@@ -50,41 +49,10 @@
             };
           };
         }
-        # If home-manager is used, consume home.persistence options
-        (lib.mkIf (config ? home-manager) (
-          let
-            inherit (lib)
-              isAttrs
-              mkMerge
-              attrNames
-              mapAttrs
-              ;
-            mkUserFiles = map (
-              x: { parentDirectory.mode = "700"; } // (if isAttrs x then x else { file = x; })
-            );
-            mkUserDirs = map (x: { mode = "700"; } // (if isAttrs x then x else { directory = x; }));
-          in
-          {
-            environment.persistence = mkMerge (
-              map (
-                user:
-                let
-                  hmUserCfg = config.home-manager.users.${user};
-                in
-                mapAttrs (_: sourceCfg: {
-                  users.${user} = {
-                    files = mkUserFiles sourceCfg.files;
-                    directories = mkUserDirs sourceCfg.directories;
-                  };
-                }) hmUserCfg.home.persistence
-              ) (attrNames config.home-manager.users)
-            );
-          }
-        ))
       ];
     };
 
-  flake.modules.homeManager.impermanence =
+  flake.modules.homeManager.impermanence-glue =
     { lib, ... }:
     let
       inherit (lib) mkOption types;

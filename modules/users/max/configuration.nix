@@ -13,8 +13,6 @@
 
   flake.modules.homeManager.max = {
     imports = with inputs.self.modules.homeManager; [
-      # TODO find better way to include impermanence
-      impermanence
       karabiner
 
       fonts

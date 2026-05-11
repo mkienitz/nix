@@ -14,12 +14,6 @@
     ];
   };
 
-  flake.modules.homeManager.home-manager = {
-    imports = [
-      inputs.self.modules.homeManager.impermanence
-    ];
-  };
-
   flake.modules.generic.home-manager = {
     home-manager = {
       useGlobalPkgs = true;

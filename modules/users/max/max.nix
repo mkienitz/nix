@@ -54,6 +54,7 @@
       home-manager.users.max = {
         imports = [
           inputs.self.modules.homeManager.max
+          inputs.self.modules.homeManager.impermanence-glue
         ];
       };
 
