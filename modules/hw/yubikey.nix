@@ -10,7 +10,9 @@ _: {
       services.udev.packages = with pkgs; [
         yubikey-personalization
         libu2f-host
+        libfido2
       ];
       services.pcscd.enable = true;
+      users.groups.plugdev = { };
     };
 }

@@ -18,6 +18,10 @@
         home = "/home/max";
         shell = pkgs.zsh;
         inherit (config.users.users.root) hashedPassword;
+        extraGroups = [
+          "plugdev"
+          "pcscd"
+        ];
       };
       programs.zsh.enable = true;
 
