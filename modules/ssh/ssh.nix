@@ -119,6 +119,9 @@
               "/.ssh/id_ed25519_sk2.pub"
               "/.ssh/known_hosts"
             ];
+            "/state".directories = [
+              "/.ssh/sockets"
+            ];
             "/persist".directories = [
               "/Git"
               "/Downloads"
