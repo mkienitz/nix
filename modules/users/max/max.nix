@@ -69,5 +69,9 @@
   flake.modules.homeManager.max = {
     home.username = "max";
     home.stateVersion = "25.11";
+    home.persistence."/persist".directories = [
+      "/Git"
+      "/Downloads"
+    ];
   };
 }

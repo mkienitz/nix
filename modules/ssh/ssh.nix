@@ -122,10 +122,6 @@
             "/state".directories = [
               "/.ssh/sockets"
             ];
-            "/persist".directories = [
-              "/Git"
-              "/Downloads"
-            ];
           };
           # services.ssh-agent.enable = true;
           # services.gnome-keyring.enable = true;
