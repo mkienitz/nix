@@ -58,6 +58,10 @@
       home.persistence."/state".directories = [
         ".local/share/direnv/allow"
         ".local/share/zoxide"
+        ".claude"
+      ];
+      home.persistence."/state".files = [
+        ".claude.json"
       ];
     };
 }
