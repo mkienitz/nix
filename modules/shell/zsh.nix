@@ -70,8 +70,8 @@
         };
       };
       home.persistence."/state".files = [
-        "${config.programs.zsh.dotDir}/.zsh_history"
-        "${config.programs.zsh.dotDir}/.zcompdump"
+        ".config/zsh/.zsh_history"
+        ".config/zsh/.zcompdump"
       ];
     };
 }
