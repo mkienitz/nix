@@ -30,6 +30,8 @@
             set -g status-interval 5
             set -g automatic-rename on
             set -g automatic-rename-format '#{b:pane_current_path}'
+            set -g extended-keys on
+            set -g extended-keys-format csi-u
             unbind '"'
             unbind %
             bind s split-window -v -c "#{pane_current_path}"
