@@ -67,6 +67,9 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+    };
     lrsync = {
       url = "git+ssh://git@github.com/mkienitz/lrsync";
       inputs.nixpkgs.follows = "nixpkgs";

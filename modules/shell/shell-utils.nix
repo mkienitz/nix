@@ -26,8 +26,17 @@
           pkgs.ripgrep
           pkgs.tldr
           pkgs.wget
-          pkgs.claude-code
-        ];
+        ]
+        ++ (
+          let
+            llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+          in
+          [
+            llm-pkgs.claude-code
+            llm-pkgs.codex
+            llm-pkgs.pi
+          ]
+        );
       };
 
       programs = {
@@ -59,6 +68,8 @@
         ".local/share/direnv/allow"
         ".local/share/zoxide"
         ".claude"
+        ".pi"
+        ".codex"
       ];
       home.persistence."/state".files = [
         ".claude.json"
