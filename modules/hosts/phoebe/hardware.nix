@@ -6,7 +6,6 @@
     }:
     {
       imports = [ inputs.disko.nixosModules.default ];
-      boot.initrd.systemd.services."zfs-import-rpool".after = [ "cryptsetup.target" ];
       disko.devices = {
         disk = {
           nixnvme = {
@@ -84,7 +83,10 @@
         };
       };
       boot = {
+        zfs.forceImportRoot = false;
         initrd = {
+          systemd.services."zfs-import-rpool".after = [ "cryptsetup.target" ];
+
           availableKernelModules = [
             "sdhci_pci"
             "xhci_pci"

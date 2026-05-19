@@ -18,6 +18,7 @@
           efi.canTouchEfiVariables = true;
           systemd-boot.enable = true;
         };
+        zfs.forceImportRoot = false;
       };
 
       fileSystems = {
