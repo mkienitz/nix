@@ -24,7 +24,7 @@
             protocol = "ssh-ng";
             system = "x86_64-linux";
             hostName = "phoebe";
-            maxJobs = 16;
+            maxJobs = 0;
             supportedFeatures = [
               "big-parallel"
               "kvm"
