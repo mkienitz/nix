@@ -147,10 +147,10 @@
             enable = true;
             backboneInterfaces = [ lanInterface ];
             interfaceName = threadInterface;
+            # SL-OPENTHREAD/2.7.2.0_GitHub-fb0446f53
             radio = {
               device = "/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_bedd4cf6eaf8ef11bd416d135c2a50c9-if00-port0";
-              # SONOFF OpenThread RCP 3.1.1 firmware.
-              baudRate = 921600;
+              baudRate = 460800;
               flowControl = false;
             };
             rest = {
