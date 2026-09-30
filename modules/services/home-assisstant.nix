@@ -75,13 +75,6 @@
             ];
           };
 
-          # Impermanence creates parent directories with mode 0755 and copies
-          # their persisted permissions back at boot. DynamicUser requires 0700.
-          systemd.tmpfiles.rules = [
-            "d /persist/var/lib/private 0700 root root -"
-            "d /var/lib/private 0700 root root -"
-          ];
-
           services.home-assistant = {
             enable = true;
             extraComponents = [

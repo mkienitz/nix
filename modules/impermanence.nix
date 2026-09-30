@@ -35,6 +35,15 @@
           };
           fileSystems."/state".neededForBoot = true;
           fileSystems."/persist".neededForBoot = true;
+
+          # TODO: determine if we need to keep this
+          # Impermanence creates parent directories with mode 0755 and copies
+          # their persisted permissions back at boot. DynamicUser requires 0700.
+          systemd.tmpfiles.rules = [
+            "d /persist/var/lib/private 0700 root root -"
+            "d /var/lib/private 0700 root root -"
+          ];
+
           boot.initrd.systemd = {
             enable = true;
             services.impermanence-root = {
