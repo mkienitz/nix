@@ -13,30 +13,23 @@
       home = {
         # Various command line tools
         packages = [
-          pkgs.tree-sitter
-          pkgs.timg
           pkgs.cloc
           pkgs.curl
           pkgs.eza
           pkgs.fd
           pkgs.fzf
+          pkgs.gh
           pkgs.git-filter-repo
           pkgs.hexyl
           pkgs.hyperfine
+          pkgs.pandoc
           pkgs.ripgrep
+          pkgs.texliveMedium
+          pkgs.timg
           pkgs.tldr
+          pkgs.tree-sitter
           pkgs.wget
-        ]
-        ++ (
-          let
-            llm-pkgs = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-          in
-          [
-            llm-pkgs.claude-code
-            llm-pkgs.codex
-            llm-pkgs.pi
-          ]
-        );
+        ];
       };
 
       programs = {
@@ -67,12 +60,6 @@
       home.persistence."/state".directories = [
         ".local/share/direnv/allow"
         ".local/share/zoxide"
-        ".claude"
-        ".pi"
-        ".codex"
-      ];
-      home.persistence."/state".files = [
-        ".claude.json"
       ];
     };
 }
