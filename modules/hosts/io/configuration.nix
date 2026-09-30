@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   ...
 }:
@@ -11,10 +12,6 @@
       max
     ];
 
-    age = {
-      # TODO maybe pass to secret factory instead?
-      rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILlq0WvbeFHTcNy7VNBU1es0gFtA757eCu7p12+6taSZ";
-      identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    };
+    age = config.flake.hosts.io.age;
   };
 }

@@ -2,6 +2,9 @@
 {
   flake.modules.nixos.bipper =
     { config, ... }:
+    let
+      flakeLib = inputs.self.lib;
+    in
     {
       imports = [
         inputs.bipper.nixosModules.default
@@ -14,28 +17,22 @@
         storageDuration = "1h";
       };
 
-      services.nginx = {
-        virtualHosts =
-          let
-            defaults = {
-              forceSSL = true;
-              enableACME = true;
-            };
-          in
-          {
-            "bipper.maxkienitz.com" = defaults // {
-              locations."/" = {
-                proxyPass =
-                  let
-                    inherit (config.services.bipper) address port;
-                  in
-                  "http://${address}:${toString port}/";
-                extraConfig = ''
-                  client_max_body_size 500M;
-                '';
-              };
-            };
+      services.nginx =
+        let
+          inherit (config.services.bipper) address port;
+        in
+        flakeLib.mkNginxProxy {
+          name = "bipper";
+          domain = "bipper.maxkienitz.com";
+          inherit address port;
+          acmeHost = null;
+          enableACME = true;
+          location = {
+            proxyPass = "http://bipper/";
+            extraConfig = ''
+              client_max_body_size 500M;
+            '';
           };
-      };
+        };
     };
 }

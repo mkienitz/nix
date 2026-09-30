@@ -3,53 +3,43 @@
   flake.modules.nixos.coffee-labeler =
     let
       coffee-labeler-domain = "label.maxkienitz.com";
+      flakeLib = inputs.self.lib;
     in
-    { config, ... }:
+    { config, lib, ... }:
     {
       imports = [
         inputs.coffee-labeler.nixosModules.default
         inputs.self.modules.nixos.acme-maxkienitz-com
       ];
 
-      services.coffee-labeler = {
-        enable = true;
-        address = "127.0.0.1";
-        port = 10000;
-        printer-address = "192.168.178.39";
-        printer-port = 9100;
-      };
+      config = lib.mkMerge [
+        (flakeLib.mkAcmeCert coffee-labeler-domain)
+        {
+          services.coffee-labeler = {
+            enable = true;
+            address = "127.0.0.1";
+            port = 10000;
+            printer-address = "192.168.178.39";
+            printer-port = 9100;
+          };
 
-      security.acme.certs.${coffee-labeler-domain}.inheritDefaults = true;
-
-      services.nginx = {
-        upstreams = {
-          coffee-labeler =
+          services.nginx =
             let
               inherit (config.services.coffee-labeler) address port;
             in
-            {
-              servers."${address}:${toString port}" = { };
-              extraConfig = ''
-                zone coffee-labeler 64k;
-                keepalive 5;
-              '';
+            flakeLib.mkNginxProxy {
+              name = "coffee-labeler";
+              domain = coffee-labeler-domain;
+              inherit address port;
+              location = {
+                extraConfig = ''
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-Host $host;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+                '';
+              };
             };
-        };
-        virtualHosts.${coffee-labeler-domain} = {
-          forceSSL = true;
-          useACMEHost = coffee-labeler-domain;
-          locations = {
-            "/" = {
-              proxyPass = "http://coffee-labeler";
-              proxyWebsockets = true;
-              extraConfig = ''
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-Host $host;
-                proxy_set_header X-Forwarded-Proto $scheme;
-              '';
-            };
-          };
-        };
-      };
+        }
+      ];
     };
 }
