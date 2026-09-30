@@ -14,7 +14,7 @@
             IdentityFile ~/.ssh/id_ed25519_sk2
             IdentityFile ~/.ssh/id_ed25519_sk
           '';
-          matchBlocks = rec {
+          settings = rec {
             "*" = {
               addKeysToAgent = "yes";
               controlMaster = "auto";
@@ -50,19 +50,15 @@
               hostname = "192.168.178.64";
               user = "root";
               port = 22;
-              extraOptions = {
-                RemoteCommand = "su -l max";
-                RequestTTY = "yes";
-              };
+              RemoteCommand = "su -l max";
+              RequestTTY = "yes";
             };
             phoebe-unlock = {
               hostname = "192.168.178.64";
               user = "root";
               port = 4;
-              extraOptions = {
-                RemoteCommand = "systemd-tty-ask-password-agent";
-                RequestTTY = "yes";
-              };
+              RemoteCommand = "systemd-tty-ask-password-agent";
+              RequestTTY = "yes";
             };
             sbox1 = {
               hostname = "u368782.your-storagebox.de";
