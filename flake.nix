@@ -76,7 +76,7 @@
       inputs.devshell.follows = "devshell";
     };
     portfolio = {
-      url = "path:/Users/max/git/personal/portfolio";
+      url = "git+ssh://git@github.com/mkienitz/portfolio";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.devshell.follows = "devshell";
     };
@@ -87,6 +87,11 @@
     coffee-vault = {
       url = "github:mkienitz/coffee-vault";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    coffee-vault-print = {
+      url = "path:/Users/max/git/personal/coffee-vault-print";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devshell.follows = "devshell";
     };
     import-tree.url = "github:vic/import-tree";
     packages = {
